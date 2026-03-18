@@ -68,18 +68,16 @@ err = Console(stderr=True)
 # Helpers de display
 # ---------------------------------------------------------------------------
 
-_LOGO = """
- ██████╗ ██████╗  █████╗ ███████╗ █████╗ ██████╗  █████╗ ██████╗  ██████╗ ███████╗
- ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔═══██╗██╔════╝
- ██████╔╝██████╔╝███████║███████╗███████║██║  ██║███████║██║  ██║██║   ██║███████╗
- ██╔══██╗██╔══██╗██╔══██║╚════██║██╔══██║██║  ██║██╔══██║██║  ██║██║   ██║╚════██║
- ██████╔╝██║  ██║██║  ██║███████║██║  ██║██████╔╝██║  ██║██████╔╝╚██████╔╝███████║
- ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝
-"""
+_LOGO = "dados-br  ·  dados públicos brasileiros"
 
 
 def _print_logo() -> None:
-    out.print(Panel.fit(_LOGO.strip(), style="bold green", padding=(0, 2)))
+    from . import __version__
+    out.print(Panel.fit(
+        f"[bold cyan]{_LOGO}[/]\n[dim]v{__version__}  ·  Apache 2.0  ·  github.com/tucaguimaraes/dados-br[/]",
+        style="cyan",
+        padding=(0, 2),
+    ))
 
 
 def _get_registry() -> Registry:
@@ -182,6 +180,7 @@ def cmd_list(
     source: Optional[str] = typer.Option(None, "--source", "-s", help="Filtra por fonte/órgão"),
     search: Optional[str] = typer.Option(None, "--search", "-q", help="Busca por texto livre"),
     show_urls: bool = typer.Option(False, "--urls", help="Exibe URLs de exemplo"),
+    show_commands: bool = typer.Option(False, "--commands", help="Exibe o comando de download de cada dataset"),
 ) -> None:
     """Lista todos os datasets disponíveis no catálogo."""
     reg = _get_registry()
@@ -203,11 +202,29 @@ def cmd_list(
 
     if show_urls:
         out.print()
-        for ds in datasets[:5]:  # limita exibição para não poluir
+        for ds in datasets[:5]:
             if ds.url_pattern:
                 out.print(f"  [dim]{ds.id}[/]: {ds.url_pattern}")
 
+    if show_commands:
+        out.print()
+        out.print("[bold]Comandos de download:[/]")
+        cmd_table = Table(show_header=False, box=None, padding=(0, 1))
+        cmd_table.add_column("ID", style="bold cyan", no_wrap=True)
+        cmd_table.add_column("Comando", style="green")
+        for ds in datasets:
+            if ds.url_type in ("pattern", "ftp") and ds.years:
+                avail = ds.available_years()
+                recent = avail[-3:] if len(avail) >= 3 else avail
+                years_ex = f"--years {recent[0]}-{recent[-1]}" if len(recent) > 1 else f"--years {recent[0]}"
+                cmd = f"dados-br download {ds.id} {years_ex}"
+            else:
+                cmd = f"dados-br download {ds.id}"
+            cmd_table.add_row(ds.id, cmd)
+        out.print(cmd_table)
+
     out.print(f"\n[dim]Use [bold]dados-br info <id>[/] para detalhes ou [bold]dados-br download <id>[/] para baixar.[/]")
+    out.print(f"[dim]Dica: [bold]dados-br list --commands[/] mostra o comando de download de cada dataset.[/]")
 
 
 # ---------------------------------------------------------------------------
@@ -408,6 +425,7 @@ def cmd_download(
 
     url_dest_map: dict[str, str] = {}  # url → dest absoluto
     dataset_files: dict[str, list[str]] = {}  # dataset_id → [dest paths]
+    dataset_years: dict[str, list[int]] = {}  # dataset_id → anos selecionados
 
     for ds in datasets_to_download:
         dest_root = output_dir / ds.dest_folder
@@ -447,6 +465,7 @@ def cmd_download(
                     selected_years = available  # batch: baixa tudo
 
             year_urls = ds.urls_for_years(selected_years)
+            dataset_years[ds.id] = list(year_urls.keys())
             for y, url_list in year_urls.items():
                 for url in url_list:
                     from .utils import filename_from_url  # noqa
@@ -480,16 +499,13 @@ def cmd_download(
     out.print(f"  Arquivos a baixar     : [bold]{len(url_dest_map)}[/]")
     out.print(f"  Diretório de saída    : [bold]{output_dir.resolve()}[/]")
 
-    # Estimar tamanho total
+    # Estimar tamanho total usando anos rastreados diretamente
     total_est_mb: float = 0.0
     total_ext_mb: float = 0.0
     for ds in datasets_to_download:
-        selected_years_for_ds = [
-            int(Path(p).stem.split("_")[-1]) if "_" in Path(p).stem else 0
-            for p in dataset_files.get(ds.id, [])
-        ]
-        est = ds.estimate_download_mb(selected_years_for_ds or None)
-        ext = ds.estimate_extracted_mb(selected_years_for_ds or None)
+        years_for_ds = dataset_years.get(ds.id) or None
+        est = ds.estimate_download_mb(years_for_ds)
+        ext = ds.estimate_extracted_mb(years_for_ds)
         if est:
             total_est_mb += est
         if ext:
