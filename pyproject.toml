@@ -9,7 +9,7 @@ description = "Ferramenta CLI open source para catalogar, baixar, validar e orga
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.11"
-authors = [{ name = "dados-br Contributors" }]
+authors = [{ name = "Carlos Artur Guimarães", email = "arturguimaraes@gmail.com" }]
 keywords = ["dados-abertos", "brasil", "data", "opendata", "governo", "inep", "ibge", "datasus", "transparencia", "ministerio-publico", "prefeituras", "capes", "cnpq"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -46,10 +46,10 @@ dev = [
 dados-br = "dadosbr.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/dados-br/dados-br"
-Documentation = "https://github.com/dados-br/dados-br#readme"
-Issues = "https://github.com/dados-br/dados-br/issues"
-Changelog = "https://github.com/dados-br/dados-br/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/tucaguimaraes/dados-br"
+Documentation = "https://github.com/tucaguimaraes/dados-br#readme"
+Issues = "https://github.com/tucaguimaraes/dados-br/issues"
+Changelog = "https://github.com/tucaguimaraes/dados-br/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["dadosbr"]

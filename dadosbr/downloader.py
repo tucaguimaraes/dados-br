@@ -32,7 +32,7 @@ from .utils import check_disk_space, clean_url, filename_from_url, human_size
 logger = logging.getLogger(__name__)
 console = Console(stderr=True)
 
-USER_AGENT = "dados-br/0.1 (+https://github.com/dados-br/dados-br)"
+USER_AGENT = "dados-br/0.1 (+https://github.com/tucaguimaraes/dados-br)"
 
 # ---------------------------------------------------------------------------
 # Configuração

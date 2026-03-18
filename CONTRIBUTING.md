@@ -31,7 +31,7 @@ Para propor uma nova base de dados, abra uma issue com a tag `novo-dataset` cont
 
 ```bash
 # Clone o repositório
-git clone https://github.com/carlosartur/dados-br.git
+git clone https://github.com/tucaguimaraes/dados-br.git
 cd dados-br
 
 # Crie e ative um ambiente virtual

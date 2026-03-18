@@ -2,7 +2,7 @@
 
 > Ferramenta open source para catalogar, baixar, validar e analisar dados públicos brasileiros — com indicadores, citações e perguntas norteadoras para pesquisa.
 
-[![CI](https://github.com/carlosartur/dados-br/actions/workflows/ci.yml/badge.svg)](https://github.com/carlosartur/dados-br/actions)
+[![CI](https://github.com/tucaguimaraes/dados-br/actions/workflows/ci.yml/badge.svg)](https://github.com/tucaguimaraes/dados-br/actions)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://python.org)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/dados-br.svg)](https://pypi.org/project/dados-br/)
@@ -21,7 +21,7 @@ O objetivo é democratizar o acesso a dados públicos brasileiros para pesquisad
 
 ## O que o dados-br faz
 
-- 📋 **Catálogo declarativo** — 35+ datasets em YAML versionado, organizados por fonte e categoria
+- 📋 **Catálogo declarativo** — 36+ datasets em YAML versionado, organizados por fonte e categoria
 - ⬇️ **Download inteligente** — progress bar, retry automático, resume de interrupções, suporte a HTTP e FTP
 - ✅ **Validação automática** — checagens de integridade após download (ZIP, CSV, tamanho mínimo, contagem de linhas)
 - 📊 **Indicadores com contexto** — 38 indicadores educacionais e sociais com citações bibliográficas (ABNT) e perguntas norteadoras para pesquisa
@@ -38,7 +38,7 @@ pip install dados-br
 
 **Do repositório (modo desenvolvimento):**
 ```bash
-git clone https://github.com/carlosartur/dados-br.git
+git clone https://github.com/tucaguimaraes/dados-br.git
 cd dados-br
 pip install -e ".[dev]"
 ```
@@ -134,7 +134,7 @@ Fórmula: IDEB = N × P
 
 ---
 
-## Catálogo de datasets (35 bases)
+## Catálogo de datasets (36 bases)
 
 ### 🎓 Educação (INEP/MEC + UFRN)
 
@@ -147,6 +147,7 @@ Fórmula: IDEB = N × P
 | `encceja` | ENCCEJA | INEP/MEC | lista estática |
 | `inep_tdi` | Taxas de Distorção Idade-Série | INEP/MEC | padrão anual |
 | `ufrn_dados_abertos` | UFRN – Dados Abertos Acadêmicos | UFRN | dinâmico |
+| `ideb` | IDEB – Índice de Desenvolvimento da Educação Básica | INEP/MEC | bienal (2005–2023) |
 | `capes_pos_graduacao` | CAPES Sucupira – Pós-Graduação | CAPES/MEC | padrão anual |
 
 ### 🗂️ IBGE
@@ -339,7 +340,7 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md). A forma mais simples de contribuir é a
 Pesquisador e gestor público com foco em dados educacionais e governança digital.
 Natal, RN.
 
-- GitHub: [@carlosartur](https://github.com/tucaguimaraes)
+- GitHub: [@tucaguimaraes](https://github.com/tucaguimaraes)
 - E-mail: carlostucaguimaraes@gmail.com
 
 ---
