@@ -7,7 +7,35 @@ e este projeto adota [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
 ---
 
-## [Não lançado]
+## [Não lançado] — 2026-03-18
+
+### Adicionado
+
+#### Modularização da CLI (`dadosbr/commands/`)
+- Pacote `dadosbr/commands/` com um módulo por domínio, permitindo leitura, teste e extensão independente de cada grupo de comandos
+- `commands/catalog.py` — comandos `list`, `info` e subapp `catalog` (validate, stats)
+- `commands/download.py` — comando `download` com modo interativo, batch e JSON; integra config de usuário para `output_dir` e `retries` padrão
+- `commands/integrity.py` — comandos `check` (valida ZIPs/CSVs) e `verify` (verifica SHA256 via manifest)
+- `commands/indicators.py` — subapp `indicators` com cinco subcomandos: list, info, questions, for-dataset, validate
+- `commands/system.py` — comandos `version` e **`status`** (novo): lê todos os `manifest.json` locais e exibe tabela consolidada com datasets baixados, timestamps, tamanho em disco e status de integridade
+- `cli.py` reduzido de ~1.300 para ~80 linhas — apenas registra os módulos e monta o app Typer
+
+#### Infraestrutura compartilhada
+- `dadosbr/context.py` — consoles Rich (`out`, `err`) e estado `--output` (`set_output_format`, `is_json`, `emit_json`) centralizados; elimina variáveis globais duplicadas entre módulos
+- `dadosbr/config.py` — leitura de `~/.dados-br.toml` via `tomllib` (stdlib Python 3.11+); dataclass `Config` com campos `output_dir`, `output_format`, `skip_existing`, `retries`, `log_level`; singleton `get_config()` com lazy loading
+- `dadosbr/services.py` — loaders `get_registry()` e `get_indicators()` com tratamento de erro unificado (exit code 1); elimina helpers duplicados que existiam em cinco arquivos
+
+#### Governança do projeto
+- `SECURITY.md` — política de divulgação responsável de vulnerabilidades (contato, SLA de resposta de 72h, escopo)
+- `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1 em português
+- `.github/ISSUE_TEMPLATE/bug_report.yml` — formulário estruturado para bugs (versão, SO, traceback, passos de reprodução)
+- `.github/ISSUE_TEMPLATE/novo_dataset.yml` — formulário para propor datasets (fonte, URL, tipo, categoria, licença)
+- `.github/ISSUE_TEMPLATE/feature_request.yml` — formulário de proposta de funcionalidade
+- `.github/PULL_REQUEST_TEMPLATE.md` — checklist de PR (testes, ruff, CHANGELOG, dry-run para datasets)
+
+### Alterado
+
+- `pyproject.toml` — `pandas`, `pyarrow` e `duckdb` movidos de `dependencies` para `[project.optional-dependencies] analysis`; instalação base (`pip install dados-br`) agora requer apenas `typer`, `rich`, `pydantic`, `PyYAML` e `httpx`; análises pesadas ficam em `pip install dados-br[analysis]`
 
 ---
 
