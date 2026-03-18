@@ -8,7 +8,7 @@ description: |
   nas avaliações do SAEB/Prova Brasil. Calculado a cada dois anos para as
   redes pública e privada, desagregado por escola, município, estado e Brasil.
   Cobre três etapas: Anos Iniciais (1º–5º ano), Anos Finais (6º–9º ano) e
-  Ensino Médio.
+  Ensino Médio. Série histórica completa de 2005 a 2023.
 tags:
   - ideb
   - inep
@@ -17,58 +17,189 @@ tags:
   - saeb
   - avaliacao
   - educacao_basica
+  - serie_historica
 license: "Dados Abertos MEC"
 homepage: "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados"
 url_type: static_list
 file_format: zip
+
 files:
-  # ── Anos Iniciais (1º–5º ano) ─────────────────────────────────────────────
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # ANOS INICIAIS (1º–5º ano) — por Município
+  # ══════════════════════════════════════════════════════════════════════════
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2005/divulgacao_anos_iniciais_municipios_2005.zip"
+    filename: "ideb_anos_iniciais_municipios_2005.zip"
+    description: "IDEB 2005 — Anos Iniciais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2007/divulgacao_anos_iniciais_municipios_2007.zip"
+    filename: "ideb_anos_iniciais_municipios_2007.zip"
+    description: "IDEB 2007 — Anos Iniciais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2009/divulgacao_anos_iniciais_municipios_2009.zip"
+    filename: "ideb_anos_iniciais_municipios_2009.zip"
+    description: "IDEB 2009 — Anos Iniciais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2011/divulgacao_anos_iniciais_municipios_2011.zip"
+    filename: "ideb_anos_iniciais_municipios_2011.zip"
+    description: "IDEB 2011 — Anos Iniciais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2013/divulgacao_anos_iniciais_municipios_2013.zip"
+    filename: "ideb_anos_iniciais_municipios_2013.zip"
+    description: "IDEB 2013 — Anos Iniciais por Município"
+    est_size_mb: 2.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2015/divulgacao_anos_iniciais_municipios_2015.zip"
+    filename: "ideb_anos_iniciais_municipios_2015.zip"
+    description: "IDEB 2015 — Anos Iniciais por Município"
+    est_size_mb: 2.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2017/divulgacao_anos_iniciais_municipios_2017.zip"
+    filename: "ideb_anos_iniciais_municipios_2017.zip"
+    description: "IDEB 2017 — Anos Iniciais por Município"
+    est_size_mb: 2.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2019/divulgacao_anos_iniciais_municipios_2019.zip"
+    filename: "ideb_anos_iniciais_municipios_2019.zip"
+    description: "IDEB 2019 — Anos Iniciais por Município"
+    est_size_mb: 3.0
+
   - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_iniciais_municipios_2021.zip"
     filename: "ideb_anos_iniciais_municipios_2021.zip"
     description: "IDEB 2021 — Anos Iniciais por Município"
     est_size_mb: 3.0
 
-  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_iniciais_escolas_2021.zip"
-    filename: "ideb_anos_iniciais_escolas_2021.zip"
-    description: "IDEB 2021 — Anos Iniciais por Escola"
-    est_size_mb: 8.0
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2023/divulgacao_anos_iniciais_municipios_2023.zip"
+    filename: "ideb_anos_iniciais_municipios_2023.zip"
+    description: "IDEB 2023 — Anos Iniciais por Município"
+    est_size_mb: 3.0
 
-  # ── Anos Finais (6º–9º ano) ───────────────────────────────────────────────
+  # ══════════════════════════════════════════════════════════════════════════
+  # ANOS FINAIS (6º–9º ano) — por Município
+  # ══════════════════════════════════════════════════════════════════════════
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2005/divulgacao_anos_finais_municipios_2005.zip"
+    filename: "ideb_anos_finais_municipios_2005.zip"
+    description: "IDEB 2005 — Anos Finais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2007/divulgacao_anos_finais_municipios_2007.zip"
+    filename: "ideb_anos_finais_municipios_2007.zip"
+    description: "IDEB 2007 — Anos Finais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2009/divulgacao_anos_finais_municipios_2009.zip"
+    filename: "ideb_anos_finais_municipios_2009.zip"
+    description: "IDEB 2009 — Anos Finais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2011/divulgacao_anos_finais_municipios_2011.zip"
+    filename: "ideb_anos_finais_municipios_2011.zip"
+    description: "IDEB 2011 — Anos Finais por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2013/divulgacao_anos_finais_municipios_2013.zip"
+    filename: "ideb_anos_finais_municipios_2013.zip"
+    description: "IDEB 2013 — Anos Finais por Município"
+    est_size_mb: 2.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2015/divulgacao_anos_finais_municipios_2015.zip"
+    filename: "ideb_anos_finais_municipios_2015.zip"
+    description: "IDEB 2015 — Anos Finais por Município"
+    est_size_mb: 2.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2017/divulgacao_anos_finais_municipios_2017.zip"
+    filename: "ideb_anos_finais_municipios_2017.zip"
+    description: "IDEB 2017 — Anos Finais por Município"
+    est_size_mb: 2.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2019/divulgacao_anos_finais_municipios_2019.zip"
+    filename: "ideb_anos_finais_municipios_2019.zip"
+    description: "IDEB 2019 — Anos Finais por Município"
+    est_size_mb: 3.0
+
   - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_finais_municipios_2021.zip"
     filename: "ideb_anos_finais_municipios_2021.zip"
     description: "IDEB 2021 — Anos Finais por Município"
     est_size_mb: 3.0
 
-  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_finais_escolas_2021.zip"
-    filename: "ideb_anos_finais_escolas_2021.zip"
-    description: "IDEB 2021 — Anos Finais por Escola"
-    est_size_mb: 8.0
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2023/divulgacao_anos_finais_municipios_2023.zip"
+    filename: "ideb_anos_finais_municipios_2023.zip"
+    description: "IDEB 2023 — Anos Finais por Município"
+    est_size_mb: 3.0
 
-  # ── Ensino Médio ──────────────────────────────────────────────────────────
+  # ══════════════════════════════════════════════════════════════════════════
+  # ENSINO MÉDIO — por Município
+  # ══════════════════════════════════════════════════════════════════════════
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2005/divulgacao_ensino_medio_municipios_2005.zip"
+    filename: "ideb_ensino_medio_municipios_2005.zip"
+    description: "IDEB 2005 — Ensino Médio por Município"
+    est_size_mb: 1.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2007/divulgacao_ensino_medio_municipios_2007.zip"
+    filename: "ideb_ensino_medio_municipios_2007.zip"
+    description: "IDEB 2007 — Ensino Médio por Município"
+    est_size_mb: 1.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2009/divulgacao_ensino_medio_municipios_2009.zip"
+    filename: "ideb_ensino_medio_municipios_2009.zip"
+    description: "IDEB 2009 — Ensino Médio por Município"
+    est_size_mb: 1.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2011/divulgacao_ensino_medio_municipios_2011.zip"
+    filename: "ideb_ensino_medio_municipios_2011.zip"
+    description: "IDEB 2011 — Ensino Médio por Município"
+    est_size_mb: 1.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2013/divulgacao_ensino_medio_municipios_2013.zip"
+    filename: "ideb_ensino_medio_municipios_2013.zip"
+    description: "IDEB 2013 — Ensino Médio por Município"
+    est_size_mb: 1.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2015/divulgacao_ensino_medio_municipios_2015.zip"
+    filename: "ideb_ensino_medio_municipios_2015.zip"
+    description: "IDEB 2015 — Ensino Médio por Município"
+    est_size_mb: 2.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2017/divulgacao_ensino_medio_municipios_2017.zip"
+    filename: "ideb_ensino_medio_municipios_2017.zip"
+    description: "IDEB 2017 — Ensino Médio por Município"
+    est_size_mb: 2.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2019/divulgacao_ensino_medio_municipios_2019.zip"
+    filename: "ideb_ensino_medio_municipios_2019.zip"
+    description: "IDEB 2019 — Ensino Médio por Município"
+    est_size_mb: 2.5
+
   - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_ensino_medio_municipios_2021.zip"
     filename: "ideb_ensino_medio_municipios_2021.zip"
     description: "IDEB 2021 — Ensino Médio por Município"
     est_size_mb: 2.5
 
-  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_ensino_medio_escolas_2021.zip"
-    filename: "ideb_ensino_medio_escolas_2021.zip"
-    description: "IDEB 2021 — Ensino Médio por Escola"
-    est_size_mb: 6.0
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2023/divulgacao_ensino_medio_municipios_2023.zip"
+    filename: "ideb_ensino_medio_municipios_2023.zip"
+    description: "IDEB 2023 — Ensino Médio por Município"
+    est_size_mb: 2.5
 
-est_size_mb_total: 30.5
-est_extracted_mb_total: 90.0
+est_size_mb_total: 62.0
+est_extracted_mb_total: 200.0
 dest_folder: "inep_mec/ideb"
 checks:
   - type: file_exists
   - type: zip_valid
   - type: min_size_mb
-    value: 1
+    value: 0.5
 notes: |
-  O IDEB é calculado bienalmente (anos ímpares: 2005, 2007, ..., 2021, 2023).
-  Este catálogo disponibiliza a edição de 2021 (última com URLs estáveis
-  verificadas). Para edições anteriores, substitua o ano na URL:
-    https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/{year}/divulgacao_anos_iniciais_municipios_{year}.zip
-  Edições disponíveis: 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019, 2021.
+  Série histórica completa: 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019,
+  2021 e 2023 (bienal). Cada edição disponibiliza três etapas:
+    - Anos Iniciais (1º–5º ano do Ensino Fundamental)
+    - Anos Finais  (6º–9º ano do Ensino Fundamental)
+    - Ensino Médio
+  Este catálogo baixa os resultados por Município (30 arquivos, ~62 MB).
+  Para resultados por Escola, substitua "municipios" por "escolas" nas URLs.
+  Para resultados por Estado/Região, substitua por "brasil_regioes_ufs".
   Os arquivos contêm planilhas Excel (.xlsx) com metas e resultados observados
-  para as redes pública (federal, estadual, municipal) e total (pública + privada).
-  Correlaciona-se diretamente com o SAEB e o Censo Escolar.
+  para redes pública (federal, estadual, municipal) e total (pública + privada).
