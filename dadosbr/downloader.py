@@ -6,6 +6,7 @@ retry com backoff exponencial, resume de downloads parciais e checagem de espaç
 from __future__ import annotations
 
 import ftplib
+import hashlib
 import logging
 import time
 import urllib.request
@@ -50,6 +51,15 @@ class DownloadConfig:
     parallel: int = 1  # reservado para futuro suporte async
 
 
+def sha256_file(path: Path, chunk_mb: int = 4) -> str:
+    """Calcula SHA256 de um arquivo em chunks — eficiente para arquivos grandes."""
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(chunk_mb << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 @dataclass
 class DownloadResult:
     url: str
@@ -59,6 +69,7 @@ class DownloadResult:
     size_bytes: int = 0
     elapsed_seconds: float = 0.0
     error: Optional[str] = None
+    sha256: Optional[str] = None  # preenchido após download real; None se dry_run ou skipped
 
 
 @dataclass
@@ -207,10 +218,12 @@ def _download_http(
 
             tmp.rename(dest)
             elapsed = time.monotonic() - start
+            file_hash = sha256_file(dest)
             return DownloadResult(
                 url=url, dest=dest, success=True,
                 size_bytes=dest.stat().st_size,
                 elapsed_seconds=elapsed,
+                sha256=file_hash,
             )
 
         except Exception as exc:
@@ -268,10 +281,12 @@ def _download_ftp(
             urllib.request.urlretrieve(url, str(tmp), reporthook=_progress_hook)
             tmp.rename(dest)
             elapsed = time.monotonic() - start
+            file_hash = sha256_file(dest)
             return DownloadResult(
                 url=url, dest=dest, success=True,
                 size_bytes=dest.stat().st_size,
                 elapsed_seconds=elapsed,
+                sha256=file_hash,
             )
         except Exception as exc:
             logger.warning("FTP tentativa %d/%d falhou: %s — %s", attempt, config.max_retries, url, exc)

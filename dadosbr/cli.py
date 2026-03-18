@@ -42,7 +42,7 @@ from rich.text import Text
 from . import __version__
 from .checker import DatasetCheckReport, run_basic_checks, run_dataset_checks
 from .downloader import DownloadConfig, DownloadSummary, download_urls, probe_all_sizes
-from .manifest import write_manifest
+from .manifest import ManifestVerifyReport, write_manifest, verify_manifest
 from .indicators import IndicatorLevel, IndicatorRegistry, indicator_registry as _global_indicators
 from .models import Dataset
 from .registry import Registry, RegistryError, registry as _global_registry
@@ -802,6 +802,143 @@ def cmd_check(
             report.print_summary()
         if not report.all_passed:
             raise typer.Exit(1)
+
+
+# ---------------------------------------------------------------------------
+# Comando: verify
+# ---------------------------------------------------------------------------
+
+@app.command("verify")
+def cmd_verify(
+    dataset_id: Optional[str] = typer.Argument(
+        default=None,
+        help="ID do dataset (omita para verificar todos os manifests em --dir)",
+    ),
+    data_dir: Path = typer.Option(
+        Path("dados"), "--dir", "-d",
+        help="Diretório raiz dos dados baixados",
+    ),
+) -> None:
+    """
+    Verifica integridade dos arquivos via SHA256 registrado no manifest.json.
+
+    Detecta arquivos corrompidos, ausentes ou alterados desde o download.
+    """
+    _STATUS_ICON = {
+        "ok":       ("[green]✓[/]",       "ok — hash confere"),
+        "mismatch": ("[bold red]✗ CORROMPIDO[/]", "hash diverge — arquivo pode estar corrompido"),
+        "missing":  ("[red]✗ AUSENTE[/]",  "arquivo não encontrado em disco"),
+        "no_hash":  ("[yellow]? sem hash[/]", "manifest não registrou hash (versão antiga ou dry-run)"),
+        "skipped":  ("[dim]⏭ skip[/]",    "arquivo pulado — hash não coletado"),
+    }
+
+    def _report_to_dict(rpt: ManifestVerifyReport) -> dict:
+        return {
+            "dataset": rpt.dataset,
+            "manifest": str(rpt.manifest_path),
+            "timestamp": rpt.timestamp,
+            "all_ok": rpt.all_ok,
+            "ok": rpt.ok_count,
+            "mismatch": rpt.mismatch_count,
+            "missing": rpt.missing_count,
+            "no_hash": rpt.no_hash_count,
+            "skipped": rpt.skipped_count,
+            "results": [
+                {
+                    "filename": r.filename,
+                    "status": r.status,
+                    "expected_sha256": r.expected_sha256,
+                    "actual_sha256": r.actual_sha256,
+                }
+                for r in rpt.results
+            ],
+        }
+
+    def _print_report(rpt: ManifestVerifyReport) -> None:
+        color = "green" if rpt.all_ok else "red"
+        status_label = "[green]OK[/]" if rpt.all_ok else "[bold red]FALHA[/]"
+        out.print(
+            f"\n[bold]Verificação [{color}]{rpt.dataset}[/][/] — {status_label}  "
+            f"[dim](manifest: {rpt.manifest_path.name})[/]"
+        )
+        table = Table(show_header=True, header_style="bold dim", box=None, padding=(0, 1))
+        table.add_column("Status", no_wrap=True, min_width=18)
+        table.add_column("Arquivo", min_width=40)
+        table.add_column("Detalhe", style="dim")
+
+        for r in rpt.results:
+            icon, detail = _STATUS_ICON.get(r.status, ("?", r.status))
+            table.add_row(icon, r.filename, detail)
+        out.print(table)
+
+        parts = []
+        if rpt.ok_count:       parts.append(f"[green]{rpt.ok_count} ok[/]")
+        if rpt.skipped_count:  parts.append(f"[dim]{rpt.skipped_count} skip[/]")
+        if rpt.mismatch_count: parts.append(f"[bold red]{rpt.mismatch_count} corrompido(s)[/]")
+        if rpt.missing_count:  parts.append(f"[red]{rpt.missing_count} ausente(s)[/]")
+        if rpt.no_hash_count:  parts.append(f"[yellow]{rpt.no_hash_count} sem hash[/]")
+        out.print("  " + " | ".join(parts))
+
+    # Localizar manifest(s)
+    manifest_paths_found: list[Path] = []
+
+    if dataset_id:
+        # Buscar manifest do dataset específico
+        reg = _get_registry()
+        try:
+            ds = reg.require(dataset_id)
+        except RegistryError as exc:
+            err.print(f"[red]{exc}[/]")
+            raise typer.Exit(1) from exc
+        candidate = data_dir / ds.dest_folder / "manifest.json"
+        if not candidate.exists():
+            err.print(f"[red]manifest.json não encontrado:[/] {candidate}")
+            err.print(f"[dim]Rode primeiro: dados-br download {dataset_id}[/]")
+            raise typer.Exit(1)
+        manifest_paths_found.append(candidate)
+    else:
+        # Varrer todos os manifests no diretório
+        if not data_dir.exists():
+            err.print(f"[red]Diretório não encontrado:[/] {data_dir}")
+            raise typer.Exit(1)
+        manifest_paths_found = sorted(data_dir.rglob("manifest.json"))
+        if not manifest_paths_found:
+            out.print(f"[yellow]Nenhum manifest.json encontrado em {data_dir}[/]")
+            out.print("[dim]Execute downloads primeiro para gerar manifests.[/]")
+            raise typer.Exit(0)
+
+    # Verificar cada manifest
+    all_reports: list[ManifestVerifyReport] = []
+    any_failure = False
+
+    for mpath in manifest_paths_found:
+        try:
+            rpt = verify_manifest(mpath)
+        except Exception as exc:
+            err.print(f"[red]Erro ao ler {mpath}:[/] {exc}")
+            any_failure = True
+            continue
+
+        all_reports.append(rpt)
+        if not rpt.all_ok:
+            any_failure = True
+
+    if _is_json():
+        _emit_json([_report_to_dict(r) for r in all_reports])
+    else:
+        for rpt in all_reports:
+            _print_report(rpt)
+
+        total_ok = sum(r.ok_count for r in all_reports)
+        total_bad = sum(r.mismatch_count + r.missing_count for r in all_reports)
+        out.print(
+            f"\n[bold]Total:[/] {len(all_reports)} dataset(s) verificado(s) — "
+            f"[green]{total_ok} arquivo(s) íntegro(s)[/]"
+            + (f" | [bold red]{total_bad} problema(s)[/]" if total_bad else "")
+        )
+
+    if any_failure:
+        raise typer.Exit(1)
 
 
 # ---------------------------------------------------------------------------
