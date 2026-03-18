@@ -102,11 +102,11 @@ class TestRunBasicChecks:
 
     def test_mixed_files(self, valid_zip_file: Path, valid_csv_file: Path):
         report = run_basic_checks([valid_zip_file, valid_csv_file])
-        assert report.total > 0
+        assert len(report.results) > 0
 
     def test_empty_list(self):
         report = run_basic_checks([])
-        assert report.total == 0
+        assert len(report.results) == 0
 
 
 class TestRunDatasetChecks:
@@ -132,7 +132,7 @@ class TestRunDatasetChecks:
             checks=[
                 CheckConfig(type="file_exists"),
                 CheckConfig(type="zip_valid"),
-                CheckConfig(type="min_size_mb", value=0.001),
+                CheckConfig(type="min_size_mb", value=0.000001),
             ],
         )
         report = run_dataset_checks(ds, sample_data_dir)

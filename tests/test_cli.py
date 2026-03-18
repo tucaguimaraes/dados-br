@@ -11,7 +11,7 @@ from typer.testing import CliRunner
 
 from dadosbr.cli import app
 
-runner = CliRunner(mix_stderr=False)
+runner = CliRunner()
 
 
 class TestCliVersion:
