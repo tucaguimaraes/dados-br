@@ -1,0 +1,51 @@
+id: cgu_acordos_leniencia
+name: "CGU – Acordos de Leniência, Sanções e Empresas Punidas"
+source: "CGU/Gov.br"
+category: transparencia
+description: |
+  Dados da Controladoria-Geral da União (CGU) sobre acordos de leniência,
+  empresas sancionadas (CEIS, CNEP, CEPIM), punições a servidores (CEAF)
+  e relatórios de auditorias. Essencial para análise de integridade pública,
+  compliance e monitoramento anticorrupção. Formato CSV.
+tags:
+  - cgu
+  - transparencia
+  - sancoes
+  - anticorrupcao
+  - leniencia
+  - compliance
+  - ceis
+  - cnep
+license: "Dados Abertos CGU"
+homepage: "https://www.gov.br/cgu/pt-br/acesso-a-informacao/dados-abertos"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://www.portaldatransparencia.gov.br/download-de-dados/ceis"
+    filename: "CEIS.csv"
+    description: "Cadastro de Empresas Inidôneas e Suspensas (CEIS)"
+    est_size_mb: 5
+  - url: "https://www.portaldatransparencia.gov.br/download-de-dados/cnep"
+    filename: "CNEP.csv"
+    description: "Cadastro Nacional de Empresas Punidas (CNEP)"
+    est_size_mb: 3
+  - url: "https://www.portaldatransparencia.gov.br/download-de-dados/cepim"
+    filename: "CEPIM.csv"
+    description: "Cadastro de Entidades Privadas sem fins lucrativos impedidas (CEPIM)"
+    est_size_mb: 2
+  - url: "https://www.portaldatransparencia.gov.br/download-de-dados/ceaf"
+    filename: "CEAF.csv"
+    description: "Cadastro de Expulsões da Administração Federal (CEAF)"
+    est_size_mb: 1
+est_size_mb_total: 11
+est_extracted_mb_total: 11
+dest_folder: "transparencia/cgu_sancoes"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  Os arquivos são CSVs sem compressão, atualizados periodicamente.
+  CEIS e CNEP são os cadastros mais usados para due diligence.
+  Combine com CNPJ (Receita Federal) para enriquecimento dos dados.

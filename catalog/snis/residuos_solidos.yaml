@@ -1,0 +1,45 @@
+id: snis_residuos
+name: "SNIS – Diagnóstico de Resíduos Sólidos"
+source: "SNIS/MCidades"
+category: saneamento
+description: |
+  Dados do Sistema Nacional de Informações sobre Saneamento (SNIS),
+  componente de Resíduos Sólidos. Diagnósticos anuais com informações
+  sobre coleta, tratamento e destinação final de resíduos sólidos por
+  município, incluindo indicadores de cobertura da coleta de lixo.
+  Base para cálculo do indicador CH16 (Cobertura de Saneamento).
+tags:
+  - snis
+  - residuos_solidos
+  - lixo
+  - coleta
+  - saneamento
+  - municipios
+license: "Dados Abertos (gov.br)"
+homepage: "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis"
+url_type: static_list
+file_format: zip
+files:
+  - url: "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis/produtos-do-snis/diagnosticos/Planilhas_RS2021.zip"
+    filename: "SNIS_RS2021.zip"
+    description: "Diagnóstico SNIS Resíduos Sólidos 2021"
+    est_size_mb: 8
+    year: 2021
+  - url: "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis/produtos-do-snis/diagnosticos/Planilhas_RS2020.zip"
+    filename: "SNIS_RS2020.zip"
+    description: "Diagnóstico SNIS Resíduos Sólidos 2020"
+    est_size_mb: 7
+    year: 2020
+est_size_mb_total: 15
+est_extracted_mb_total: 50
+dest_folder: "snis/residuos_solidos"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 2
+notes: |
+  O SNIS disponibiliza diagnósticos anuais. URLs de anos anteriores podem
+  seguir padrão diferente. Acesse o portal para obter URLs de outros anos:
+  https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis/produtos-do-snis/diagnosticos
+  Dados em planilhas Excel (.xlsx) dentro do ZIP. Use openpyxl ou pandas.

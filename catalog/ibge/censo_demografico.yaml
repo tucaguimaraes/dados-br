@@ -1,0 +1,47 @@
+id: censo_demografico
+name: "Censo Demográfico IBGE"
+source: "IBGE"
+category: demografico
+description: |
+  Recenseamento geral da população brasileira realizado a cada 10 anos pelo IBGE.
+  Coleta dados de alfabetização, frequência escolar, nível de instrução, rendimento,
+  cor/raça, domicílio e condições de vida para todos os municípios do Brasil.
+  Única fonte com desagregação municipal completa para indicadores de educação e renda.
+  Edições disponíveis: 1960, 1970, 1980, 1991, 2000, 2010, 2022.
+tags:
+  - censo
+  - ibge
+  - alfabetizacao
+  - instrucao
+  - demografico
+  - municipios
+license: "Dados Abertos IBGE"
+homepage: "https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Agregados_por_Setores_Censitarios/Educacao/CSV/"
+    filename: "censo_2022_educacao_setores.zip"
+    description: "Microdados de educação por setor censitário — Censo 2022"
+    est_size_mb: 450
+  - url: "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2022/Resultados_do_Universo/Agregados_por_Municipios/"
+    filename: "censo_2022_municipios.zip"
+    description: "Resultados agregados por município — Censo 2022"
+    est_size_mb: 120
+  - url: "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Resultados_do_Universo/Agregados_por_Municipios/"
+    filename: "censo_2010_municipios.zip"
+    description: "Resultados agregados por município — Censo 2010 (série histórica)"
+    est_size_mb: 90
+est_size_mb_total: 660
+est_extracted_mb_total: 2500
+dest_folder: "ibge/censo_demografico"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 50
+notes: |
+  O Censo 2022 trouxe mudanças metodológicas em relação a 2010 (coleta digital,
+  novo questionário). Os microdados de educação incluem: alfabetização (5+ anos),
+  frequência escolar (6–17 anos), nível de instrução (25+ anos), anos de estudo.
+  Para série histórica comparável use os agregados municipais 2010 e 2022.

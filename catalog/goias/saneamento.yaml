@@ -1,0 +1,50 @@
+id: goias_saneamento
+name: "Goiás – Dados de Saneamento Básico (AGR-GO)"
+source: "AGR-GO / dadosabertos.go.gov.br"
+category: saneamento
+description: |
+  Dados de saneamento básico do estado de Goiás disponibilizados pelo
+  Portal de Dados Abertos do Governo de Goiás. Inclui relatórios de
+  fiscalização, convênios de delegação de regulação, autos de infração
+  e microrregiões de saneamento básico da AGR-GO (Agência Goiana de
+  Regulação, Controle e Fiscalização de Serviços Públicos).
+tags:
+  - goias
+  - saneamento
+  - agua
+  - esgoto
+  - regulacao
+  - agr
+license: "Dados Abertos Goiás (CC BY)"
+homepage: "https://dadosabertos.go.gov.br"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dadosabertos.go.gov.br/dataset/6447d96b-a300-4456-a306-51f137888128/resource/e04353e4-7286-4cba-8d64-18d1ef21103e/download/relatorios-de-fiscalizacao-4.csv"
+    filename: "relatorios_fiscalizacao_saneamento_go.csv"
+    description: "Relatórios de fiscalização de saneamento (GO)"
+    est_size_mb: 2
+  - url: "https://dadosabertos.go.gov.br/dataset/362a9480-bd03-4fb8-aa9f-8d45c862da1b/resource/4088fb3e-984e-4409-81ce-8a1a4a4378c9/download/convenios-para-delegacao-da-regulacao-e-fiscalizacao-dos-servicos-de-abastecimento-de-agua-e-es-.csv"
+    filename: "convenios_regulacao_agua_esgoto_go.csv"
+    description: "Convênios de delegação de regulação de água/esgoto (GO)"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/f50a34b4-5ac4-4731-a215-4e83da377a86/resource/151af881-59c0-4e26-8adb-f4e1529d5669/download/autos-de-infracao-de-saneamento-basico-3.csv"
+    filename: "autos_infracao_saneamento_go.csv"
+    description: "Autos de infração de saneamento básico (GO)"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/2e47cd91-8cb1-488c-91db-aa6d1087ba23/resource/323195e8-8a49-4722-85a3-a56e64ec52f1/download/microrregioes-de-saneamento-basico.csv"
+    filename: "microrregioes_saneamento_basico_go.csv"
+    description: "Microrregiões de saneamento básico de Goiás"
+    est_size_mb: 0.5
+est_size_mb_total: 4.5
+est_extracted_mb_total: 4.5
+dest_folder: "goias/saneamento"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.05
+notes: |
+  Dados da AGR-GO (Agência Goiana de Regulação). Indicadores relacionados:
+  CH16 (Cobertura de Saneamento). Para análise comparativa use também
+  snis_residuos (dados nacionais do SNIS).

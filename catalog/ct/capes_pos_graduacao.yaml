@@ -1,0 +1,47 @@
+id: capes_pos_graduacao
+name: "CAPES – Sucupira: Pós-Graduação no Brasil"
+source: "CAPES/MEC"
+category: ciencia_tecnologia
+description: |
+  Dados da Plataforma Sucupira da CAPES (Coordenação de Aperfeiçoamento de
+  Pessoal de Nível Superior). Base de referência da pós-graduação brasileira:
+  programas de mestrado e doutorado, avaliações quadrienais, discentes,
+  docentes, produções bibliográficas, teses e dissertações defendidas.
+  Permite análises do sistema de pós-graduação e produção científica nacional.
+tags:
+  - capes
+  - pos_graduacao
+  - mestrado
+  - doutorado
+  - sucupira
+  - ciencia
+  - producao_academica
+  - teses
+license: "Dados Abertos CAPES"
+homepage: "https://dadosabertos.capes.gov.br/"
+url_type: pattern
+file_format: zip
+years:
+  start: 2013
+  end: 2023
+url_pattern: "https://dadosabertos.capes.gov.br/dataset/programas-da-pos-graduacao-stricto-sensu-no-brasil-{year}/resource/programas_{year}.zip"
+year_exceptions:
+  "2024": null
+est_size_mb_per_year: 30
+est_extracted_mb_per_year: 120
+dest_folder: "ct/capes_pos_graduacao"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 5
+notes: |
+  O portal de dados abertos da CAPES (https://dadosabertos.capes.gov.br/)
+  usa CKAN e disponibiliza vários conjuntos por categoria:
+    - Programas: avaliação e notas dos PPGs
+    - Discentes: matrículas de mestrado e doutorado
+    - Docentes: pesquisadores vinculados a PPGs
+    - Produções: artigos, livros, patentes por PPG
+    - Teses e dissertações: dados de defesas
+  Cada conjunto tem sua própria URL no portal. Use a API CKAN para descoberta.
+  URL padrão do catálogo: https://dadosabertos.capes.gov.br/api/3/action/package_list

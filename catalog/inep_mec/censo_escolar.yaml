@@ -1,0 +1,40 @@
+id: censo_escolar
+name: "Censo Escolar da Educação Básica"
+source: "INEP/MEC"
+category: educacao
+description: |
+  Microdados do Censo Escolar, principal levantamento estatístico educacional
+  da educação básica brasileira. Abrange matrículas, docentes, turmas, escolas
+  e infraestrutura, cobrindo todas as etapas: Educação Infantil, Ensino
+  Fundamental e Ensino Médio, em redes pública e privada.
+tags:
+  - censo_escolar
+  - inep
+  - educacao_basica
+  - matriculas
+  - docentes
+  - escolas
+  - microdados
+license: "Dados Abertos MEC"
+homepage: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar"
+url_type: pattern
+file_format: zip
+years:
+  start: 1995
+  end: 2024
+url_pattern: "https://download.inep.gov.br/dados_abertos/microdados_censo_escolar_{year}.zip"
+year_exceptions:
+  "2025": null
+est_size_mb_per_year: 250
+est_extracted_mb_per_year: 900
+dest_folder: "inep_mec/censo_escolar"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 20
+notes: |
+  Dados disponíveis desde 1995. Arquivos mais antigos (1995–2006) são menores.
+  A partir de 2007 há maior granularidade de variáveis. Cada ZIP contém
+  arquivos CSV separados por tipo de entidade (escolas, turmas, matrículas,
+  docentes) e o respectivo dicionário de variáveis.

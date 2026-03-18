@@ -1,0 +1,42 @@
+id: cnmp_dados_mp
+name: "CNMP – Dados do Ministério Público (MP em Números)"
+source: "CNMP"
+category: transparencia
+description: |
+  Dados do Conselho Nacional do Ministério Público (CNMP) sobre o desempenho
+  institucional do Ministério Público brasileiro. Inclui estatísticas de
+  procedimentos instaurados e concluídos, inquéritos, ações penais e civis,
+  produtividade de membros e dados do relatório "MP em Números". Abrange
+  MPF, MPDFT, MPE dos 26 estados + DF e MPs especializados.
+tags:
+  - cnmp
+  - ministerio_publico
+  - mpf
+  - mpe
+  - processos
+  - estatisticas
+  - accountability
+license: "Dados Abertos CNMP"
+homepage: "https://www.cnmp.mp.br/portal/publicacoes/relatorios"
+url_type: pattern
+file_format: zip
+years:
+  start: 2015
+  end: 2023
+url_pattern: "https://www.cnmp.mp.br/portal/images/Publicacoes/documentos/MP-em-Numeros/{year}/dados-abertos-mp-em-numeros-{year}.zip"
+year_exceptions:
+  "2024": null
+est_size_mb_per_year: 10
+est_extracted_mb_per_year: 40
+dest_folder: "mp/cnmp"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 1
+notes: |
+  Os dados cobrem todos os ramos do MP brasileiro. Para dados do MPF
+  especificamente, consulte: https://dadosabertos.mpf.mp.br/
+  O CNMP também publica o cadastro de membros do MP em:
+  https://www.cnmp.mp.br/portal/institucional/membros-do-mp
+  URLs podem variar por ano — verifique a página de publicações do CNMP.

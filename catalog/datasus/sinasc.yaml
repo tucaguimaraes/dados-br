@@ -1,0 +1,41 @@
+id: sinasc
+name: "SINASC – Sistema de Informações sobre Nascidos Vivos"
+source: "DATASUS/MS"
+category: saude
+description: |
+  Registro administrativo de todos os nascimentos ocorridos no Brasil, com dados
+  da Declaração de Nascido Vivo (DNV). Contém informações sobre a mãe (idade,
+  escolaridade, número de filhos, raça/cor, município de residência) e o recém-nascido
+  (peso ao nascer, Apgar, idade gestacional, anomalias). Série histórica desde 1994.
+  Fundamental para projetar demanda futura por vagas escolares e analisar determinantes
+  sociais do desenvolvimento infantil que impactam o desempenho escolar posterior.
+tags:
+  - sinasc
+  - datasus
+  - nascimentos
+  - saude_materna
+  - determinantes_sociais
+  - educacao_mae
+license: "Dados Abertos DATASUS/MS"
+homepage: "http://www.datasus.gov.br/DATASUS/index.php?area=0205"
+url_type: pattern
+file_format: dbc
+years:
+  start: 1994
+  end: 2022
+url_pattern: "ftp://ftp.datasus.gov.br/dissemin/publicos/SINASC/NOV/DNBR{year}.dbc"
+est_size_mb_per_year: 15
+est_extracted_mb_per_year: 60
+dest_folder: "datasus/sinasc"
+checks:
+  - type: file_exists
+  - type: dbc_exists
+  - type: min_size_mb
+    value: 5
+notes: |
+  Arquivos no formato DBC (compressão proprietária do DATASUS). Use o pacote
+  `read.dbc` (R) ou `pysus` (Python) para leitura. Variável-chave para educação:
+  ESCMAE (escolaridade da mãe em anos de estudo) — permite analisar a relação
+  intergeracional entre escolaridade materna e indicadores de saúde neonatal.
+  Peso ao nascer < 2500g e prematuridade são preditores de dificuldades de
+  aprendizagem na educação básica.

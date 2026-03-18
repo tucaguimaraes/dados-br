@@ -1,0 +1,66 @@
+id: goias_educacao
+name: "Goiás – Dados Educacionais (SEDUC-GO)"
+source: "SEDUC-GO"
+category: educacao
+description: |
+  Dados educacionais do estado de Goiás disponibilizados pelo Portal de
+  Dados Abertos do Governo de Goiás. Inclui: resultados IDEGO/SAEGO,
+  cadastro de professores por escola, matrículas por etapa, escolas
+  conveniadas, repasse de merenda escolar, transporte escolar, cursos
+  de graduação da UEG, emendas impositivas e convênios SEDUC.
+  Dados de 2025 em formato CSV.
+tags:
+  - goias
+  - educacao
+  - seduc
+  - idego
+  - saego
+  - matriculas
+  - professores
+  - ueg
+license: "Dados Abertos Goiás (CC BY)"
+homepage: "https://dadosabertos.go.gov.br"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dadosabertos.go.gov.br/dataset/9294643a-0116-470c-bd87-6492054874e1/resource/79c4ee1d-636c-4184-8752-237805ff1722/download/9.resultados_idego_seduc_2025.csv"
+    filename: "resultados_idego_seduc_2025.csv"
+    description: "Resultados IDEGO SEDUC 2025"
+    est_size_mb: 2
+  - url: "https://dadosabertos.go.gov.br/dataset/9a837627-bc76-4d26-aab6-6b35e3e95906/resource/a9754bd3-04e6-4701-a707-b503130577fc/download/8.professores_escola_seduc_2025.csv"
+    filename: "professores_escola_seduc_2025.csv"
+    description: "Professores por escola SEDUC 2025"
+    est_size_mb: 3
+  - url: "https://dadosabertos.go.gov.br/dataset/773b17ff-757c-4e71-bc3b-7f1c8cd4dbeb/resource/f649807d-b91e-44b0-bab6-573833e6c9d3/download/7.matriculas_por_etapa_seduc_2025.csv"
+    filename: "matriculas_por_etapa_seduc_2025.csv"
+    description: "Matrículas por etapa SEDUC 2025"
+    est_size_mb: 2
+  - url: "https://dadosabertos.go.gov.br/dataset/96f7221a-584f-4e58-8ea2-ba43d0e3fcfd/resource/3f2c9e35-e9b1-415e-8516-c421af2e269f/download/6.escolas_conveniadas_seduc_2025.csv"
+    filename: "escolas_conveniadas_seduc_2025.csv"
+    description: "Escolas conveniadas SEDUC 2025"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/2240a6a0-039f-4c22-9b54-ce1fcbe581a0/resource/a9e57732-1579-403c-bcba-cb551f485cfa/download/11.repasse_merenda_escolar_seduc_2025.csv"
+    filename: "repasse_merenda_escolar_seduc_2025.csv"
+    description: "Repasse merenda escolar SEDUC 2025"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/27415897-dafc-4409-a1e1-1081f6bd19d5/resource/5607e746-1d63-4956-b172-c4305ed5fc78/download/12.transporte_escolar_seduc_2025.csv"
+    filename: "transporte_escolar_seduc_2025.csv"
+    description: "Transporte escolar SEDUC 2025"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/27909a2b-0852-4615-b4d1-1b97f75f20c1/resource/644246ea-0695-4fbe-83be-b033adde5142/download/cursos_de_graduacao_ueg_2025.csv"
+    filename: "cursos_de_graduacao_ueg_2025.csv"
+    description: "Cursos de graduação UEG 2025"
+    est_size_mb: 1
+est_size_mb_total: 11
+est_extracted_mb_total: 11
+dest_folder: "goias/educacao"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.1
+notes: |
+  Dados em formato CSV, sem necessidade de extração. Encoding geralmente
+  UTF-8 ou latin-1. Use pandas com encoding='latin-1' se UTF-8 falhar.
+  URLs podem mudar conforme atualizações do portal dadosabertos.go.gov.br.
+  Indicadores relacionados: CH03 (SAEGO/IDEGO).

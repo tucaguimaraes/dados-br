@@ -1,0 +1,59 @@
+id: ibge_malha_br
+name: "IBGE – Malhas Territoriais do Brasil (2024)"
+source: "IBGE"
+category: geografia
+description: |
+  Malhas territoriais digitais do Brasil disponibilizadas pelo IBGE para o
+  ano de referência 2024. Inclui polígonos de todos os municípios brasileiros,
+  limites estaduais, regiões geográficas imediatas e intermediárias e limites
+  do país. Formato Shapefile comprimido em ZIP.
+tags:
+  - ibge
+  - malha
+  - shapefile
+  - brasil
+  - municipios
+  - estados
+  - geografia
+  - cartografia
+license: "Dados Abertos IBGE"
+homepage: "https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais"
+url_type: static_list
+file_format: zip
+files:
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_Municipios_2024.zip"
+    filename: "BR_Municipios_2024.zip"
+    description: "Todos os municípios do Brasil 2024"
+    est_size_mb: 35
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_UF_2024.zip"
+    filename: "BR_UF_2024.zip"
+    description: "Limites estaduais do Brasil 2024"
+    est_size_mb: 4
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_Regioes_2024.zip"
+    filename: "BR_Regioes_2024.zip"
+    description: "Regiões do Brasil 2024"
+    est_size_mb: 2
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_RG_Imediatas_2024.zip"
+    filename: "BR_RG_Imediatas_2024.zip"
+    description: "Regiões Geográficas Imediatas do Brasil 2024"
+    est_size_mb: 10
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_RG_Intermediarias_2024.zip"
+    filename: "BR_RG_Intermediarias_2024.zip"
+    description: "Regiões Geográficas Intermediárias do Brasil 2024"
+    est_size_mb: 5
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/Brasil/BR_Pais_2024.zip"
+    filename: "BR_Pais_2024.zip"
+    description: "Limite nacional do Brasil 2024"
+    est_size_mb: 2
+est_size_mb_total: 58
+est_extracted_mb_total: 180
+dest_folder: "ibge/malha_br"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 1
+notes: |
+  Shapefiles em formato EPSG:4674 (SIRGAS 2000). BR_Municipios_2024.zip é
+  o maior arquivo (~35 MB comprimido, ~100 MB extraído).
+  Para análises rápidas considere usar apenas BR_UF_2024.zip.

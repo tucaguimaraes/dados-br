@@ -1,0 +1,143 @@
+# Indicadores DATASUS — Saúde como Determinante Social da Educação
+# Bases: SIM (mortalidade), SINASC (nascimentos), Projeções Populacionais
+# Referência: Determinantes Sociais da Saúde / ODS 3 e 4
+
+level: transversal
+
+indicators:
+
+  - id: mortalidade_infantil
+    name: "Taxa de Mortalidade Infantil (TMI) por Município"
+    category: saude_social
+    description: |
+      Número de óbitos de menores de 1 ano por 1.000 nascidos vivos. Calculada
+      combinando o SIM (óbitos — DATASUS) e o SINASC (nascimentos — DATASUS).
+      É um dos principais indicadores de desenvolvimento humano e condições de vida.
+      A TMI tem forte correlação com nível de escolaridade materna, saneamento básico,
+      cobertura de saúde e renda. Quanto menor a TMI, maiores as chances de as crianças
+      chegarem à escola em melhores condições de desenvolvimento. Meta ODS 3.2.1:
+      menos de 12 óbitos/1.000 NV até 2030. Em 2022 o Brasil registrou 11,2/1.000 NV.
+    periodicity: anual
+    available_since: 1994
+    methodology_url: "http://tabnet.datasus.gov.br/cgi/idb2012/c01b.htm"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - causa_obito
+      - cor_raca
+      - sexo
+    source_datasets:
+      - datasus_sim_doinf
+      - sinasc
+      - datasus_pops
+    citations:
+      - "VICTORA, C. G. et al. Saúde de mães e crianças no Brasil: progressos e desafios. The Lancet, v. 377, n. 9780, p. 1863–1876, 2011. (Série Saúde no Brasil, 2)."
+      - "RASELLA, D. et al. Effect of a conditional cash transfer programme on childhood mortality. The Lancet, v. 382, n. 9886, p. 57–64, 2013."
+      - "DATASUS. Notas técnicas: Sistema de Informações sobre Mortalidade e SINASC. Brasília: MS, 2021."
+      - "SZWARCWALD, C. L.; LEAL, M. C.; ANDRADE, C. L. T. Estimação da mortalidade infantil no Brasil. Cadernos de Saúde Pública, v. 18, supl., p. 43–52, 2002."
+    research_questions:
+      - "Municípios com maior taxa de mortalidade infantil (TMI > 15/1.000 NV) apresentam taxas de abandono escolar e TDI no EF significativamente maiores 5–10 anos depois?"
+      - "Qual a correlação entre TMI e escolaridade materna (SINASC — variável ESCMAE) nos municípios brasileiros? A relação é mais forte em municípios do Nordeste?"
+      - "O Programa Bolsa Família, ao condicionar benefícios ao acompanhamento de saúde infantil, gerou redução da TMI maior nos municípios com maior cobertura do programa?"
+      - "Como a TMI por cor/raça evoluiu entre 2000 e 2022? A desigualdade racial na mortalidade infantil está se reduzindo ou ampliando?"
+      - "Municípios que atingiram TMI < 10/1.000 NV apresentam melhores indicadores educacionais (IDEB, frequência escolar) do que os ainda acima dessa meta?"
+
+  - id: mortalidade_causas_externas_jovens
+    name: "Mortalidade por Causas Externas em Jovens de 15 a 29 Anos"
+    category: saude_social
+    description: |
+      Taxa de mortalidade por causas externas (homicídios, acidentes de trânsito,
+      suicídios e outras causas externas) na população de 15–29 anos. Calculada
+      com dados do SIM/DATASUS. É o principal componente da mortalidade juvenil no
+      Brasil, com impacto direto na permanência e conclusão do ensino médio e na
+      taxa NEET. O Brasil tem uma das maiores taxas de homicídios de jovens do mundo,
+      com forte concentração em jovens negros do sexo masculino em periferias urbanas.
+    periodicity: anual
+    available_since: 1979
+    methodology_url: "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sim/cnv/ext10uf.def"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - causa_obito_capitulo
+      - cor_raca
+      - sexo
+      - faixa_etaria
+    source_datasets:
+      - datasus_sim_dores
+      - datasus_pops
+    citations:
+      - "WAISELFISZ, J. J. Mapa da Violência 2016: Homicídios por arma de fogo no Brasil. Brasília: FLACSO/OPAS, 2016."
+      - "IPEA; FBSP. Atlas da Violência 2023. Brasília: IPEA, 2023."
+      - "CERQUEIRA, D. et al. Atlas da Violência 2022. Brasília: IPEA, 2022."
+      - "SOARES FILHO, A. M. Vitimização por homicídios segundo características de raça no Brasil. Revista de Saúde Pública, São Paulo, v. 45, n. 4, p. 745–755, 2011."
+    research_questions:
+      - "Municípios com alta taxa de homicídios de jovens (15–24 anos) apresentam maiores taxas de abandono do ensino médio? A correlação é mais forte em capitais do que em municípios do interior?"
+      - "A taxa de mortalidade por causas externas em jovens negros de 15–29 anos é estatisticamente diferente da de jovens brancos na mesma faixa etária, estado e faixa de renda?"
+      - "Há redução da mortalidade por causas externas juvenil nos estados que implementaram programas de pacificação escolar ou redução da violência urbana (ex: Programa Fica Vivo – MG)?"
+      - "A mortalidade por suicídio em jovens cresceu entre 2010 e 2022? O padrão difere entre regiões e faixas etárias (15–19 vs 20–29 anos)?"
+      - "Existe correlação entre a taxa de homicídios no entorno de escolas públicas (nível municipal) e os índices de frequência escolar no ensino médio?"
+
+  - id: escolaridade_materna_nascimentos
+    name: "Escolaridade Materna e Condições de Nascimento (SINASC)"
+    category: determinantes_sociais
+    description: |
+      Análise da escolaridade da mãe (ESCMAE no SINASC) em relação a indicadores
+      de saúde neonatal: baixo peso ao nascer (< 2.500g), prematuridade (< 37 semanas),
+      realização de pré-natal adequado (≥ 7 consultas) e tipo de parto. A escolaridade
+      materna é um dos principais determinantes das condições de nascimento, que por
+      sua vez afetam o desenvolvimento neurológico e o desempenho escolar posterior.
+      Indicador de transmissão intergeracional das desigualdades educacionais.
+    periodicity: anual
+    available_since: 1994
+    methodology_url: "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sinasc/cnv/nvbr.def"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - escolaridade_mae
+      - cor_raca_mae
+      - faixa_etaria_mae
+    source_datasets:
+      - sinasc
+    citations:
+      - "VICTORA, C. G. et al. Breastfeeding in the 21st century. The Lancet, v. 387, n. 10017, p. 475–490, 2016."
+      - "CURRIE, J. Inequality at Birth: Some Causes and Consequences. American Economic Review, v. 101, n. 3, p. 1–22, 2011."
+      - "LEAL, M. C. et al. Birth in Brazil: national survey into labour and birth. Reproductive Health, v. 9, n. 15, 2012."
+      - "BARROS, A. J. D. et al. Patterns of deliveries in a Brazilian birth cohort: almost universal Cesarean sections for the better-off. Revista de Saúde Pública, v. 45, n. 4, 2011."
+    research_questions:
+      - "Mães sem instrução ou com fundamental incompleto apresentam prevalência de baixo peso ao nascer significativamente maior do que mães com ensino médio ou superior completo?"
+      - "Existe um gradiente contínuo entre anos de estudo materno e probabilidade de pré-natal adequado (≥ 7 consultas) nos municípios brasileiros?"
+      - "A relação entre escolaridade materna e condições de nascimento mudou entre 2000 e 2022? A ampliação do ensino médio feminino gerou melhora nos indicadores neonatais?"
+      - "Municípios com alta proporção de mães sem instrução no SINASC apresentam, 6 anos depois, menores taxas de matrícula na 1ª série do EF ou maiores taxas de TDI?"
+
+  - id: cobertura_atencao_basica
+    name: "Cobertura de Atenção Básica à Saúde e Impacto Educacional"
+    category: saude_social
+    description: |
+      Percentual de cobertura da Estratégia Saúde da Família (ESF) e das equipes de
+      Atenção Básica nos municípios, combinado com indicadores de mortalidade infantil
+      e mortalidade por causas evitáveis. A cobertura da atenção básica é um determinante
+      da saúde infantil e escolar: crianças saudáveis têm maior frequência e desempenho
+      escolar. Permite estudar a relação entre expansão do SUS e melhora nos indicadores
+      educacionais municipais.
+    periodicity: anual
+    available_since: 2000
+    methodology_url: "https://sisab.saude.gov.br/"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+    source_datasets:
+      - datasus_pops
+      - datasus_sim_doinf
+      - datasus_sim_dores
+    citations:
+      - "MACINKO, J.; MARINHO DE SOUZA, M. F.; GUANAIS, F. C. Going to scale with community-based primary care: an analysis of the Family Health Program and infant mortality in Brazil, 1999–2004. Social Science & Medicine, v. 65, n. 10, p. 2070–2080, 2007."
+      - "AQUINO, R.; OLIVEIRA, N. F.; BARRETO, M. L. Impact of the Family Health Program on infant mortality in Brazilian municipalities. American Journal of Public Health, v. 99, n. 1, p. 87–93, 2009."
+      - "BRASIL. Ministério da Saúde. Sala de Apoio à Gestão Estratégica (SAGE). Brasília: MS, 2023."
+    research_questions:
+      - "Municípios com maior cobertura da Estratégia Saúde da Família (ESF > 80%) apresentam menor TMI e, consequentemente, melhores indicadores de frequência escolar no EF?"
+      - "A expansão da ESF nos anos 2000 gerou impactos nos indicadores educacionais municipais (IDEB, abandono) dos municípios do Nordeste e Norte?"
+      - "Existe correlação entre cobertura de vacinação infantil (cartão de vacina em dia) e frequência escolar na educação infantil (4–5 anos)?"

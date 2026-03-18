@@ -1,0 +1,42 @@
+id: cnj_dados_judiciarios
+name: "CNJ – Dados do Poder Judiciário (Justiça em Números)"
+source: "CNJ"
+category: transparencia
+description: |
+  Dados do Conselho Nacional de Justiça (CNJ) sobre o desempenho do Poder
+  Judiciário brasileiro. Inclui estatísticas de processos, acervo, taxa de
+  congestionamento, produtividade de magistrados e servidores, orçamento dos
+  tribunais e dados do relatório "Justiça em Números". Abrange todos os
+  segmentos de justiça (STJ, TJs, TRFs, TRTs, etc.).
+tags:
+  - cnj
+  - judiciario
+  - processos
+  - justica
+  - tribunais
+  - desempenho
+  - estatisticas
+license: "Dados Abertos CNJ"
+homepage: "https://www.cnj.jus.br/pesquisas-judiciarias/justica-em-numeros/"
+url_type: pattern
+file_format: zip
+years:
+  start: 2014
+  end: 2023
+url_pattern: "https://www.cnj.jus.br/wp-content/uploads/2024/07/justica-em-numeros-{year}.zip"
+year_exceptions:
+  "2024": null
+est_size_mb_per_year: 20
+est_extracted_mb_per_year: 80
+dest_folder: "tribunais/cnj"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 5
+notes: |
+  O relatório Justiça em Números é publicado anualmente (referência ano anterior).
+  Além do ZIP principal, o CNJ disponibiliza o DataJud (base de dados de processos
+  judiciais): https://datajud-wiki.cnj.jus.br/
+  DataJud requer acesso via API com token — não incluído neste dataset.
+  Microdados de processos individuais disponíveis via DataJud para pesquisadores.

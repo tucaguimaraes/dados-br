@@ -1,0 +1,50 @@
+id: inpi_patentes
+name: "INPI – Patentes e Propriedade Industrial"
+source: "INPI/MDIC"
+category: ciencia_tecnologia
+description: |
+  Dados do Instituto Nacional da Propriedade Industrial (INPI) sobre pedidos
+  e concessões de patentes, registros de marcas, desenhos industriais,
+  indicações geográficas e programas de computador. Permite análises sobre
+  inovação tecnológica, setores econômicos emergentes, concentração de
+  patentes por estado e transferência de tecnologia no Brasil.
+tags:
+  - inpi
+  - patentes
+  - marcas
+  - propriedade_intelectual
+  - inovacao
+  - tecnologia
+  - mdic
+license: "Dados Abertos INPI"
+homepage: "https://www.gov.br/inpi/pt-br/acesso-a-informacao/dados-abertos"
+url_type: static_list
+file_format: zip
+files:
+  - url: "https://www.gov.br/inpi/pt-br/acesso-a-informacao/dados-abertos/arquivos/patentes/dados-abertos-patentes-pedidos.zip"
+    filename: "inpi_patentes_pedidos.zip"
+    description: "Pedidos de patentes depositados no INPI"
+    est_size_mb: 150
+  - url: "https://www.gov.br/inpi/pt-br/acesso-a-informacao/dados-abertos/arquivos/marcas/dados-abertos-marcas-pedidos.zip"
+    filename: "inpi_marcas_pedidos.zip"
+    description: "Pedidos de registro de marcas no INPI"
+    est_size_mb: 100
+  - url: "https://www.gov.br/inpi/pt-br/acesso-a-informacao/dados-abertos/arquivos/programas-de-computador/dados-abertos-programas-computador.zip"
+    filename: "inpi_programas_computador.zip"
+    description: "Registros de programas de computador no INPI"
+    est_size_mb: 20
+est_size_mb_total: 270
+est_extracted_mb_total: 900
+dest_folder: "ct/inpi"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 10
+notes: |
+  Os dados de patentes são os maiores (~150 MB comprimido). Para análises
+  internacionais de patentes use também a base WIPO (wipo.int/ipstats).
+  O INPI disponibiliza dados históricos desde 1882. Dados mais recentes
+  passam por validação antes da publicação (podem ter atraso de 18-24 meses
+  para patentes por sigilo industrial).
+  Acesso via API: https://busca.inpi.gov.br/pePI/

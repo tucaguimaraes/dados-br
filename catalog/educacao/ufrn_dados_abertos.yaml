@@ -1,0 +1,65 @@
+id: ufrn_dados_abertos
+name: "UFRN – Dados Abertos da Universidade Federal do Rio Grande do Norte"
+source: "UFRN"
+category: educacao
+description: |
+  Dados abertos da UFRN, uma das universidades federais com maior tradição
+  em abertura de dados no Brasil. Disponibiliza dados de discentes, docentes,
+  técnicos administrativos, projetos de pesquisa e extensão, cotas,
+  evasão, desempenho acadêmico e dados financeiros. O portal SIGAA/SIGRH
+  da UFRN é referência nacional de sistema acadêmico de código aberto,
+  adotado por dezenas de IFEs brasileiras.
+tags:
+  - ufrn
+  - universidade
+  - ensino_superior
+  - discentes
+  - docentes
+  - pesquisa
+  - extensao
+  - dados_abertos_academicos
+  - federal
+license: "Dados Abertos UFRN (CC BY)"
+homepage: "https://dados.ufrn.br"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dados.ufrn.br/dataset/85ecd3b6-34c0-48cf-bd41-f16bd5e1a977/resource/61c78c3c-7c3b-4f41-a9c3-8e44e8db25df/download/discentes.csv"
+    filename: "ufrn_discentes.csv"
+    description: "Discentes matriculados/histórico da UFRN"
+    est_size_mb: 15
+  - url: "https://dados.ufrn.br/dataset/b4953da6-3e7b-435c-a05d-8ccc74970782/resource/6e9b53f2-c64c-4eb4-8419-2a2f07c38e3e/download/docentes.csv"
+    filename: "ufrn_docentes.csv"
+    description: "Docentes da UFRN – perfil e vínculos"
+    est_size_mb: 3
+  - url: "https://dados.ufrn.br/dataset/evasao/resource/evasao.csv"
+    filename: "ufrn_evasao.csv"
+    description: "Evasão por curso e período na UFRN"
+    est_size_mb: 2
+  - url: "https://dados.ufrn.br/dataset/projetos-de-pesquisa/resource/projetos_pesquisa.csv"
+    filename: "ufrn_projetos_pesquisa.csv"
+    description: "Projetos de pesquisa registrados na UFRN"
+    est_size_mb: 2
+  - url: "https://dados.ufrn.br/dataset/estrutura-curricular/resource/componentes_curriculares.csv"
+    filename: "ufrn_componentes_curriculares.csv"
+    description: "Componentes curriculares (disciplinas) da UFRN"
+    est_size_mb: 1
+est_size_mb_total: 23
+est_extracted_mb_total: 23
+dest_folder: "educacao/ufrn"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  O portal dados.ufrn.br usa CKAN e tem mais de 60 conjuntos de dados.
+  A UFRN é referência nacional em dados abertos acadêmicos — os dados são
+  ricos e bem documentados. Outros datasets relevantes:
+    - Cotas e ações afirmativas
+    - Bolsas de permanência
+    - Estrutura curricular por curso
+    - Calendário acadêmico e feriados
+  O SIGAA/UFRN é adotado por mais de 60 IFEs — dados similares disponíveis
+  em: UFPA, UFPB, UFERSA, UFC, UFCA, entre outras.
+  Para comparação entre universidades use o Censo da Educação Superior (INEP).

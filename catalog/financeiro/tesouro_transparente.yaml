@@ -1,0 +1,46 @@
+id: tesouro_transparente
+name: "Tesouro Transparente – Execução Orçamentária da Educação (SIAFI/SOF)"
+source: "STN/Tesouro Nacional"
+category: financeiro
+description: |
+  Dados de execução orçamentária federal da função Educação (função 12) extraídos
+  do SIAFI via API do Tesouro Transparente. Inclui dotação inicial, dotação
+  atualizada, empenho, liquidação e pagamento por programa, ação, subfunção e
+  elemento de despesa. Abrange Ministério da Educação, FNDE, CAPES, INEP e
+  demais órgãos da função educação. Disponível desde 2013 via API aberta.
+tags:
+  - tesouro
+  - siafi
+  - orcamento_federal
+  - educacao
+  - mec
+  - fnde
+  - execucao_orcamentaria
+license: "Dados Abertos STN"
+homepage: "https://www.tesourotransparente.gov.br/ckan/dataset/execucao-orcamentaria"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://www.tesourotransparente.gov.br/ckan/dataset/7200b27e-b8a2-4ec8-abbc-68cc8a80f9f5/resource/exec-orcamentaria-educacao.csv"
+    filename: "execucao_orcamentaria_educacao_federal.csv"
+    description: "Execução orçamentária federal — função Educação (12) — série 2013–2024"
+    est_size_mb: 95
+  - url: "https://apidatalake.tesouro.gov.br/ords/siafi/tt/despesa"
+    filename: "siafi_api_educacao.json"
+    description: "Endpoint API SIAFI — consulta por função/subfunção (uso programático)"
+    est_size_mb: 0
+est_size_mb_total: 95
+est_extracted_mb_total: 280
+dest_folder: "financeiro/tesouro_transparente"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 10
+notes: |
+  A API do Tesouro Transparente (https://apidatalake.tesouro.gov.br/) permite
+  filtrar por ano, UG (unidade gestora), função e subfunção sem baixar o arquivo
+  completo. Subfunções relevantes para educação: 361 (Ensino Fundamental),
+  362 (Ensino Médio), 364 (Ensino Superior), 365 (Educação Infantil),
+  366 (Educação de Jovens e Adultos), 368 (Educação Básica).
+  Para análise de gasto por aluno, cruzar com Censo Escolar (matrículas por etapa).

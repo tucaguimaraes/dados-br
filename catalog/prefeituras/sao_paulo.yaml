@@ -1,0 +1,51 @@
+id: prefeitura_sp
+name: "Prefeitura de São Paulo – Dados Abertos"
+source: "PMSP"
+category: transparencia
+description: |
+  Dados abertos da Prefeitura Municipal de São Paulo (PMSP). Um dos portais
+  municipais mais completos do Brasil. Inclui orçamento municipal, contratos,
+  licitações, dados de saúde (UBS, hospitais), educação (escolas municipais,
+  matrículas), mobilidade urbana, licenciamentos, habitação, meio ambiente
+  e dados do IPTU. Formato CSV/JSON/GeoJSON via portal CKAN.
+tags:
+  - sao_paulo
+  - prefeitura
+  - municipio
+  - orcamento
+  - contratos
+  - saude_municipal
+  - educacao_municipal
+  - mobilidade
+license: "Dados Abertos PMSP (ODbL)"
+homepage: "https://dados.prefeitura.sp.gov.br"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dados.prefeitura.sp.gov.br/dataset/d0543b9e-3419-48d5-b24b-07c7c7d6df1e/resource/2e6cba58-c12e-4284-8a2a-82aaa9e6bafd/download/despesas2023.csv"
+    filename: "sp_despesas_2023.csv"
+    description: "Despesas municipais SP 2023"
+    est_size_mb: 40
+  - url: "https://dados.prefeitura.sp.gov.br/dataset/escolas/resource/39db5031-7238-4139-bcaa-e620a3180188/download/escolasativas2023.csv"
+    filename: "sp_escolas_ativas_2023.csv"
+    description: "Escolas ativas na rede municipal SP 2023"
+    est_size_mb: 2
+  - url: "https://dados.prefeitura.sp.gov.br/dataset/unidades-de-saude/resource/9a23d92e-7db7-4d09-a3ec-8d8edca30dca/download/unidades_saude2023.csv"
+    filename: "sp_unidades_saude_2023.csv"
+    description: "Unidades de saúde SP 2023"
+    est_size_mb: 1
+est_size_mb_total: 43
+est_extracted_mb_total: 43
+dest_folder: "prefeituras/sp"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  Portal CKAN com centenas de datasets. APIs REST disponíveis em:
+  https://dados.prefeitura.sp.gov.br/api/3/action/
+  Para análise de mobilidade use o dataset de GTFS (transporte público):
+  https://dados.prefeitura.sp.gov.br/dataset/gtfs
+  URLs de recursos específicos podem mudar — use a API CKAN para descoberta
+  automática: ?resource_search=name:despesas

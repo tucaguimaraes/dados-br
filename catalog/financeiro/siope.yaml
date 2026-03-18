@@ -1,0 +1,47 @@
+id: siope
+name: "SIOPE – Sistema de Informações sobre Orçamentos Públicos em Educação"
+source: "FNDE/MEC"
+category: financeiro
+description: |
+  Base de dados do FNDE que registra receitas, despesas e indicadores do
+  financiamento da educação pública de estados, municípios e Distrito Federal.
+  Contém: receitas vinculadas ao ensino (art. 212 CF), despesas com MDE
+  (manutenção e desenvolvimento do ensino), gasto por aluno, complementação da
+  União ao FUNDEB, cumprimento do piso salarial docente e percentual de receita
+  aplicado por etapa de ensino. Disponível desde 2006, com granularidade mensal.
+tags:
+  - siope
+  - fnde
+  - financiamento_educacao
+  - fundeb
+  - gasto_aluno
+  - mde
+  - piso_salarial
+license: "Dados Abertos FNDE/MEC"
+homepage: "https://www.fnde.gov.br/siope/"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://www.fnde.gov.br/siope/relatorioRREO.do?method=exportarCSV&tipoBaixar=1"
+    filename: "siope_estados_series.csv"
+    description: "Dados de estados — série histórica consolidada"
+    est_size_mb: 80
+  - url: "https://www.fnde.gov.br/siope/relatorioRREO.do?method=exportarCSV&tipoBaixar=2"
+    filename: "siope_municipios_series.csv"
+    description: "Dados de municípios — série histórica consolidada"
+    est_size_mb: 350
+est_size_mb_total: 430
+est_extracted_mb_total: 1200
+dest_folder: "financeiro/siope"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 30
+notes: |
+  O SIOPE é a principal fonte para verificar o cumprimento das vinculações
+  constitucionais de gastos em educação (25% das receitas líquidas dos estados
+  e 15% dos municípios). Após a EC 108/2020, o FUNDEB passou a ser permanente
+  com complementação mínima de 23% da União até 2026. Os indicadores de gasto
+  por aluno do INEP são derivados do SIOPE + Censo Escolar.
+  A API do FNDE em https://apigestao.fnde.gov.br/ oferece acesso programático.

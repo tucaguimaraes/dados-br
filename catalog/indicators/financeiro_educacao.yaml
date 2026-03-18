@@ -1,0 +1,141 @@
+# Indicadores de Financiamento da Educação Pública Brasileira
+# Bases: SIOPE (FNDE/MEC), Tesouro Transparente (STN), Censo Escolar (INEP)
+# Referência legal: CF 1988 Art. 212; EC 108/2020 (FUNDEB); Lei 11.738/2008 (Piso)
+
+level: transversal
+
+indicators:
+
+  - id: gasto_aluno_municipio
+    name: "Gasto Público por Aluno por Município e Estado (SIOPE)"
+    category: financeiro
+    description: |
+      Valor médio anual de recursos públicos aplicados por aluno matriculado em
+      cada ente federado, calculado dividindo as despesas com MDE (manutenção e
+      desenvolvimento do ensino) pelo número de matrículas do Censo Escolar. Inclui
+      despesas de pessoal, custeio e capital das redes municipais e estaduais.
+      É o principal indicador de equidade no financiamento educacional. O CAQi
+      (Custo Aluno-Qualidade inicial) define o valor mínimo necessário para uma
+      educação de qualidade por etapa: em 2023, estimado em R$ 5.400/ano para
+      anos iniciais e R$ 7.200 para EM.
+    periodicity: anual
+    available_since: 2006
+    methodology_url: "https://www.fnde.gov.br/siope/relatorioRREO.do"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+      - dependencia_administrativa
+    source_datasets:
+      - siope
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Indicadores Financeiros Educacionais — Gasto por Aluno. Brasília: MEC/INEP, 2021."
+      - "PINTO, J. M. R. O financiamento da educação na Constituição Federal de 1988: 30 anos de mobilização social. Educação & Sociedade, v. 39, n. 145, p. 846–869, 2018."
+      - "CAMPANHA NACIONAL PELO DIREITO À EDUCAÇÃO. CAQi e CAQ no PNE: quanto custa a educação pública de qualidade no Brasil? São Paulo: Campanha, 2018."
+      - "DAVIES, N. FUNDEB: a redenção da educação básica? Educação & Sociedade, v. 27, n. 96, p. 753–774, 2006."
+    research_questions:
+      - "Qual é a razão entre o maior e o menor gasto por aluno entre municípios brasileiros de mesmo porte? A desigualdade no financiamento municipal cresceu ou caiu entre 2010 e 2023?"
+      - "Municípios que gastam acima do CAQi estimado apresentam IDEB significativamente maior do que municípios abaixo desse piso, controlando por Inse?"
+      - "Como o gasto por aluno evoluiu nos municípios que recebem complementação da União pelo FUNDEB após a EC 108/2020?"
+      - "Existe correlação entre gasto por aluno no ensino fundamental e a taxa de conclusão do ensino médio 8–10 anos depois na mesma coorte municipal?"
+      - "Quais estados ainda apresentam gasto por aluno no ensino médio abaixo do mínimo FUNDEB? Qual o impacto nos indicadores de fluxo e desempenho?"
+
+  - id: vinculacao_constitucional_educacao
+    name: "Cumprimento da Vinculação Constitucional de Gastos em Educação"
+    category: financeiro
+    description: |
+      Percentual de receitas líquidas aplicado em educação por estados (mínimo 25%
+      — Art. 212 CF) e municípios (mínimo 15%). Calculado a partir do SIOPE e do
+      Tesouro Transparente. Indicador crítico de accountability fiscal: descumprimento
+      implica retenção de transferências voluntárias da União. Após a EC 108/2020,
+      estados e municípios que participam do novo FUNDEB têm obrigações adicionais
+      de complementação. Historicamente, muitos municípios declaram cumprir o mínimo
+      mas há questionamentos sobre o que é contabilizado como MDE.
+    periodicity: anual
+    available_since: 2000
+    methodology_url: "https://www.fnde.gov.br/siope/relatorioRREO.do"
+    disaggregations:
+      - estado
+      - municipio
+      - brasil
+      - dependencia_administrativa
+    source_datasets:
+      - siope
+      - tesouro_transparente
+    citations:
+      - "PINTO, J. M. R. A política recente de fundos para o financiamento da educação e seus efeitos no pacto federativo. Educação & Sociedade, v. 28, n. 100, p. 877–897, 2007."
+      - "BRASIL. Constituição Federal. Art. 212: Vinculação de receitas em educação. Brasília, 1988."
+      - "BRASIL. Emenda Constitucional nº 108, de 26 de agosto de 2020 — FUNDEB permanente. Brasília, 2020."
+      - "TRIBUNAL DE CONTAS DA UNIÃO. Auditoria Operacional: Financiamento da Educação Básica. Brasília: TCU, 2019."
+    research_questions:
+      - "Quantos municípios declararam no SIOPE percentuais abaixo de 15% nos últimos 10 anos? Qual o perfil (porte, região, IDH) dos reincidentes?"
+      - "O que é efetivamente contabilizado como MDE nos relatórios do SIOPE? Há evidências de que algumas despesas (como inativos e pensionistas) são indevidamente incluídas?"
+      - "A complementação da União pelo FUNDEB reduziu a desigualdade de gasto por aluno entre estados ricos e pobres após 2020?"
+      - "Municípios que historicamente cumprem o percentual constitucional com folga (> 20%) apresentam melhores indicadores educacionais do que os que ficam no limite (15–16%)?"
+
+  - id: gasto_federal_funcao_educacao
+    name: "Execução Orçamentária Federal da Função Educação (SIAFI/Tesouro)"
+    category: financeiro
+    description: |
+      Evolução das despesas do governo federal na função Educação (função 12) por
+      subfunção, programa e órgão: MEC, FNDE, CAPES, INEP, universidades federais e
+      institutos federais. Inclui análise por categoria econômica (custeio, pessoal,
+      investimento) e por modalidade de aplicação (direta, transferências). Permite
+      avaliar prioridades orçamentárias, impacto de contingenciamentos e evolução
+      real do gasto (deflacionado) ao longo do tempo.
+    periodicity: anual
+    available_since: 2001
+    methodology_url: "https://www.tesourotransparente.gov.br/ckan/dataset/execucao-orcamentaria"
+    disaggregations:
+      - orgao
+      - programa
+      - subfuncao
+      - categoria_economica
+      - acao
+    source_datasets:
+      - tesouro_transparente
+    citations:
+      - "BRASIL. Lei de Diretrizes Orçamentárias (LDO) e Lei Orçamentária Anual (LOA) — função 12 Educação. Brasília: SOF/MPOG, 2013–2024."
+      - "AMARAL, N. C. PEC 241/55 — A 'morte' do PNE 2014–2024 e o fim do SNE. Revista Brasileira de Política e Administração da Educação, v. 32, n. 3, 2016."
+      - "DWECK, E.; ROSSI, P.; OLIVEIRA, A. L. M. (Orgs.). Austeridade e Retrocesso. São Paulo: Friedrich-Ebert-Stiftung, 2018."
+    research_questions:
+      - "O teto de gastos (EC 95/2016) reduziu o investimento federal em educação em termos reais entre 2017 e 2023? Quais subfunções foram mais afetadas (ensino superior, básico, profissional)?"
+      - "Qual é a proporção do gasto federal com educação destinada a transferências para estados e municípios (FUNDEB, PNAE, PNATE) versus gasto direto em IFES e IFs?"
+      - "Como evoluiu o gasto com programas de permanência estudantil (PNAES) nas IFES em relação ao total de matrículas? O gasto per capita caiu com a expansão do REUNI?"
+      - "A execução orçamentária do FNDE para programas de infraestrutura escolar (PROINFÂNCIA, PAR) teve alta taxa de contingenciamento em anos de restrição fiscal?"
+
+  - id: fundeb_distribuicao_municipios
+    name: "Distribuição e Complementação do FUNDEB por Município"
+    category: financeiro
+    description: |
+      Valores recebidos e contribuídos ao FUNDEB por cada município e estado,
+      incluindo a complementação da União para entes que ficam abaixo do valor
+      mínimo por aluno. Após a EC 108/2020, o FUNDEB passou a ser permanente com
+      complementação crescente de 10% (2020) a 23% (2026+). Novo mecanismo VAAR
+      (Valor Aluno-Ano por Resultado) vincula parte da complementação ao desempenho
+      e indicadores de equidade. Fonte de análise de equidade no financiamento.
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.fnde.gov.br/financiamento/fundeb"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+      - complementacao_uniao
+    source_datasets:
+      - siope
+      - tesouro_transparente
+      - censo_escolar
+    citations:
+      - "BRASIL. Emenda Constitucional nº 108/2020 — Novo FUNDEB. Brasília, 2020."
+      - "BRASIL. Lei nº 14.113/2020 — Regulamenta o novo FUNDEB. Brasília, 2020."
+      - "GOUVEIA, A. B.; SOUZA, A. R.; TAVARES, T. M. Conversas sobre financiamento da educação no Brasil. Curitiba: Ed. UFPR, 2006."
+      - "MONLEVADE, J. A. C. Entender o FUNDEB para melhorar o FUNDEF. Brasília: Idéa Editora, 1997."
+    research_questions:
+      - "Quais estados recebem complementação da União pelo FUNDEB? A complementação é suficiente para atingir o valor mínimo por aluno definido pelo FNDE a cada ano?"
+      - "O novo mecanismo VAAR (vinculado a resultado) do FUNDEB pós-EC 108/2020 tem correlação positiva com melhorias nos indicadores de IDEB e fluxo escolar nos municípios beneficiados?"
+      - "A redistribuição intraestadual do FUNDEB reduz a desigualdade de gasto por aluno entre municípios ricos e pobres dentro de um mesmo estado?"
+      - "Municípios que dependem fortemente da complementação da União para compor o FUNDEB apresentam maior fragilidade fiscal em anos de queda de repasses?"

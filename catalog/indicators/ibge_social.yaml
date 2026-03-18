@@ -1,0 +1,181 @@
+# Indicadores IBGE — Contexto Social, Demográfico e Educacional
+# Bases: PNAD Contínua, Censo Demográfico, PeNSE
+# Fonte metodológica: IBGE / Agenda 2030 ODS
+
+level: transversal
+
+indicators:
+
+  - id: taxa_analfabetismo
+    name: "Taxa de Analfabetismo da População de 15 Anos ou Mais"
+    category: alfabetizacao
+    description: |
+      Percentual da população de 15 anos ou mais que não sabe ler nem escrever
+      um bilhete simples. Calculada pelo IBGE a partir da PNAD Contínua (estimativa
+      anual) e pelo Censo Demográfico (desagregação municipal decenal). O Brasil
+      atingiu 5,6% em 2022 (PNAD), mas com forte heterogeneidade regional: Nordeste
+      mantém taxas acima de 12%. Indicador ODS 4.6.1 (Meta: eliminar analfabetismo
+      até 2030). Correlaciona-se diretamente com anos de estudo dos pais e IDEB.
+    periodicity: anual (PNADC) / decenal (Censo)
+    available_since: 1940
+    methodology_url: "https://www.ibge.gov.br/estatisticas/multidominio/condicoes-de-vida-desigualdade-e-pobreza/9221-sintese-de-indicadores-sociais.html"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - cor_raca
+      - sexo
+      - zona_urbana_rural
+      - faixa_etaria
+    source_datasets:
+      - pnadc_microdados
+      - censo_demografico
+    citations:
+      - "IBGE. Síntese de Indicadores Sociais 2023: Uma análise das condições de vida da população brasileira. Rio de Janeiro: IBGE, 2023."
+      - "IBGE. Censo Demográfico 2022: Resultados do Universo — Características da população. Rio de Janeiro: IBGE, 2023."
+      - "UNESCO. Literacy rates. In: Global Education Monitoring Report 2023. Paris: UNESCO, 2023."
+      - "FERRARO, A. R. Alfabetização rural no Brasil na perspectiva das relações campo-cidade e de gênero. Educação & Realidade, v. 37, n. 3, p. 943–967, 2012."
+    research_questions:
+      - "Como a taxa de analfabetismo evolui por faixa etária entre 2012 e 2023? A redução foi mais rápida entre jovens (15–24 anos) ou adultos (40+ anos)?"
+      - "Quais municípios do Nordeste apresentam taxa de analfabetismo acima de 20% no Censo 2022? Qual a correlação com o IDEB dos anos finais do EF dessas localidades?"
+      - "A taxa de analfabetismo entre pessoas pretas e pardas é significativamente maior do que entre brancas, mesmo controlando por renda e localização?"
+      - "O Programa Brasil Alfabetizado gerou impacto mensurável na taxa de analfabetismo dos municípios-alvo entre 2010 e 2022?"
+      - "Qual a diferença na taxa de analfabetismo entre zonas rurais e urbanas em 2022? Essa diferença é maior em estados com menor urbanização?"
+
+  - id: frequencia_escolar
+    name: "Taxa de Frequência Escolar por Faixa Etária"
+    category: acesso
+    description: |
+      Proporção da população em determinada faixa etária que frequenta escola ou creche.
+      Calculada pela PNAD Contínua e Censo Demográfico. Indicadores-chave: taxa líquida
+      de matrícula na educação infantil (4–5 anos), no ensino fundamental (6–14 anos)
+      e no ensino médio (15–17 anos). O Brasil atingiu quase universalização no EF
+      (99%) mas apresenta gap no EM (75%) e na EI (93%). Componente do ODS 4.1.
+    periodicity: anual (PNADC) / decenal (Censo)
+    available_since: 1992
+    methodology_url: "https://www.ibge.gov.br/estatisticas/sociais/educacao/17270-pnad-continua.html"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - faixa_etaria
+      - cor_raca
+      - sexo
+      - renda_domiciliar
+      - zona_urbana_rural
+    source_datasets:
+      - pnadc_microdados
+      - censo_demografico
+    citations:
+      - "IBGE. PNAD Contínua — Educação 2022. Rio de Janeiro: IBGE, 2023. (Nota técnica)."
+      - "IBGE. Censo Demográfico 2022: Educação. Rio de Janeiro: IBGE, 2023."
+      - "UNDP. Human Development Report 2023/24: Education indicators. New York: UNDP, 2024."
+      - "LEON, F. L. L.; MENEZES-FILHO, N. A. Reprovação, avanço e evasão escolar no Brasil. Pesquisa e Planejamento Econômico, v. 32, n. 3, 2002."
+    research_questions:
+      - "A taxa de frequência ao ensino médio (15–17 anos) é significativamente menor entre jovens pretos e pardos do quintil de renda mais baixo? Qual a magnitude da desigualdade?"
+      - "Como a frequência escolar na educação infantil (4–5 anos) evoluiu nos municípios com alta cobertura do Programa Criança Feliz entre 2017 e 2022?"
+      - "Jovens de 15–17 anos em zonas rurais apresentam menor taxa de frequência ao ensino médio do que seus pares urbanos? A diferença é explicada por distância ou oferta de vagas?"
+      - "A queda na taxa de frequência escolar durante a pandemia (2020–2021) foi recuperada em 2022? O impacto foi homogêneo por renda e cor/raça?"
+      - "Existe correlação entre a taxa de frequência escolar municipal e o IDEB dos anos finais do EF? Municípios com maior frequência têm maior IDEB?"
+
+  - id: neet_jovens
+    name: "Taxa NEET – Jovens que Não Estudam, Não Trabalham e Não se Qualificam"
+    category: trajetoria
+    description: |
+      Proporção de jovens de 15 a 29 anos que não estão ocupados (trabalhando nem
+      procurando trabalho), não frequentam escola e não realizam qualificação
+      profissional. Indicador da OIT e ODS 8.6.1. No Brasil, cerca de 22% dos jovens
+      de 15–29 anos eram NEET em 2022, com predominância de mulheres (especialmente
+      mães jovens) e jovens pretos e pardos de baixa renda. Sinaliza risco de exclusão
+      social permanente e baixo capital humano.
+    periodicity: anual
+    available_since: 2012
+    methodology_url: "https://www.ibge.gov.br/estatisticas/sociais/trabalho/17270-pnad-continua.html"
+    disaggregations:
+      - estado
+      - brasil
+      - sexo
+      - cor_raca
+      - faixa_etaria
+      - renda_domiciliar
+      - zona_urbana_rural
+    source_datasets:
+      - pnadc_microdados
+    citations:
+      - "IBGE. PNAD Contínua — Jovens que não estudam nem trabalham: 2022. Rio de Janeiro: IBGE, 2023."
+      - "ILO. Global Employment Trends for Youth 2022. Geneva: ILO, 2022."
+      - "CAMARANO, A. A.; KANSO, S. O que estão fazendo os jovens que não estudam, não trabalham e não procuram trabalho? Mercado de Trabalho, Brasília, n. 57, 2012."
+      - "CORSEUIL, C. H.; FRANCA, M. Nem-nem no Brasil: desafios e perspectivas. Rio de Janeiro: IPEA, 2015."
+    research_questions:
+      - "A proporção de jovens NEET entre mulheres de 15–24 anos com filhos é significativamente maior do que entre jovens sem filhos? Qual o papel da licença maternidade e acesso a creches?"
+      - "Municípios com maior cobertura do PRONATEC e programas de qualificação profissional apresentaram redução da taxa NEET entre 2013 e 2018?"
+      - "Como a taxa NEET variou durante a pandemia (2020–2021) por quintil de renda? Jovens de famílias mais pobres foram mais afetados?"
+      - "A taxa NEET é maior entre jovens que não concluíram o ensino médio? Qual a diferença com jovens com EM completo mas sem ensino superior?"
+      - "Existe correlação entre taxa NEET municipal e taxas de abandono no ensino médio (Censo Escolar)? Municípios com maior abandono têm maior NEET três anos depois?"
+
+  - id: nivel_instrucao_adultos
+    name: "Nível de Instrução da População Adulta (25 Anos ou Mais)"
+    category: instrucao
+    description: |
+      Distribuição da população adulta (25+ anos) por nível de instrução: sem instrução,
+      fundamental incompleto, fundamental completo, médio completo, superior completo.
+      Calculado pela PNAD Contínua (anual) e Censo Demográfico (municipal). Reflete
+      o acúmulo histórico de escolarização da força de trabalho e o capital humano
+      disponível na economia. Componente do Índice de Desenvolvimento Humano (IDH) e
+      do ODS 4.3. Permite analisar herança educacional intergeracional.
+    periodicity: anual (PNADC) / decenal (Censo)
+    available_since: 1992
+    methodology_url: "https://www.ibge.gov.br/estatisticas/multidominio/condicoes-de-vida-desigualdade-e-pobreza/9221-sintese-de-indicadores-sociais.html"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - cor_raca
+      - sexo
+      - faixa_etaria
+      - renda_domiciliar
+    source_datasets:
+      - pnadc_microdados
+      - censo_demografico
+    citations:
+      - "IBGE. PNAD Contínua — Educação: Notas técnicas 2022. Rio de Janeiro: IBGE, 2023."
+      - "UNDP. Human Development Index — Education Component. In: Human Development Report 2023/24. New York: UNDP, 2024."
+      - "BECKER, G. S. Human Capital: A Theoretical and Empirical Analysis. 3. ed. Chicago: University of Chicago Press, 1994."
+      - "SCHULTZ, T. W. Investment in Human Capital. American Economic Review, v. 51, n. 1, p. 1–17, 1961."
+    research_questions:
+      - "Qual a proporção de adultos de 25–34 anos com ensino superior completo por estado em 2022? Como isso se compara com a meta do PNE (33% até 2024)?"
+      - "A escolaridade materna (mãe com ensino médio ou superior) está associada a maior IDEB nas escolas do município? Qual a magnitude do efeito?"
+      - "Existe convergência do nível de instrução entre estados do Norte/Nordeste e Sul/Sudeste ao longo das últimas décadas, ou a desigualdade se mantém?"
+      - "Como a proporção de adultos sem instrução ou com fundamental incompleto evoluiu entre 2012 e 2022? A queda foi mais acelerada em municípios com programas de EJA?"
+
+  - id: saude_escolar_pense
+    name: "Indicadores de Saúde do Escolar (PeNSE)"
+    category: saude_educacao
+    description: |
+      Conjunto de indicadores de saúde e fatores de risco de escolares do 6º ao
+      9º ano e do Ensino Médio. Inclui: prevalência de bullying, saúde mental
+      (sentimento de solidão, insônia por preocupação), atividade física, consumo
+      de álcool e drogas, prática sexual sem proteção, violência escolar e doméstica.
+      Permite identificar determinantes de saúde que impactam o desempenho,
+      a presença e a permanência escolar.
+    periodicity: quinquenal
+    available_since: 2009
+    methodology_url: "https://www.ibge.gov.br/estatisticas/sociais/saude/9134-pesquisa-nacional-de-saude-do-escolar.html"
+    disaggregations:
+      - estado
+      - brasil
+      - tipo_escola_publica_privada
+      - sexo
+      - faixa_etaria
+    source_datasets:
+      - pense
+      - censo_escolar
+    citations:
+      - "IBGE. Pesquisa Nacional de Saúde do Escolar 2019. Rio de Janeiro: IBGE, 2021."
+      - "MALTA, D. C. et al. Bullying nas escolas brasileiras: resultados da Pesquisa Nacional de Saúde do Escolar (PeNSE) 2015. Ciência & Saúde Coletiva, v. 24, n. 2, p. 549–558, 2019."
+      - "EVANS, G. W. The Environment of Childhood Poverty. American Psychologist, v. 59, n. 2, p. 77–92, 2004."
+    research_questions:
+      - "Qual a prevalência de bullying em escolas públicas versus privadas em 2019? Essa diferença se mantém após controlar por nível socioeconômico (Inse)?"
+      - "Estudantes com maior prática de atividade física apresentam melhor desempenho no Saeb? É possível estabelecer correlação com os microdados da PeNSE e do Saeb por escola?"
+      - "A prevalência de consumo de álcool entre escolares do Ensino Médio está associada a maior taxa de abandono escolar (Censo Escolar) nos estados?"
+      - "Como os indicadores de saúde mental (sentimento de solidão, distúrbios do sono) dos escolares evoluíram entre 2012 e 2019? O que os dados sugerem para o pós-pandemia?"

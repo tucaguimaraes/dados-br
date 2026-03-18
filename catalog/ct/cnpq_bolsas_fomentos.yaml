@@ -1,0 +1,51 @@
+id: cnpq_bolsas_fomentos
+name: "CNPq – Bolsas e Fomentos à Pesquisa"
+source: "CNPq/MCTI"
+category: ciencia_tecnologia
+description: |
+  Dados do Conselho Nacional de Desenvolvimento Científico e Tecnológico
+  (CNPq) sobre bolsas concedidas, fomentos à pesquisa, grupos de pesquisa
+  (Diretório de Grupos), investimentos em C&T por modalidade, área do
+  conhecimento e UF. Essencial para análise do sistema nacional de ciência,
+  tecnologia e inovação (C,T&I).
+tags:
+  - cnpq
+  - bolsas
+  - pesquisa
+  - ciencia
+  - tecnologia
+  - inovacao
+  - fomento
+  - grupos_pesquisa
+license: "Dados Abertos CNPq"
+homepage: "https://dadosabertos.cnpq.br/"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dadosabertos.cnpq.br/dataset/bolsas-concedidas/resource/bolsas_vigentes.csv"
+    filename: "cnpq_bolsas_vigentes.csv"
+    description: "Bolsas CNPq vigentes no momento"
+    est_size_mb: 20
+  - url: "https://dadosabertos.cnpq.br/dataset/investimentos/resource/investimentos_serie_historica.csv"
+    filename: "cnpq_investimentos_historico.csv"
+    description: "Série histórica de investimentos CNPq em C&T"
+    est_size_mb: 5
+  - url: "https://dadosabertos.cnpq.br/dataset/grupos-de-pesquisa/resource/grupos_pesquisa.csv"
+    filename: "cnpq_grupos_pesquisa.csv"
+    description: "Grupos de pesquisa cadastrados no Diretório CNPq"
+    est_size_mb: 10
+est_size_mb_total: 35
+est_extracted_mb_total: 35
+dest_folder: "ct/cnpq"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 1
+notes: |
+  Portal de dados abertos do CNPq: https://dadosabertos.cnpq.br/
+  O Diretório de Grupos de Pesquisa (DGP) é uma das bases mais ricas para
+  mapeamento da pesquisa científica brasileira por área e região.
+  Para dados de pesquisadores use a Plataforma Lattes:
+  https://memoria.cnpq.br/web/portal-lattes/dados-abertos
+  (requer cadastro e aprovação de projeto de pesquisa).

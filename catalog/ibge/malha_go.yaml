@@ -1,0 +1,50 @@
+id: ibge_malha_go
+name: "IBGE – Malhas Territoriais de Goiás (2024)"
+source: "IBGE"
+category: geografia
+description: |
+  Malhas territoriais digitais do estado de Goiás disponibilizadas pelo
+  IBGE no ano de referência 2024. Inclui polígonos de municípios, limites
+  da UF, regiões geográficas imediatas e intermediárias. Formato Shapefile
+  comprimido em ZIP.
+tags:
+  - ibge
+  - malha
+  - shapefile
+  - goias
+  - municipios
+  - geografia
+  - cartografia
+license: "Dados Abertos IBGE"
+homepage: "https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais"
+url_type: static_list
+file_format: zip
+files:
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/UFs/GO/GO_Municipios_2024.zip"
+    filename: "GO_Municipios_2024.zip"
+    description: "Municípios de Goiás 2024"
+    est_size_mb: 2
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/UFs/GO/GO_UF_2024.zip"
+    filename: "GO_UF_2024.zip"
+    description: "Limite do estado de Goiás 2024"
+    est_size_mb: 1
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/UFs/GO/GO_RG_Imediatas_2024.zip"
+    filename: "GO_RG_Imediatas_2024.zip"
+    description: "Regiões Geográficas Imediatas de GO 2024"
+    est_size_mb: 1
+  - url: "https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2024/UFs/GO/GO_RG_Intermediarias_2024.zip"
+    filename: "GO_RG_Intermediarias_2024.zip"
+    description: "Regiões Geográficas Intermediárias de GO 2024"
+    est_size_mb: 1
+est_size_mb_total: 5
+est_extracted_mb_total: 15
+dest_folder: "ibge/malha_go"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  Shapefiles em formato EPSG:4674 (SIRGAS 2000). Para abrir use GeoPandas:
+    import geopandas as gpd
+    gdf = gpd.read_file("GO_Municipios_2024.zip")

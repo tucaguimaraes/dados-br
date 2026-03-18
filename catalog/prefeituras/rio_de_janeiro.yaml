@@ -1,0 +1,47 @@
+id: prefeitura_rio
+name: "Prefeitura do Rio de Janeiro – Dados Abertos"
+source: "PCRJ"
+category: transparencia
+description: |
+  Dados abertos da Prefeitura da Cidade do Rio de Janeiro (PCRJ). Portal com
+  dezenas de conjuntos de dados sobre gestão municipal: orçamento, contratos,
+  licitações, dados de saúde (CMS, hospitais), educação (escolas municipais),
+  mobilidade (BRT, metrô, ciclofaixas), turismo, habitação e dados geoespaciais
+  da cidade. Portal CKAN com API REST.
+tags:
+  - rio_de_janeiro
+  - prefeitura
+  - municipio
+  - orcamento
+  - contratos
+  - saude_municipal
+  - educacao_municipal
+  - geodados
+license: "Dados Abertos PCRJ (CC BY)"
+homepage: "https://data.rio"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://opendata.arcgis.com/datasets/a6f35e19b60f4b30a1bcb7aff1a4b7fd_0.csv"
+    filename: "rj_escolas_municipais.csv"
+    description: "Escolas da rede municipal do Rio de Janeiro"
+    est_size_mb: 2
+  - url: "https://opendata.arcgis.com/datasets/d19278c6a9d34daa9b6cdfab82a11f19_0.csv"
+    filename: "rj_unidades_saude.csv"
+    description: "Unidades de saúde municipais do Rio de Janeiro"
+    est_size_mb: 1
+est_size_mb_total: 3
+est_extracted_mb_total: 3
+dest_folder: "prefeituras/rio"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.2
+notes: |
+  Portal principal: https://data.rio — baseado em ArcGIS Open Data.
+  Para dados financeiros (despesas, contratos) acesse também:
+  https://transparencia.prefeitura.rio.gov.br
+  Dados geoespaciais ricos disponíveis em GeoJSON via ArcGIS REST API.
+  O Rio disponibiliza dados de câmeras, COR (Centro de Operações), tráfego
+  e ocorrências — úteis para análises de segurança e mobilidade urbana.

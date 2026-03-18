@@ -1,0 +1,50 @@
+id: pense
+name: "PeNSE – Pesquisa Nacional de Saúde do Escolar"
+source: "IBGE/MS"
+category: saude_educacao
+description: |
+  Pesquisa do IBGE em parceria com o Ministério da Saúde que investiga as
+  condições de saúde e fatores de risco dos escolares brasileiros do 6º ao 9º ano
+  (e Ensino Médio na edição 2019). Abrange: alimentação, atividade física, uso de
+  álcool e drogas, violência, saúde sexual e reprodutiva, saúde mental, higiene,
+  saneamento e acesso a serviços de saúde. Disponível em 2009, 2012, 2015 e 2019.
+tags:
+  - pense
+  - ibge
+  - saude_escolar
+  - adolescente
+  - educacao_basica
+  - microdados
+license: "Dados Abertos IBGE/MS"
+homepage: "https://www.ibge.gov.br/estatisticas/sociais/saude/9134-pesquisa-nacional-de-saude-do-escolar.html"
+url_type: static_list
+file_format: zip
+files:
+  - url: "https://ftp.ibge.gov.br/PeNSE/2019/microdados/PeNSE_2019_microdados.zip"
+    filename: "pense_2019_microdados.zip"
+    description: "Microdados PeNSE 2019 — 6º ao 9º ano e Ensino Médio"
+    est_size_mb: 25
+    year: 2019
+  - url: "https://ftp.ibge.gov.br/PeNSE/2015/microdados/PeNSE_2015_microdados.zip"
+    filename: "pense_2015_microdados.zip"
+    description: "Microdados PeNSE 2015 — série histórica"
+    est_size_mb: 18
+    year: 2015
+  - url: "https://ftp.ibge.gov.br/PeNSE/2012/microdados/PeNSE_2012_BRASIL.zip"
+    filename: "pense_2012_microdados.zip"
+    description: "Microdados PeNSE 2012 — série histórica"
+    est_size_mb: 12
+    year: 2012
+est_size_mb_total: 55
+est_extracted_mb_total: 200
+dest_folder: "ibge/pense"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 5
+notes: |
+  PeNSE é amostral, com representatividade para capitais e regiões.
+  Aplicada em escolas públicas e privadas. A edição 2019 incluiu Ensino Médio
+  pela primeira vez. Variáveis de interesse para cruzamento com Censo Escolar:
+  saúde mental dos estudantes, bullying, consumo de álcool e tabaco, atividade física.

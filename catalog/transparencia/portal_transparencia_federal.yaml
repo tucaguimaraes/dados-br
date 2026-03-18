@@ -1,0 +1,44 @@
+id: portal_transparencia_federal
+name: "Portal da Transparência Federal – Gastos e Contratos"
+source: "CGU/Gov.br"
+category: transparencia
+description: |
+  Dados do Portal da Transparência do Governo Federal (CGU). Inclui execução
+  orçamentária e financeira da União, contratos, licitações, convênios,
+  transferências a estados e municípios, viagens, imóveis funcionais e
+  cadastro de servidores públicos federais. API REST e downloads em CSV/JSON.
+  Principal fonte para monitoramento de gastos públicos federais.
+tags:
+  - transparencia
+  - gastos_publicos
+  - contratos
+  - servidores
+  - cgu
+  - uniao
+  - orcamento
+license: "Dados Abertos CGU"
+homepage: "https://portaldatransparencia.gov.br/download-de-dados"
+url_type: pattern
+file_format: zip
+years:
+  start: 2013
+  end: 2024
+url_pattern: "https://portaldatransparencia.gov.br/download-de-dados/despesas/{year}"
+year_exceptions:
+  "2025": null
+est_size_mb_per_year: 500
+est_extracted_mb_per_year: 2000
+dest_folder: "transparencia/portal_federal"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 50
+notes: |
+  O Portal disponibiliza múltiplos conjuntos de dados. URLs principais:
+    - Despesas: https://portaldatransparencia.gov.br/download-de-dados/despesas/{year}
+    - Contratos: https://portaldatransparencia.gov.br/download-de-dados/contratos/{year}
+    - Servidores: https://portaldatransparencia.gov.br/download-de-dados/servidores/{year}
+    - Viagens: https://portaldatransparencia.gov.br/download-de-dados/viagens/{year}
+  Cada conjunto é um ZIP com CSVs mensais. O tamanho estimado é por conjunto/ano.
+  Para API programática use: https://api.portaldatransparencia.gov.br/swagger-ui.html

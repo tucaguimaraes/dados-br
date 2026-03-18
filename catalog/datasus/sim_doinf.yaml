@@ -1,0 +1,39 @@
+id: datasus_sim_doinf
+name: "SIM/DATASUS – Óbitos Fetais e Infantis (DOINF – CID-10)"
+source: "DATASUS/MS"
+category: saude
+description: |
+  Dados do Sistema de Informação sobre Mortalidade (SIM/DATASUS),
+  subsistema DOFET/DOINF para óbitos fetais e infantis (menores de 1 ano)
+  com codificação CID-10. Permite calcular o indicador de Mortalidade
+  Infantil (CH15): óbitos em menores de 1 ano por 1.000 nascidos vivos.
+tags:
+  - datasus
+  - sim
+  - mortalidade_infantil
+  - obitos_infantis
+  - cid10
+  - saude
+  - dbc
+license: "Dados Abertos SUS"
+homepage: "https://datasus.saude.gov.br/mortalidade-desde-1979-pelo-sim"
+url_type: ftp
+file_format: dbc
+years:
+  start: 2000
+  end: 2023
+url_pattern: "ftp://ftp.datasus.gov.br/dissemin/publicos/SIM/CID10/DOFET/DOINF{year_2d}.DBC"
+year_exceptions:
+  "2024": null
+est_size_mb_per_year: 3
+est_extracted_mb_per_year: 12
+dest_folder: "datasus/sim_doinf"
+checks:
+  - type: dbc_exists
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  Arquivos menores que DORES por focarem apenas em óbitos infantis.
+  Para calcular Mortalidade Infantil (CH15) também é necessário o SINASC
+  (Sistema de Informação sobre Nascidos Vivos).
+  Mesmas considerações técnicas de DBC do dataset datasus_sim_dores.

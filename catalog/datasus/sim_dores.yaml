@@ -1,0 +1,45 @@
+id: datasus_sim_dores
+name: "SIM/DATASUS – Declarações de Óbito (DORES – CID-10)"
+source: "DATASUS/MS"
+category: saude
+description: |
+  Dados do Sistema de Informação sobre Mortalidade (SIM) do DATASUS,
+  subsistema DORES (Declarações de Óbito por Residência) com codificação
+  CID-10. Contém registros individuais de óbitos ocorridos no Brasil com
+  causa básica codificada pela CID-10. Arquivos DBC (formato comprimido
+  proprietário DATASUS) por ano.
+tags:
+  - datasus
+  - sim
+  - mortalidade
+  - obitos
+  - cid10
+  - saude
+  - dbc
+license: "Dados Abertos SUS"
+homepage: "https://datasus.saude.gov.br/mortalidade-desde-1979-pelo-sim"
+url_type: ftp
+file_format: dbc
+years:
+  start: 2000
+  end: 2023
+url_pattern: "ftp://ftp.datasus.gov.br/dissemin/publicos/SIM/CID10/DORES/DOBR{year_2d}.dbc"
+year_exceptions:
+  "2024": null
+est_size_mb_per_year: 15
+est_extracted_mb_per_year: 60
+dest_folder: "datasus/sim_dores"
+checks:
+  - type: dbc_exists
+  - type: min_size_mb
+    value: 2
+notes: |
+  ATENÇÃO: URL usa sufixo de 2 dígitos do ano (ex: DOBR23.dbc para 2023).
+  Arquivos no formato DBC (compressão BLAST da DATASUS). Para converter
+  para CSV/DataFrame use o pacote pysus:
+    pip install pysus
+    from pysus.online_data.SIM import download
+  Ou converta com read.dbc do R via subprocess.
+  url_pattern usa {year_2d} = dois últimos dígitos do ano.
+  OBS: O registry substitui {year} mas a URL precisa dos 2 últimos dígitos.
+  Para este dataset, os arquivos são baixados via FTP direto.

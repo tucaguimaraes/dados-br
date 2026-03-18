@@ -1,0 +1,43 @@
+id: mpf_dados_abertos
+name: "MPF – Dados Abertos do Ministério Público Federal"
+source: "MPF"
+category: transparencia
+description: |
+  Dados abertos do Ministério Público Federal (MPF) disponibilizados via
+  portal próprio. Inclui procedimentos administrativos e investigatórios,
+  inquéritos civis, ações civis públicas, acordos de não persecução,
+  recursos humanos e gestão. Permite análise de atuação do MPF por tema,
+  região e período. Formato CSV.
+tags:
+  - mpf
+  - ministerio_publico_federal
+  - procedimentos
+  - dados_abertos
+  - accountability
+  - investigacao
+license: "Dados Abertos MPF"
+homepage: "https://dadosabertos.mpf.mp.br/"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dadosabertos.mpf.mp.br/dataset/inqueritos-civis-instaurados/resource/procedimentos.csv"
+    filename: "mpf_procedimentos.csv"
+    description: "Procedimentos administrativos e investigatórios do MPF"
+    est_size_mb: 8
+  - url: "https://dadosabertos.mpf.mp.br/dataset/recursos-humanos/resource/servidores.csv"
+    filename: "mpf_servidores.csv"
+    description: "Servidores e membros do MPF"
+    est_size_mb: 3
+est_size_mb_total: 11
+est_extracted_mb_total: 11
+dest_folder: "mp/mpf"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  O portal de dados do MPF (https://dadosabertos.mpf.mp.br/) usa CKAN e
+  disponibiliza múltiplos conjuntos. As URLs acima são exemplos representativos.
+  Para catálogo completo acesse o portal e use o filtro de conjuntos.
+  Para dados dos MPs Estaduais, cada estado mantém portal independente.

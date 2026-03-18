@@ -1,0 +1,44 @@
+id: tcu_acordaos
+name: "TCU – Acórdãos e Dados de Controle Externo"
+source: "TCU"
+category: transparencia
+description: |
+  Dados do Tribunal de Contas da União (TCU): acórdãos (decisões), processos,
+  licitações auditadas, responsabilizações e dados de controle externo dos
+  órgãos federais. O TCU disponibiliza dados estruturados via API REST
+  (jurisprudência) e downloads em CSV/XML. Fundamental para pesquisa sobre
+  controle institucional, accountability e governança pública federal.
+tags:
+  - tcu
+  - tribunais
+  - controle_externo
+  - acordaos
+  - auditoria
+  - responsabilizacao
+  - federal
+license: "Dados Abertos TCU"
+homepage: "https://portal.tcu.gov.br/dados-abertos/"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://portal.tcu.gov.br/lumis/portal/file/fileDownload.jsp?fileId=8A8182A24F0A728E014F0B26B21B28C9"
+    filename: "tcu_acordaos_recentes.csv"
+    description: "Acórdãos recentes do TCU (CSV)"
+    est_size_mb: 30
+  - url: "https://portal.tcu.gov.br/dados-abertos/responsabilizacao/"
+    filename: "tcu_responsabilizacoes.csv"
+    description: "Responsabilizações TCU"
+    est_size_mb: 5
+est_size_mb_total: 35
+est_extracted_mb_total: 35
+dest_folder: "tribunais/tcu"
+checks:
+  - type: file_exists
+  - type: min_size_mb
+    value: 1
+notes: |
+  O TCU mantém o portal de dados abertos em https://portal.tcu.gov.br/dados-abertos/
+  A API de jurisprudência permite busca textual: https://pesquisa.apps.tcu.gov.br/
+  Para acórdãos históricos consulte o Diário Oficial da União (DOU) ou
+  a plataforma do Senado Federal (legislação e jurisprudência).
+  URLs dos arquivos podem mudar — verifique periodicamente o portal oficial.

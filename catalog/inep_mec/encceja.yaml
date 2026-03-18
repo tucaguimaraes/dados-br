@@ -1,0 +1,39 @@
+id: encceja
+name: "ENCCEJA – Exame Nacional para Certificação de Competências"
+source: "INEP/MEC"
+category: educacao
+description: |
+  Microdados do ENCCEJA (Exame Nacional para Certificação de Competências de
+  Jovens e Adultos). Avaliação destinada a pessoas que não concluíram o Ensino
+  Fundamental ou Médio na idade certa. Disponível para anos específicos de
+  realização do exame.
+tags:
+  - encceja
+  - inep
+  - eja
+  - certificacao
+  - microdados
+license: "Dados Abertos MEC"
+homepage: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/encceja"
+url_type: pattern
+file_format: zip
+years:
+  start: 2013
+  end: 2023
+url_pattern: "https://download.inep.gov.br/microdados/microdados_encceja_{year}.zip"
+year_exceptions:
+  "2015": null
+  "2016": null
+  "2021": null
+est_size_mb_per_year: 80
+est_extracted_mb_per_year: 300
+dest_folder: "inep_mec/encceja"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 5
+notes: |
+  O ENCCEJA não é realizado todos os anos. Anos disponíveis (confirmados):
+  2013, 2014, 2017, 2018, 2019, 2020, 2022, 2023.
+  Anos 2015, 2016 e 2021 não possuem dados publicados.

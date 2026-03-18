@@ -1,0 +1,57 @@
+id: goias_saude
+name: "Goiás – Dados de Saúde (SES-GO)"
+source: "SES-GO / dadosabertos.go.gov.br"
+category: saude
+description: |
+  Dados de saúde do estado de Goiás disponibilizados pelo Portal de Dados
+  Abertos do Governo de Goiás. Inclui dados sobre COVID-19 (casos, óbitos,
+  testes), solicitações de internação por arbovirose, mortalidade infantil
+  e expectativa de vida por município.
+tags:
+  - goias
+  - saude
+  - covid19
+  - mortalidade
+  - epidemiologia
+  - ses
+license: "Dados Abertos Goiás (CC BY)"
+homepage: "https://dadosabertos.go.gov.br"
+url_type: static_list
+file_format: csv
+files:
+  - url: "https://dadosabertos.go.gov.br/dataset/bcbcdd14-f47e-4277-9134-cb4932671042/resource/cd6da1c8-fbe7-42df-ad58-0f583c8f88d9/download/solicitacoes-internacao-arbovirose.csv"
+    filename: "solicitacoes_internacao_arbovirose.csv"
+    description: "Solicitações de internação por arbovirose (GO)"
+    est_size_mb: 3
+  - url: "https://dadosabertos.go.gov.br/dataset/193382be-a163-4c49-96dd-b33fd78f2772/resource/8e40af77-e707-40b3-859d-4af2b224cb96/download/covid-19-casos.csv"
+    filename: "covid19_casos_go.csv"
+    description: "COVID-19 – Casos em Goiás"
+    est_size_mb: 8
+  - url: "https://dadosabertos.go.gov.br/dataset/193382be-a163-4c49-96dd-b33fd78f2772/resource/0fb513b9-3daa-4323-9302-a58fd5d0e66c/download/covid-19-obitos.csv"
+    filename: "covid19_obitos_go.csv"
+    description: "COVID-19 – Óbitos em Goiás"
+    est_size_mb: 2
+  - url: "https://dadosabertos.go.gov.br/dataset/193382be-a163-4c49-96dd-b33fd78f2772/resource/578c346d-8fb8-45c0-afa6-a0cfd60f7605/download/covid-19-consolidado-municipios.csv"
+    filename: "covid19_consolidado_municipios_go.csv"
+    description: "COVID-19 – Consolidado por município (GO)"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/317dd73b-8090-42eb-8e23-51fa85d4dd90/resource/d403c5a6-cf13-42a8-8eff-ca4d891d74f7/download/mortalidade-infantil.csv"
+    filename: "mortalidade_infantil_go.csv"
+    description: "Mortalidade infantil por município em Goiás"
+    est_size_mb: 1
+  - url: "https://dadosabertos.go.gov.br/dataset/964315b8-3561-4b71-a2ac-716ed44d5794/resource/b8d12725-cd13-40ad-b646-c2efb20b62b1/download/expectativa-de-vida.csv"
+    filename: "expectativa_de_vida_go.csv"
+    description: "Expectativa de vida por município em Goiás"
+    est_size_mb: 1
+est_size_mb_total: 16
+est_extracted_mb_total: 16
+dest_folder: "goias/saude"
+checks:
+  - type: file_exists
+  - type: csv_readable
+  - type: min_size_mb
+    value: 0.1
+notes: |
+  Dados CSVs sem extração necessária. Indicadores relacionados: CH15
+  (Mortalidade Infantil). Para análise de mortalidade infantil, combine
+  com datasus_sim_doinf para dados nacionais de comparação.

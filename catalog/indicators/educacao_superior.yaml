@@ -1,0 +1,143 @@
+# Indicadores de Educação Superior — INEP/MEC
+# Fonte: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais
+# Licença: Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+
+level: superior
+
+indicators:
+
+  - id: fluxo_educacao_superior
+    name: "Indicadores de Fluxo da Educação Superior"
+    category: fluxo
+    description: |
+      Conjunto de indicadores que descrevem o percurso dos estudantes na educação
+      superior: Taxa de Conclusão de Curso (TCC), Taxa de Permanência (TP) e
+      Taxa de Desistência Acumulada (TDA). Calculados por curso, IES, organização
+      acadêmica (universidade, faculdade, IF) e categoria administrativa (pública/privada).
+      Baseados no acompanhamento de coortes de ingressantes ao longo do tempo.
+    periodicity: anual
+    available_since: 2010
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/indicadores-de-fluxo-da-educacao-superior"
+    disaggregations:
+      - ies
+      - curso
+      - organizacao_academica
+      - categoria_administrativa
+      - estado
+      - area_conhecimento
+    source_datasets:
+      - censo_superior
+      - capes_pos_graduacao
+    citations:
+      - "INEP. Nota Técnica n. 14/2017/CGCQES/DAES: Indicadores de Fluxo da Educação Superior. Brasília: MEC/INEP, 2017."
+      - "TINTO, V. Dropout from Higher Education: A Theoretical Synthesis of Recent Research. Review of Educational Research, v. 45, n. 1, p. 89–125, 1975."
+      - "BAGGI, C. A. S.; LOPES, D. A. Evasão e avaliação institucional no ensino superior: uma discussão bibliográfica. Avaliação, Campinas, v. 16, n. 2, p. 355–374, 2011."
+      - "LOBO, M. B. C. M. Panorama da evasão no ensino superior brasileiro: aspectos gerais das causas e soluções. ABMES Cadernos, n. 25, p. 9–58, 2012."
+    research_questions:
+      - "Qual a taxa de desistência acumulada nos cursos de Licenciatura em Matemática e Física das IES públicas? Isso explica a carência de professores formados nessas áreas?"
+      - "Cursos noturnos apresentam taxas de conclusão significativamente menores do que cursos diurnos, mesmo em cursos do mesmo tipo e IES?"
+      - "A expansão do PROUNI e do FIES afetou as taxas de conclusão e desistência nas IES privadas? O efeito foi diferente por faixa de renda dos estudantes?"
+      - "Qual o perfil dos estudantes que desistem nos primeiros dois anos (evasão precoce) versus os que desistem nos anos finais (evasão tardia)?"
+      - "A implementação de políticas de permanência (auxílio moradia, alimentação, psicológico) nas IFES impacta a redução da desistência?"
+      - "Como as taxas de fluxo diferem entre áreas do conhecimento (Saúde, Engenharia, Humanas, Licenciaturas)? Quais áreas apresentam maior risco de evasão?"
+
+  - id: trajetoria_educacao_superior
+    name: "Indicadores de Trajetória da Educação Superior"
+    category: trajetoria
+    description: |
+      Monitoram o percurso dos estudantes ao longo do ensino superior: tempo médio
+      de conclusão, mobilidade entre IES e cursos, integralização curricular e
+      progressão por períodos. Complementam os indicadores de fluxo ao detalhar
+      comportamentos dentro do percurso dos que permanecem matriculados.
+      Incluem análise por cotas raciais e socioeconômicas.
+    periodicity: anual
+    available_since: 2011
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/indicadores-de-trajetoria-da-educacao-superior"
+    disaggregations:
+      - ies
+      - curso
+      - turno
+      - categoria_administrativa
+      - modalidade_ensino
+      - tipo_ingresso
+    source_datasets:
+      - censo_superior
+    citations:
+      - "INEP. Nota Técnica: Indicadores de Trajetória da Educação Superior. Brasília: MEC/INEP, 2018."
+      - "VANZ, S. A. S. et al. Evasão e permanência: estudo de caso no curso de Biblioteconomia da UFRGS. Avaliação, Campinas, v. 21, n. 2, p. 411–426, 2016."
+      - "BRASIL. Lei nº 12.711/2012 – Lei de Cotas. Brasília, 2012. (Impactos no perfil de trajetória dos ingressantes cotistas)."
+    research_questions:
+      - "Estudantes ingressantes por cotas raciais ou de baixa renda apresentam trajetórias acadêmicas (tempo de conclusão, mobilidade) comparáveis às dos ampla concorrência?"
+      - "O tempo médio de conclusão dos cursos de graduação nas IFES supera o tempo mínimo previsto? Em quais áreas o prolongamento é mais comum?"
+      - "Estudantes que ingressaram pela EaD têm trajetórias acadêmicas distintas (mais interrupções, mais mobilidade) dos ingressantes presenciais?"
+      - "Como a pandemia de COVID-19 afetou a progressão curricular dos estudantes nas IFES? Houve aumento na proporção de alunos com integralização atrasada?"
+
+  - id: qualidade_educacao_superior
+    name: "Indicadores de Qualidade da Educação Superior (CPC, CC, IGC)"
+    category: qualidade
+    description: |
+      Conjunto de indicadores que avaliam a qualidade dos cursos e IES:
+      - CPC (Conceito Preliminar de Curso): avalia cursos de graduação; combina
+        desempenho no Enade, IDD, insumos (corpo docente, infraestrutura, recursos didáticos);
+      - CC (Conceito de Curso): resultado final da avaliação in loco pela comissão do Inep;
+      - IGC (Índice Geral de Cursos): avaliação institucional; média ponderada dos CPCs
+        dos cursos de graduação e das notas dos programas de pós-graduação (CAPES).
+      Todos em escala de 1 a 5. Cursos com CPC 1 ou 2 ficam sujeitos à avaliação in loco.
+    periodicity: trienal
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/indicadores-de-qualidade-da-educacao-superior"
+    disaggregations:
+      - ies
+      - curso
+      - area_conhecimento
+      - organizacao_academica
+      - categoria_administrativa
+      - estado
+      - modalidade_ensino
+    source_datasets:
+      - censo_superior
+      - capes_pos_graduacao
+    citations:
+      - "INEP. Nota Técnica n. 58/2015/CGCQES/DAES: Cálculo do Conceito Preliminar de Curso — CPC. Brasília: MEC/INEP, 2015."
+      - "VERHINE, R. E.; FREITAS, A. A. S. M. A avaliação da educação superior: modalidades e tendências no cenário internacional. Revista Ensino Superior, Campinas, v. 4, p. 1–16, 2012."
+      - "POLIDORI, M. M.; MARINHO-ARAUJO, C. M.; BARREYRO, G. B. SINAES: perspectivas e desafios na avaliação da educação superior brasileira. Ensaio: Avaliação e Políticas Públicas em Educação, v. 14, n. 53, p. 425–436, 2006."
+      - "BRASIL. Lei nº 10.861/2004 – Sistema Nacional de Avaliação da Educação Superior (SINAES). Brasília, 2004."
+    research_questions:
+      - "Cursos de EaD apresentam CPC médio significativamente inferior ao dos cursos presenciais equivalentes? O gap aumentou ou diminuiu entre 2007 e 2022?"
+      - "Existe correlação entre o IGC das IES e a taxa de empregabilidade dos egressos, mensurada via dados da RAIS e CAGED?"
+      - "Cursos em IES privadas com fins lucrativos têm distribuição de CPC diferente das IES privadas sem fins lucrativos e das públicas?"
+      - "O IDD (Indicador de Diferença entre Desempenhos Observado e Esperado) captura 'valor agregado' real pelos cursos? Como se distribui entre áreas e tipos de IES?"
+      - "Há viés no CPC por localização geográfica da IES (capitais vs. interior) que não é explicado por insumos observáveis?"
+
+  - id: docentes_pos_graduacao_superior
+    name: "Percentual de Docentes com Pós-Graduação Stricto Sensu"
+    category: docentes
+    description: |
+      Proporção de docentes da educação superior com titulação de mestrado ou
+      doutorado (stricto sensu), por IES, área do conhecimento e categoria
+      administrativa. Indicador de qualificação do corpo docente, componente
+      importante do CPC e do IGC. A LDB e os critérios do MEC para autorização
+      e reconhecimento de cursos estabelecem proporções mínimas de doutores.
+    periodicity: anual
+    available_since: 2003
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/percentual-de-docentes-com-pos-graduacao-stricto-sensu"
+    disaggregations:
+      - ies
+      - curso
+      - area_conhecimento
+      - organizacao_academica
+      - categoria_administrativa
+      - estado
+    source_datasets:
+      - censo_superior
+      - capes_pos_graduacao
+    citations:
+      - "INEP. Nota Técnica: Percentual de Docentes com Pós-Graduação Stricto Sensu. Brasília: MEC/INEP, 2019."
+      - "CAPES. Plano Nacional de Pós-Graduação (PNPG 2011–2020). Brasília: CAPES/MEC, 2010."
+      - "BRASIL. Lei nº 9.394/1996 – LDB. Art. 66: Preparação para o exercício do magistério superior. Brasília, 1996."
+    research_questions:
+      - "Como o percentual de doutores nas IES privadas evoluiu entre 2003 e 2022? A expansão do ensino superior privado veio acompanhada de aumento na qualificação docente?"
+      - "Existe correlação entre o percentual de doutores em um curso e seu CPC? Qual a magnitude do efeito?"
+      - "A distribuição de docentes doutores por área do conhecimento é homogênea? Quais áreas apresentam maior concentração e quais têm déficit de doutores?"
+      - "O crescimento de programas de pós-graduação stricto sensu no interior do Brasil (pós REUNI) reduziu a disparidade regional na qualificação docente da educação superior?"
+      - "Qual a relação entre o percentual de docentes com pós-graduação stricto sensu em licenciaturas e a formação de professores para a educação básica?"

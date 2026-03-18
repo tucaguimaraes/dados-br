@@ -1,0 +1,59 @@
+id: saeb
+name: "SAEB – Sistema de Avaliação da Educação Básica"
+source: "INEP/MEC"
+category: educacao
+description: |
+  Microdados do SAEB (Sistema de Avaliação da Educação Básica), avaliação
+  bienal de proficiência em Língua Portuguesa e Matemática do 5º e 9º ano
+  do EF e 3ª série do EM. Base primária para cálculo do IDEB junto com
+  dados de fluxo do Censo Escolar. Inclui também dados de contexto
+  (questionários de diretores, professores e alunos).
+tags:
+  - saeb
+  - inep
+  - avaliacao
+  - ideb
+  - proficiencia
+  - educacao_basica
+  - microdados
+license: "Dados Abertos MEC"
+homepage: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/saeb"
+url_type: pattern
+file_format: zip
+years:
+  start: 2001
+  end: 2023
+url_pattern: "https://download.inep.gov.br/microdados/microdados_saeb_{year}.zip"
+year_exceptions:
+  "2001": "https://download.inep.gov.br/microdados/micro_saeb2001.zip"
+  "2003": "https://download.inep.gov.br/microdados/microdados_saeb_2003.zip"
+  "2005": "https://download.inep.gov.br/microdados/microdados_saeb_2005.zip"
+  "2007": "https://download.inep.gov.br/microdados/MICRODADOS_SAEB_2007_RECALCULADO.zip"
+  "2009": "https://download.inep.gov.br/microdados/MICRODADOS_SAEB_2009_RECALCULADO.zip"
+  "2021":
+    - "https://download.inep.gov.br/microdados/microdados_saeb_2021_ensino_fundamental_e_medio.zip"
+    - "https://download.inep.gov.br/microdados/microdados_saeb_2021_educacao_infantil.zip"
+  "2002": null
+  "2004": null
+  "2006": null
+  "2008": null
+  "2010": null
+  "2012": null
+  "2014": null
+  "2016": null
+  "2018": null
+  "2020": null
+  "2022": null
+est_size_mb_per_year: 400
+est_extracted_mb_per_year: 1500
+dest_folder: "inep_mec/saeb"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 10
+notes: |
+  O SAEB é bienal (anos ímpares). Em 2021 foi dividido em dois arquivos:
+  ensino fundamental/médio e educação infantil. Anos anteriores a 2009
+  usam URLs com sufixos especiais (RECALCULADO). O SAEB é base para
+  cálculo do IDEB (indicador CH02).

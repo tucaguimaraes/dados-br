@@ -1,0 +1,40 @@
+id: enem
+name: "ENEM – Exame Nacional do Ensino Médio"
+source: "INEP/MEC"
+category: educacao
+description: |
+  Microdados do Exame Nacional do Ensino Médio (ENEM). Contém dados de
+  inscritos, participantes, notas por área de conhecimento (Ciências Humanas,
+  Ciências da Natureza, Linguagens, Matemática) e redação, além de informações
+  socioeconômicas dos participantes. Disponível de 2000 a 2024.
+tags:
+  - enem
+  - inep
+  - ensino_medio
+  - microdados
+  - vestibular
+  - educacao_basica
+license: "Dados Abertos MEC"
+homepage: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem"
+url_type: pattern
+file_format: zip
+years:
+  start: 2000
+  end: 2024
+url_pattern: "https://download.inep.gov.br/microdados/microdados_enem_{year}.zip"
+year_exceptions:
+  "2025": null  # ainda não disponível
+est_size_mb_per_year: 300
+est_extracted_mb_per_year: 1200
+dest_folder: "inep_mec/enem"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 30
+notes: |
+  Arquivos de 2000–2008 são menores (~30–80 MB). A partir de 2009 o ENEM
+  passou a ser unificado e os arquivos são maiores (~200–400 MB).
+  O dicionário de variáveis e o questionário socioeconômico estão incluídos
+  em cada arquivo ZIP. Recomenda-se usar DuckDB ou PyArrow para leitura
+  eficiente dos arquivos de microdados.

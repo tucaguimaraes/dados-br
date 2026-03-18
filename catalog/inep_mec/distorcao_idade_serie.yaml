@@ -1,0 +1,42 @@
+id: inep_tdi
+name: "TDI – Indicadores de Distorção Idade-Série"
+source: "INEP/MEC"
+category: educacao
+description: |
+  Indicadores de Distorção Idade-Série (TDI) do INEP. Mede a proporção de
+  alunos com atraso escolar de 2 anos ou mais em relação à série adequada,
+  desagregado por Brasil/Regiões/UFs, municípios e escolas. Disponível para
+  séries históricas a partir de 2006.
+tags:
+  - tdi
+  - inep
+  - distorcao_idade_serie
+  - indicadores
+  - fluxo_escolar
+  - educacao_basica
+license: "Dados Abertos MEC"
+homepage: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar"
+url_type: pattern
+file_format: zip
+years:
+  start: 2016
+  end: 2024
+url_pattern: "https://download.inep.gov.br/informacoes_estatisticas/indicadores_educacionais/{year}/TDI_{year}_MUNICIPIOS.zip"
+year_exceptions:
+  "2024": null
+est_size_mb_per_year: 5
+est_extracted_mb_per_year: 20
+dest_folder: "inep_mec/inep_tdi"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 1
+notes: |
+  Cada ano disponibiliza três recortes: Brasil/Regiões/UFs, Municípios e
+  Escolas. Este catálogo aponta para o recorte por Municípios por padrão.
+  Para obter os demais, use as URLs:
+    - TDI_{year}_BRASIL_REGIOES_UFS.zip
+    - TDI_{year}_ESCOLAS.zip
+  Indicador calculável a partir do Censo Escolar (variável de movimento).
+  Corresponde ao indicador CH05 do projeto dados-br.

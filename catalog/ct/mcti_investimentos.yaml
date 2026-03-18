@@ -1,0 +1,47 @@
+id: mcti_investimentos_ct
+name: "MCTI – Indicadores e Investimentos em Ciência, Tecnologia e Inovação"
+source: "MCTI/Gov.br"
+category: ciencia_tecnologia
+description: |
+  Indicadores nacionais de ciência, tecnologia e inovação (C,T&I) publicados
+  pelo Ministério da Ciência, Tecnologia e Inovação (MCTI). Inclui séries
+  históricas de: investimentos federais e estaduais em P&D, pesquisadores por
+  UF, publicações científicas, patentes depositadas, startups, parques
+  tecnológicos e incubadoras. Referência para políticas públicas de inovação.
+tags:
+  - mcti
+  - ciencia
+  - tecnologia
+  - inovacao
+  - pd
+  - indicadores
+  - investimentos
+  - pesquisadores
+license: "Dados Abertos MCTI"
+homepage: "https://www.gov.br/mcti/pt-br/acesso-a-informacao/indicadores-e-estatisticas"
+url_type: static_list
+file_format: zip
+files:
+  - url: "https://www.gov.br/mcti/pt-br/acesso-a-informacao/indicadores-e-estatisticas/dados-abertos/arquivos/indicadores_ctinacional.zip"
+    filename: "mcti_indicadores_nacionais.zip"
+    description: "Indicadores nacionais de C,T&I – séries históricas"
+    est_size_mb: 8
+  - url: "https://www.gov.br/mcti/pt-br/acesso-a-informacao/indicadores-e-estatisticas/dados-abertos/arquivos/investimentos_estados.zip"
+    filename: "mcti_investimentos_estados.zip"
+    description: "Investimentos estaduais em C&T por UF"
+    est_size_mb: 3
+est_size_mb_total: 11
+est_extracted_mb_total: 40
+dest_folder: "ct/mcti"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 1
+notes: |
+  Dados publicados em planilhas Excel (.xlsx) dentro dos ZIPs.
+  Para dados mais granulares sobre empresas inovadoras use a PINTEC
+  (Pesquisa de Inovação do IBGE): https://www.ibge.gov.br/pintec
+  Para universidades e institutos use o FORPDI/FORGES do MEC.
+  Séries históricas do MCTI cobrem de 2000 em diante para maioria dos
+  indicadores.

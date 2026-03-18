@@ -1,0 +1,203 @@
+# Indicadores — Transparência, Controle, C&T, Território e Prefeituras
+# Bases: CGU, TCU, CNJ, CNMP, CNPq, CAPES, INPI, MCTI, UFRN, Prefeituras, SNIS, Goiás
+
+level: transversal
+
+indicators:
+
+  - id: transparencia_orcamentaria
+    name: "Transparência e Integridade na Gestão dos Recursos Públicos de Educação"
+    category: controle_social
+    description: |
+      Análise cruzada entre dados de execução orçamentária do Portal da Transparência
+      federal (CGU), acordos de leniência (CGU), acórdãos do TCU e dados de processo
+      judicial (CNJ) para identificar irregularidades na aplicação de recursos públicos
+      na área de educação. Permite monitorar contratos superfaturados, desvios do FUNDEB,
+      irregularidades em obras escolares e prestações de contas pendentes de municípios.
+    periodicity: contínua
+    available_since: 2004
+    methodology_url: "https://www.portaltransparencia.gov.br/sobre/acesso-a-informacao"
+    disaggregations:
+      - municipio
+      - estado
+      - orgao
+      - programa
+    source_datasets:
+      - portal_transparencia_federal
+      - cgu_acordos_leniencia
+      - tcu_acordaos
+      - cnj_dados_judiciarios
+    citations:
+      - "CGU. Manual da Lei de Acesso à Informação para Estados e Municípios. Brasília: CGU, 2013."
+      - "TCU. Auditoria sobre aplicação de recursos do FUNDEB em municípios brasileiros. Brasília: TCU, 2019."
+      - "TRANSPARENCY INTERNATIONAL. Corruption Perceptions Index 2023. Berlin: TI, 2023."
+      - "OPEN GOVERNMENT PARTNERSHIP. Open Data Charter: Principios de Datos Abiertos. Washington, 2015."
+    research_questions:
+      - "Quais municípios apresentam maior número de irregularidades em contratos de obras escolares identificadas pelo TCU entre 2015 e 2023? Há correlação com piores indicadores educacionais?"
+      - "O Portal da Transparência permite rastrear os repasses do PNAE (merenda escolar) até a execução municipal? Onde há maior opacidade nos dados?"
+      - "Municípios com maior número de ações judiciais (CNJ) relacionadas à educação apresentam melhores ou piores indicadores de acesso e qualidade?"
+      - "As empresas envolvidas em acordos de leniência com a CGU têm contratos ativos com o MEC/FNDE para fornecimento de materiais didáticos ou construção de escolas?"
+
+  - id: controle_mp_educacao
+    name: "Atuação do Ministério Público na Garantia do Direito à Educação"
+    category: controle_social
+    description: |
+      Análise dos dados do CNMP (Conselho Nacional do Ministério Público) e MPF sobre
+      procedimentos instaurados, ações civis públicas e termos de ajustamento de conduta
+      (TACs) relacionados ao direito à educação: vagas em creche e pré-escola, condições
+      de infraestrutura escolar, cumprimento de metas do PNE e irregularidades no
+      financiamento educacional. O MP é o principal órgão de exigibilidade judicial
+      do direito à educação no Brasil.
+    periodicity: anual
+    available_since: 2011
+    methodology_url: "https://www.cnmp.mp.br/portal/institucional/secretarias/paineis-de-controle"
+    disaggregations:
+      - estado
+      - ramo_mp
+      - tipo_procedimento
+      - area_tematica
+    source_datasets:
+      - cnmp_dados_mp
+      - mpf_dados_abertos
+      - cnj_dados_judiciarios
+    citations:
+      - "CNMP. Relatório Anual de Atividades do Ministério Público Brasileiro 2022. Brasília: CNMP, 2023."
+      - "SILVEIRA, A. A. D. Direito à educação e o Ministério Público. São Paulo: Editora Alameda, 2010."
+      - "XIMENES, S. L. Direito à qualidade na educação básica: teoria e crítica. São Paulo: Quartier Latin, 2014."
+    research_questions:
+      - "Quais estados concentram maior número de ações civis públicas do MP para garantia de vagas em educação infantil? Há correlação com menor cobertura da EI (Censo Escolar)?"
+      - "A atuação do MP (TACs e ACPs) em municípios com baixo IDEB gerou impacto mensurável nos indicadores educacionais nos anos seguintes?"
+      - "Quais são os tipos mais frequentes de irregularidades no financiamento da educação detectadas pelo MPF e denunciadas em ações penais?"
+
+  - id: producao_cientifica_ct
+    name: "Produção Científica, Patentes e Financiamento de C&T"
+    category: ciencia_tecnologia
+    description: |
+      Conjunto de indicadores de ciência, tecnologia e inovação: bolsas concedidas
+      pela CNPq por área de conhecimento, dissertações e teses defendidas por
+      programa e IES (CAPES), depósitos de patentes por setor (INPI) e investimentos
+      públicos em P&D (MCTI). Permite avaliar a relação entre formação pós-graduada,
+      produção científica e inovação tecnológica no Brasil. Complementa os indicadores
+      de qualidade da educação superior (CPC/IGC) com medidas de output científico.
+    periodicity: anual
+    available_since: 2000
+    methodology_url: "https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/indicadores"
+    disaggregations:
+      - ies
+      - area_conhecimento
+      - estado
+      - brasil
+      - nivel_formacao
+    source_datasets:
+      - cnpq_bolsas_fomentos
+      - capes_pos_graduacao
+      - inpi_patentes
+      - mcti_investimentos_ct
+      - ufrn_dados_abertos
+    citations:
+      - "MCTI. Indicadores Nacionais de Ciência, Tecnologia e Inovação 2022. Brasília: MCTI, 2023."
+      - "CAPES. Relatório de Avaliação da Pós-Graduação 2017–2020. Brasília: CAPES/MEC, 2022."
+      - "MUELLER, S. P. M.; PERUCCHI, V. Universidades e a produção de patentes. Perspectivas em Ciência da Informação, v. 19, n. 2, p. 15–28, 2014."
+      - "ROMER, P. M. Endogenous Technological Change. Journal of Political Economy, v. 98, n. 5, p. S71–S102, 1990."
+    research_questions:
+      - "Quais IES brasileiras têm maior produção de patentes depositadas no INPI por pesquisador? Há correlação entre patentes e notas CAPES dos programas de pós-graduação?"
+      - "O número de bolsas CNPq de doutorado no Brasil acompanhou o crescimento de programas de pós-graduação? Há déficit de bolsas em áreas estratégicas (Engenharia, TI, Saúde)?"
+      - "Como o investimento público em P&D como percentual do PIB evoluiu entre 2010 e 2023? O Brasil avança em direção à meta de 2% do PIB em CT&I?"
+      - "Programas de pós-graduação com nota CAPES 6 ou 7 produzem significativamente mais patentes e publicações em periódicos A1/A2 do que os de nota 4 ou 5?"
+      - "A distribuição geográfica dos programas de pós-graduação stricto sensu é proporcional à população? A expansão pós-REUNI reduziu a concentração em SP-RJ?"
+
+  - id: saneamento_educacao
+    name: "Saneamento Básico, Infraestrutura e Desempenho Escolar"
+    category: territorio
+    description: |
+      Relação entre cobertura de saneamento básico (abastecimento de água tratada,
+      coleta e tratamento de esgoto, coleta de resíduos sólidos — SNIS) e indicadores
+      educacionais municipais. Escolas com acesso adequado à água e saneamento
+      apresentam menores taxas de absenteísmo por doenças infecciosas. O Censo Escolar
+      registra a infraestrutura sanitária das escolas; o SNIS registra a cobertura
+      municipal. As malhas municipais e estaduais do IBGE (ibge_malha_br, ibge_malha_go)
+      são usadas para visualização cartográfica e agregação espacial dos indicadores.
+      Indicador ODS 6.1/6.2 com interface direta com ODS 4.a.
+    periodicity: anual
+    available_since: 1995
+    methodology_url: "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - tipo_servico
+    source_datasets:
+      - snis_residuos
+      - censo_escolar
+      - goias_saneamento
+      - ibge_malha_br
+      - ibge_malha_go
+    citations:
+      - "HUTTON, G.; CHASE, C. The knowledge base for achieving the Sustainable Development Goal targets on water supply, sanitation and hygiene. International Journal of Environmental Research and Public Health, v. 13, n. 6, 2016."
+      - "TEIXEIRA, J. C. et al. Análise dos impactos da inadequação de saneamento básico sobre a saúde pública no Brasil urbano. Engenharia Sanitária e Ambiental, v. 19, n. 1, p. 87–96, 2014."
+      - "SNIS. Diagnóstico dos Serviços de Água e Esgotos 2022. Brasília: SNIS/SNSA, 2023."
+    research_questions:
+      - "Municípios com cobertura de esgotamento sanitário abaixo de 30% apresentam maior taxa de absenteísmo escolar e TDI? Qual a magnitude da correlação?"
+      - "Escolas do Censo Escolar sem acesso à água potável (banheiro com água encanada) estão concentradas em municípios de qual faixa de cobertura de saneamento (SNIS)?"
+      - "A universalização do saneamento básico prevista no Marco Legal (Lei 14.026/2020) para 2033 tem acompanhamento por indicadores que permitam estimar impacto futuro no IDEB?"
+
+  - id: indicadores_municipais_educacao
+    name: "Painel de Indicadores Educacionais por Prefeitura (SP, Rio, Goiânia)"
+    category: gestao_municipal
+    description: |
+      Indicadores educacionais das redes municipais das três maiores prefeituras do
+      catálogo dados-br (São Paulo, Rio de Janeiro, Goiânia) extraídos dos portais de
+      dados abertos. Inclui: matrículas por escola, infraestrutura, avaliações próprias,
+      merenda, transporte escolar, e programas municipais. Permite análise comparativa
+      da gestão educacional em grandes municípios e cruzamento com dados nacionais
+      do Censo Escolar e Saeb.
+    periodicity: anual
+    available_since: 2013
+    methodology_url: "https://dados.prefeitura.sp.gov.br/"
+    disaggregations:
+      - escola
+      - regional_educacao
+      - municipio
+    source_datasets:
+      - prefeitura_sp
+      - prefeitura_rio
+      - prefeitura_goiania
+      - censo_escolar
+      - saeb
+    citations:
+      - "PREFEITURA DE SÃO PAULO. Plano Municipal de Educação 2021–2030. São Paulo: SME/SP, 2021."
+      - "PREFEITURA DO RIO DE JANEIRO. Dados Educacionais da Rede Municipal. Rio de Janeiro: SME/RJ, 2022."
+      - "UNDIME. Planos Municipais de Educação: análise e monitoramento. Brasília: UNDIME, 2018."
+    research_questions:
+      - "Como o IDEB das escolas municipais de São Paulo, Rio de Janeiro e Goiânia compara-se com a média nacional das redes municipais? Qual rede apresentou maior evolução entre 2017 e 2021?"
+      - "Existe variação interna significativa entre regionais/distritos educacionais dentro de cada prefeitura que possa orientar políticas de equidade intraurbana?"
+      - "Os portais de dados abertos das prefeituras publicam dados comparáveis entre si? Quais indicadores estão presentes nos três portais e quais estão ausentes?"
+
+  - id: indicadores_educacao_goias
+    name: "Indicadores Educacionais do Estado de Goiás (SEDUC-GO)"
+    category: gestao_estadual
+    description: |
+      Painel de indicadores da rede estadual de educação de Goiás: matrículas, taxas
+      de rendimento, frequência, infraestrutura escolar, programas estaduais e dados
+      da SEDUC-GO via portal dadosabertos.go.gov.br. Permite análise focalizada da
+      rede estadual goiana, referência para estudos de caso e para cruzamento com
+      os dados nacionais do Censo Escolar e do Saeb.
+    periodicity: anual
+    available_since: 2015
+    methodology_url: "https://dadosabertos.go.gov.br/"
+    disaggregations:
+      - escola
+      - municipio_goiano
+      - regional_educacao_go
+    source_datasets:
+      - goias_educacao
+      - goias_saude
+      - goias_saneamento
+      - censo_escolar
+    citations:
+      - "SEDUC-GO. Plano Estadual de Educação de Goiás 2015–2025. Goiânia: SEDUC, 2015."
+      - "INEP. Relatório do Estado de Goiás — IDEB 2021. Brasília: INEP/MEC, 2022."
+    research_questions:
+      - "Como o IDEB da rede estadual de Goiás evoluiu por regional de ensino entre 2015 e 2021? Quais regiões estão abaixo da meta estadual?"
+      - "A cobertura de saneamento nos municípios goianos (dados estaduais) está correlacionada com as condições de infraestrutura das escolas estaduais (Censo Escolar)?"
+      - "Municípios goianos com maiores indicadores de saúde (SES-GO) também apresentam melhores resultados educacionais? Qual a magnitude da correlação saúde-educação em Goiás?"

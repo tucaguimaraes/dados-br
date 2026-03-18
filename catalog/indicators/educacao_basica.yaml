@@ -1,0 +1,456 @@
+# Indicadores de Educação Básica — INEP/MEC
+# Fonte: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais
+# Licença: Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada
+
+level: basica
+
+indicators:
+
+  - id: ideb
+    name: "IDEB – Índice de Desenvolvimento da Educação Básica"
+    category: desempenho
+    description: |
+      O IDEB é o principal indicador de qualidade da educação básica brasileira.
+      Combina dois componentes: taxa de aprovação escolar (obtida pelo Censo Escolar)
+      e médias de desempenho nas avaliações do Inep (Saeb para anos iniciais/finais
+      do Ensino Fundamental e Ensino Médio). Calculado bienalmente desde 2005.
+      Disponível por escola, município, estado e Brasil, para redes pública e privada.
+      A meta projetada para 2022 (meta do PNE) era 6,0 nos anos iniciais; o Brasil
+      atingiu 6,0 em 2021 nos anos iniciais da rede pública.
+    formula: "IDEB = N × P, onde N = nota média padronizada no Saeb e P = taxa de aprovação"
+    periodicity: bienal
+    available_since: 2005
+    methodology_url: "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/notas-tecnicas"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - rede_publica
+      - rede_privada
+    source_datasets:
+      - saeb
+      - censo_escolar
+    citations:
+      - "FERNANDES, R. Índice de Desenvolvimento da Educação Básica (IDEB). Brasília: INEP, 2007. (Série Documental: Textos para Discussão, 26)."
+      - "INEP. Nota Técnica n. 020/2014: Índice de Desenvolvimento da Educação Básica. Brasília: MEC/INEP, 2014."
+      - "SOARES, J. F.; XAVIER, F. P. Pressupostos educacionais e estatísticos do IDEB. Educação & Sociedade, Campinas, v. 34, n. 124, p. 903–923, 2013."
+      - "BRASIL. Lei nº 13.005/2014 – Plano Nacional de Educação (PNE 2014–2024). Brasília: MEC, 2014."
+    research_questions:
+      - "Como o IDEB evoluiu nas escolas públicas estaduais e municipais de cada região entre 2005 e 2023, e quais redes mostraram maior crescimento?"
+      - "Existe correlação estatisticamente significativa entre o IDEB de uma escola e seu Nível Socioeconômico (Inse)? O gradiente socioeconômico aumentou ou diminuiu ao longo dos anos?"
+      - "Quais municípios brasileiros atingiram ou superaram as metas projetadas pelo PNE para 2022, e que características estruturais os distinguem dos que ficaram abaixo?"
+      - "Como a pandemia de COVID-19 impactou o IDEB de 2021 comparado a 2019 em diferentes etapas de ensino, regiões e redes?"
+      - "Há convergência regional do IDEB ao longo do tempo, ou as desigualdades entre Norte/Nordeste e Sul/Sudeste se aprofundaram?"
+      - "Qual a relação entre o percentual de docentes com formação adequada (AFD) e o IDEB por escola? A formação docente é preditor significativo do desempenho?"
+
+  - id: distorcao_idade_serie
+    name: "Taxas de Distorção Idade-Série (TDI)"
+    category: fluxo
+    description: |
+      Proporção de alunos com mais de dois anos de atraso escolar em relação à
+      idade esperada para a série/ano cursada. Calculada para cada etapa e série
+      do ensino fundamental e médio. É um indicador de distorção acumulada no
+      percurso escolar, resultado de reprovações e interrupções. Disponível desde
+      2007 para escolas, municípios e estados.
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-distorcao-idade-serie"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - localizacao_urbana_rural
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+      - inep_tdi
+    citations:
+      - "INEP. Nota Técnica: Indicador de Distorção Idade-Série. Brasília: MEC/INEP, 2017."
+      - "LEON, F. L. L.; MENEZES-FILHO, N. A. Reprovação, avanço e evasão escolar no Brasil. Pesquisa e Planejamento Econômico, Rio de Janeiro, v. 32, n. 3, p. 417–452, 2002."
+      - "FERRÃO, M. E.; BELTRÃO, K. I.; SANTOS, D. P. Políticas de não-repetência e a qualidade da educação: evidências obtidas a partir da modelagem dos dados da 4ª série do SAEB/99. Estudos em Avaliação Educacional, n. 26, p. 47–73, 2002."
+    research_questions:
+      - "Quais estados e municípios apresentam as maiores taxas de distorção idade-série no Ensino Médio e qual o perfil socioeconômico desses territórios?"
+      - "A TDI é maior em escolas rurais do que em escolas urbanas? Essa diferença se ampliou ou reduziu entre 2007 e 2022?"
+      - "Existe correlação entre TDI elevada e abandono escolar posterior? Alunos com distorção têm maior probabilidade de interromper os estudos?"
+      - "Como a introdução de políticas de progressão continuada em estados como São Paulo e Minas Gerais afetou a TDI ao longo do tempo?"
+      - "Qual a relação entre TDI e o Nível Socioeconômico (Inse) das escolas? A distorção é concentrada em grupos vulneráveis específicos?"
+
+  - id: taxas_rendimento
+    name: "Taxas de Rendimento Escolar (Aprovação, Reprovação e Abandono)"
+    category: fluxo
+    description: |
+      Conjunto de três taxas calculadas a partir do Censo Escolar: aprovação,
+      reprovação e abandono. Medem o fluxo de alunos ao longo do percurso escolar
+      em cada série/ano, etapa de ensino, rede e localização. São insumos para o
+      cálculo do IDEB e do Indicador de Fluxo da Educação Superior.
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+      - serie_ano
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Taxas de Rendimento Escolar. Brasília: MEC/INEP, 2019."
+      - "KLEIN, R. Como está a educação no Brasil? O que fazer? Ensaio: Avaliação e Políticas Públicas em Educação, Rio de Janeiro, v. 14, n. 51, p. 139–172, 2006."
+      - "CORREA, V. Globalização e emprego. Novos Estudos CEBRAP, São Paulo, n. 58, p. 23–38, 2000."
+    research_questions:
+      - "Qual é a evolução das taxas de abandono no Ensino Médio entre 2010 e 2023, com destaque para diferenças entre redes pública e privada?"
+      - "O abandono escolar é mais concentrado em qual faixa de série (1ª, 2ª ou 3ª série do EM)? Isso sugere pontos críticos de intervenção?"
+      - "Como as taxas de reprovação variam entre escolas de zona rural e urbana? Políticas de recuperação paralela reduzem reprovação?"
+      - "Qual o impacto do Programa Bolsa Família nas taxas de abandono nos municípios que apresentam maior cobertura do programa?"
+      - "A pandemia de 2020–2021 elevou significativamente as taxas de abandono? O efeito foi homogêneo entre estados?"
+
+  - id: taxas_transicao
+    name: "Taxas de Transição Escolar (Promoção, Repetência e Evasão)"
+    category: fluxo
+    description: |
+      Estimam a probabilidade de um aluno, ao final de um ano letivo, ser promovido
+      à série seguinte, repetir a mesma série ou evadir do sistema. Complementam as
+      taxas de rendimento ao capturar o movimento de alunos entre dois anos consecutivos,
+      incluindo reingressantes. Calculadas para educação básica.
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-transicao-escolar"
+    disaggregations:
+      - estado
+      - brasil
+      - etapa_ensino
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Taxas de Transição. Brasília: MEC/INEP, 2020."
+      - "FERRÃO, M. E. Introdução aos modelos de regressão multinível em educação. Campinas: Editora Komedi, 2003."
+    research_questions:
+      - "Como a probabilidade de evasão difere entre alunos dos anos iniciais, finais do ensino fundamental e ensino médio?"
+      - "A taxa de reingressantes (alunos que retornam após evasão) aumentou após os programas de busca ativa escolar?"
+      - "Existe diferença na transição de alunos entre escolas com gestão eficiente (baixa complexidade de gestão) e escolas de alta complexidade?"
+
+  - id: nivel_socioeconomico_inse
+    name: "Nível Socioeconômico dos Estudantes (Inse)"
+    category: contexto
+    description: |
+      O Inse posiciona estudantes e escolas em uma escala de nível socioeconômico
+      construída a partir de dados do Saeb (questionário do estudante). Considera
+      escolaridade dos pais, renda familiar, bens domésticos e acesso a serviços.
+      Essencial para análises de equidade, pois permite isolar o efeito escola
+      do efeito background socioeconômico no desempenho.
+    periodicity: bienal
+    available_since: 2015
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/nivel-socioeconomico"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+    source_datasets:
+      - saeb
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica n. 14/2021/CGIM/DAEB: Indicador de Nível Socioeconômico das Escolas de Educação Básica (Inse). Brasília: MEC/INEP, 2021."
+      - "ALVES, M. T. G.; SOARES, J. F. Contexto escolar e indicadores educacionais: condições desiguais para a efetivação de uma política de avaliação educacional. Educação e Pesquisa, São Paulo, v. 39, n. 1, p. 177–194, 2013."
+      - "BOURDIEU, P.; PASSERON, J.-C. A Reprodução: elementos para uma teoria do sistema de ensino. Rio de Janeiro: Francisco Alves, 1982."
+    research_questions:
+      - "Escolas de nível socioeconômico mais alto apresentam IDEB significativamente maior? Qual a magnitude do gradiente socioeconômico no desempenho escolar?"
+      - "Existem escolas com Inse baixo e IDEB alto (escolas eficazes)? Quais características pedagógicas e de gestão as distinguem?"
+      - "Como o Inse médio das escolas públicas variou entre 2015 e 2021? Houve melhora nas condições socioeconômicas dos estudantes?"
+      - "A segregação escolar por nível socioeconômico é maior nas grandes capitais? Como ela se compara a municípios médios e pequenos?"
+      - "Qual o papel do nível socioeconômico na explicação do desempenho no ENEM? O gradiente socioeconômico é maior no EM do que no EF?"
+
+  - id: adequacao_formacao_docente
+    name: "Adequação da Formação Docente (AFD)"
+    category: docentes
+    description: |
+      Classifica docentes em cinco categorias segundo a adequação entre sua formação
+      acadêmica e as disciplinas que leciona: (1) formação superior na área; (2) bacharelado
+      com complementação pedagógica; (3) licenciatura em área diferente; (4) bacharelado
+      sem complementação; (5) sem ensino superior. Calculado por escola e disciplina.
+    periodicity: anual
+    available_since: 2014
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/adequacao-da-formacao-docente"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - disciplina
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica n. 020/2014: Indicador de Adequação da Formação do Docente da Educação Básica. Brasília: MEC/INEP, 2014."
+      - "ALVES, T.; PINTO, J. M. R. Remuneração e características do trabalho docente no Brasil: um aporte. Cadernos de Pesquisa, São Paulo, v. 41, n. 143, p. 606–639, 2011."
+      - "GATTI, B. A.; BARRETTO, E. S. S. Professores do Brasil: impasses e desafios. Brasília: UNESCO, 2009."
+    research_questions:
+      - "Qual é o percentual de professores de Matemática e Ciências com formação adequada (categoria 1) nas escolas públicas das regiões Norte e Nordeste?"
+      - "Há correlação entre a AFD média de uma escola e seu desempenho no Saeb, controlando pelo Inse?"
+      - "Como a AFD evoluiu após a aprovação da Lei do Piso Salarial (Lei nº 11.738/2008) e das políticas de valorização docente?"
+      - "Escolas rurais apresentam maior proporção de docentes sem ensino superior (categoria 5)? A diferença com escolas urbanas diminuiu ao longo do tempo?"
+      - "Quais disciplinas apresentam maior carência de professores com formação adequada? A carência é distribuída de forma homogênea entre estados?"
+
+  - id: esforco_docente
+    name: "Indicador de Esforço Docente"
+    category: docentes
+    description: |
+      Mede o grau de esforço empreendido pelo docente considerando o número de
+      alunos atendidos, a quantidade de escolas em que trabalha, os turnos letivos
+      e as etapas e modalidades de ensino onde atua. Classificado em 6 níveis:
+      do nível 1 (menor esforço — poucos alunos, uma escola, um turno) ao nível 6
+      (maior esforço — muitos alunos, múltiplas escolas, turnos e etapas).
+    periodicity: anual
+    available_since: 2014
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/esforco-docente"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - dependencia_administrativa
+      - etapa_ensino
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica n. 039/2014: Indicador de Esforço Docente. Brasília: MEC/INEP, 2014."
+      - "LAPO, F. R.; BUENO, B. O. Professores, desencanto com a profissão e abandono do magistério. Cadernos de Pesquisa, n. 118, p. 65–88, 2003."
+    research_questions:
+      - "Qual a proporção de professores com esforço docente nos níveis mais elevados (5 e 6) na rede pública estadual, e como isso se distribui por disciplina?"
+      - "Existe relação entre alto esforço docente (níveis 5–6) e maior rotatividade de professores na escola?"
+      - "Professores com alto esforço docente estão concentrados em regiões específicas? Isso está associado à escassez de professores nessas regiões?"
+      - "Como o esforço docente se relaciona com os resultados de aprendizagem dos alunos no Saeb?"
+
+  - id: regularidade_corpo_docente
+    name: "Indicador de Regularidade do Corpo Docente (IED)"
+    category: docentes
+    description: |
+      Mede a regularidade com que os docentes permanecem lecionando em uma mesma
+      escola ao longo dos anos. Considera os últimos cinco anos do Censo Escolar.
+      Alta regularidade indica estabilidade do corpo docente; baixa regularidade
+      sinaliza alta rotatividade, que pode impactar negativamente o aprendizado.
+      Classificado em cinco grupos: baixíssima, baixa, média, alta e altíssima regularidade.
+    periodicity: anual
+    available_since: 2014
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/regularidade-do-corpo-docente"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica n. 011/2015: Indicador de Regularidade do Corpo Docente. Brasília: MEC/INEP, 2015."
+      - "HANUSHEK, E. A.; RIVKIN, S. G. Teacher Quality. In: HANUSHEK, E.; WELCH, F. (Ed.). Handbook of the Economics of Education. Amsterdam: Elsevier, 2006. v. 2, p. 1051–1078."
+    research_questions:
+      - "Escolas com alta regularidade do corpo docente apresentam melhores resultados no Saeb e IDEB?"
+      - "Qual é a taxa de rotatividade docente nas escolas de baixo IDEB? A rotatividade é causa ou consequência do baixo desempenho?"
+      - "Como a regularidade docente varia entre escolas de diferentes dependências administrativas (federal, estadual, municipal, privada)?"
+
+  - id: percentual_docentes_superior
+    name: "Percentual de Docentes com Curso Superior"
+    category: docentes
+    description: |
+      Proporção de funções docentes na educação básica exercidas por profissionais
+      com diploma de curso superior (licenciatura ou bacharelado). Indicador de
+      escolarização mínima do corpo docente, especialmente relevante para a educação
+      infantil e anos iniciais do ensino fundamental, onde historicamente a proporção
+      era mais baixa. Meta do PNE: 100% dos docentes com curso superior até 2024.
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/percentual-de-docentes-com-curso-superior"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Percentual de Docentes com Curso Superior. Brasília: MEC/INEP, 2018."
+      - "GATTI, B. A.; BARRETTO, E. S. S.; ANDRÉ, M. E. D. A. Políticas docentes no Brasil: um estado da arte. Brasília: UNESCO, 2011."
+      - "BRASIL. Lei nº 9.394/1996 – Lei de Diretrizes e Bases da Educação Nacional. Brasília, 1996. Art. 62."
+    research_questions:
+      - "O Brasil atingiu a meta do PNE de ter 100% dos docentes com curso superior na educação básica até 2024? Quais regiões ainda estão abaixo?"
+      - "Como evoluiu o percentual de docentes com curso superior na educação infantil pública entre 2007 e 2022, por estado?"
+      - "Existe correlação entre o percentual de docentes com curso superior em municípios rurais e o desempenho dos alunos no Saeb?"
+
+  - id: remuneracao_media_docentes
+    name: "Remuneração Média dos Docentes"
+    category: docentes
+    description: |
+      Estima a remuneração média mensal dos docentes da educação básica pública por
+      estado, etapa de ensino e dependência administrativa. Inclui análise em relação
+      ao piso salarial nacional (Lei nº 11.738/2008). Permite avaliar a valorização
+      financeira da carreira docente e disparidades regionais na remuneração.
+    periodicity: anual
+    available_since: 2015
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/remuneracao-media-dos-docentes"
+    disaggregations:
+      - estado
+      - brasil
+      - etapa_ensino
+      - dependencia_estadual_municipal
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Indicadores Financeiros Educacionais — Remuneração de Docentes. Brasília: MEC/INEP, 2019."
+      - "PINTO, J. M. R. Remuneração adequada do professor: desafio à educação brasileira. Retratos da Escola, Brasília, v. 3, n. 4, p. 51–67, 2009."
+      - "BRASIL. Lei nº 11.738/2008 – Piso Salarial Profissional Nacional. Brasília, 2008."
+    research_questions:
+      - "Qual a diferença de remuneração docente entre as redes estaduais dos estados mais ricos (SP, MG) e os mais pobres (MA, PI)? Essa disparidade aumentou ou diminuiu?"
+      - "O cumprimento do piso salarial nacional docente está correlacionado com melhores indicadores de regularidade e esforço docente?"
+      - "Como a remuneração docente se compara a profissões de nível superior equivalente no mercado de trabalho brasileiro?"
+
+  - id: complexidade_gestao_escola
+    name: "Indicador de Complexidade de Gestão da Escola"
+    category: escola
+    description: |
+      Classifica as escolas de educação básica em cinco níveis de complexidade de
+      gestão, considerando: porte da escola (número de matrículas), número de turnos
+      de funcionamento, complexidade das etapas ofertadas e existência de atendimento
+      educacional especializado. Ferramente para alocação de recursos e definição
+      de perfis de gestores escolares.
+    periodicity: anual
+    available_since: 2014
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/complexidade-de-gestao-da-escola"
+    disaggregations:
+      - escola
+      - municipio
+      - estado
+      - brasil
+      - dependencia_administrativa
+      - localizacao
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica n. 040/2014: Indicador de Complexidade de Gestão da Escola. Brasília: MEC/INEP, 2014."
+      - "LUCK, H. Gestão educacional: uma questão paradigmática. Petrópolis: Vozes, 2006."
+    research_questions:
+      - "Escolas de alta complexidade de gestão concentradas em periferias urbanas apresentam piores resultados de aprendizagem, controlando por Inse?"
+      - "Qual o perfil de formação dos diretores das escolas de maior complexidade? Há evidências de que formação específica em gestão melhora resultados?"
+      - "Existe relação entre alta complexidade de gestão e maior taxa de abandono e reprovação dos alunos?"
+
+  - id: media_alunos_turma
+    name: "Média de Alunos por Turma"
+    category: escola
+    description: |
+      Razão entre o número total de matrículas e o número de turmas, por etapa de
+      ensino, série/ano, turno, rede e localização. Indicador de sobrecarga das
+      turmas e insumo para políticas de dimensionamento da rede física escolar.
+      Parâmetros de referência do CAQi (Custo Aluno-Qualidade inicial) definem
+      máximos de alunos por turma por etapa.
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/media-de-alunos-por-turma"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+      - turno
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Média de Alunos por Turma. Brasília: MEC/INEP, 2018."
+      - "CAMPANHA NACIONAL PELO DIREITO À EDUCAÇÃO. CAQi e CAQ no PNE. São Paulo: Campanha, 2018."
+      - "HARFITT, G. J. Class size reduction. New York: Routledge, 2015."
+    research_questions:
+      - "Escolas com média de alunos por turma acima do máximo preconizado pelo CAQi apresentam piores resultados no Saeb, controlando por Inse?"
+      - "Como a média de alunos por turma variou entre 2010 e 2022 em função das tendências demográficas (queda de natalidade)?"
+      - "A redução de turmas superlotadas está associada a menores taxas de abandono e reprovação?"
+
+  - id: media_horas_aula_diaria
+    name: "Média de Horas-aula Diária"
+    category: escola
+    description: |
+      Razão entre a carga horária total das turmas e a quantidade de dias letivos
+      e turmas, expressando a duração média das aulas diárias. Indicador para
+      monitoramento do tempo de instrução escolar, insumo para a implementação
+      da escola de tempo integral (meta do PNE: 50% das escolas públicas e 25%
+      das matrículas em tempo integral até 2024).
+    periodicity: anual
+    available_since: 2007
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/media-de-horas-aula-diaria"
+    disaggregations:
+      - municipio
+      - estado
+      - brasil
+      - etapa_ensino
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "INEP. Nota Técnica: Média de Horas-Aula Diária. Brasília: MEC/INEP, 2018."
+      - "BRASIL. Lei nº 13.415/2017 – Reforma do Ensino Médio. Brasília, 2017. (Escola de Tempo Integral)."
+      - "BRUNS, B.; EVANS, D.; LUQUE, J. Achieving World-Class Education in Brazil. Washington: World Bank, 2012."
+    research_questions:
+      - "Qual é a proporção de matrículas em escolas que ofertam 7 ou mais horas-aula diárias (tempo integral) por estado e rede em 2022?"
+      - "O aumento de horas-aula diárias está associado a melhores resultados no IDEB, após controle por Inse e AFD?"
+      - "A implementação do Programa de Fomento às Escolas de Ensino Médio em Tempo Integral (MEC, 2017) gerou impacto mensurável nos indicadores de desempenho?"
+
+  - id: indicadores_financeiros_educacionais
+    name: "Indicadores Financeiros Educacionais"
+    category: financeiro
+    description: |
+      Conjunto de indicadores sobre financiamento da educação pública: gasto por aluno,
+      gasto como percentual do PIB, distribuição do FUNDEB, complementação da União,
+      custo-aluno e parâmetros do CAQi. Permitem avaliar o esforço fiscal dos entes
+      federados com a educação e a equidade no financiamento entre redes e estados.
+    periodicity: anual
+    available_since: 2000
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/indicadores-financeiros-educacionais"
+    disaggregations:
+      - estado
+      - municipio
+      - brasil
+      - etapa_ensino
+      - dependencia_administrativa
+    source_datasets:
+      - censo_escolar
+    citations:
+      - "PINTO, J. M. R. A política recente de fundos para o financiamento da educação e seus efeitos no pacto federativo. Educação & Sociedade, v. 28, n. 100, p. 877–897, 2007."
+      - "BRASIL. Emenda Constitucional nº 108/2020 – FUNDEB permanente. Brasília, 2020."
+      - "INEP. Nota Técnica: Indicadores Financeiros Educacionais. Brasília: MEC/INEP, 2021."
+    research_questions:
+      - "O gasto por aluno nas redes municipais de estados que recebem complementação do FUNDEB evoluiu para cima após a EC 108/2020?"
+      - "Existe correlação positiva entre gasto por aluno e IDEB em municípios com Inse semelhante?"
+      - "Quais estados ainda estão abaixo do valor mínimo por aluno estabelecido pelo FUNDEB? Quais fatores estruturais explicam essa situação?"
+
+  - id: taxas_nao_resposta
+    name: "Taxas de Não-resposta (TNR) nas Avaliações do Inep"
+    category: avaliacao
+    description: |
+      Proporção de participantes que não respondem itens específicos nas avaliações
+      do Inep (Saeb, Enem, Encceja). Alta TNR pode indicar dificuldades com o item,
+      cansaço, desistência ou problemas operacionais. Indicador de qualidade dos
+      instrumentos de avaliação e da participação efetiva dos estudantes.
+    periodicity: bienal
+    available_since: 2009
+    methodology_url: "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-nao-resposta"
+    disaggregations:
+      - estado
+      - brasil
+      - etapa_ensino
+      - componente_curricular
+    source_datasets:
+      - saeb
+      - enem
+      - encceja
+    citations:
+      - "INEP. Nota Técnica: Taxas de Não-resposta. Brasília: MEC/INEP, 2016."
+      - "MISLEVY, R. J.; WU, P. K. Missing Responses and IRT Ability Estimation: Omits, Choice, Time Limits, and Adaptive Testing. ETS Research Report, Princeton, 1996."
+    research_questions:
+      - "Itens com alta TNR no Saeb estão associados a conteúdos específicos do currículo? Isso indica lacunas no ensino?"
+      - "A TNR no Enem varia sistematicamente por região, tipo de escola ou perfil socioeconômico dos candidatos?"
+      - "Como a aplicação digital do Saeb afetou as taxas de não-resposta em comparação com o formato papel?"

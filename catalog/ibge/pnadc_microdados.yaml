@@ -1,0 +1,35 @@
+id: pnadc_microdados
+name: "PNAD Contínua – Microdados Trimestrais"
+source: "IBGE"
+category: trabalho
+description: |
+  Microdados da Pesquisa Nacional por Amostra de Domicílios Contínua
+  (PNAD Contínua) do IBGE. Principal fonte de dados sobre mercado de
+  trabalho, rendimento e condições de vida da população brasileira.
+  Publicada trimestralmente desde 2012. Permite calcular indicadores de
+  ocupação, desemprego, renda, informalidade, analfabetismo funcional
+  (CH11), coeficiente de Gini (CH12), NEET (CH19) e outros.
+tags:
+  - pnadc
+  - ibge
+  - mercado_trabalho
+  - renda
+  - emprego
+  - microdados
+  - trimestral
+license: "Dados Abertos IBGE"
+homepage: "https://www.ibge.gov.br/estatisticas/sociais/trabalho/9171-pesquisa-nacional-por-amostra-de-domicilios-continua-mensal.html"
+url_type: dynamic
+file_format: zip
+dest_folder: "ibge/pnadc_microdados"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 50
+notes: |
+  ATENÇÃO: url_type=dynamic — os arquivos são descobertos via HTTP scraping
+  do servidor FTP do IBGE (https://ftp.ibge.gov.br/Trabalho_e_Rendimento/PNADC/).
+  Use o módulo dedicado: `dados-br download pnadc_microdados --years 2020-2023`.
+  O servidor organiza por ano e trimestre, com variações de nome entre períodos.
+  Dados disponíveis de 2012 em diante.

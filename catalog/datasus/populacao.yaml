@@ -1,0 +1,38 @@
+id: datasus_pops
+name: "DATASUS – Estimativas Populacionais por Município (POPSVS)"
+source: "DATASUS/MS"
+category: saude
+description: |
+  Estimativas populacionais por município e faixa etária elaboradas pelo
+  DATASUS/MS com base nas projeções do IBGE. Utilizadas como denominador
+  para cálculo de indicadores de saúde e educação. Permitem calcular
+  taxas como Mortalidade Infantil (CH15), Taxa de Escolarização (CH01) e
+  Taxa de Matrícula no Ensino Superior (CH09).
+tags:
+  - datasus
+  - populacao
+  - estimativas
+  - municipios
+  - ibge
+  - saude
+license: "Dados Abertos SUS"
+homepage: "https://datasus.saude.gov.br/estimativas-populacionais"
+url_type: ftp
+file_format: zip
+years:
+  start: 2000
+  end: 2024
+url_pattern: "ftp://ftp.datasus.gov.br/dissemin/publicos/IBGE/POPSVS/POPSBR{year_2d}.zip"
+year_exceptions: {}
+est_size_mb_per_year: 2
+est_extracted_mb_per_year: 8
+dest_folder: "datasus/populacao"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 0.5
+notes: |
+  Arquivos ZIP com dados no formato DBF. Para anos mais recentes (2010+)
+  baseados no Censo 2010 e projeções IBGE. Disponíveis com sufixo de 2
+  dígitos do ano (ex: POPSBR23.zip para 2023).
