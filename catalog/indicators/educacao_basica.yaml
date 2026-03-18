@@ -29,6 +29,7 @@ indicators:
       - rede_publica
       - rede_privada
     source_datasets:
+      - ideb
       - saeb
       - censo_escolar
     citations:

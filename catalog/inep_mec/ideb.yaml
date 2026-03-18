@@ -1,0 +1,74 @@
+id: ideb
+name: "IDEB – Índice de Desenvolvimento da Educação Básica"
+source: "INEP/MEC"
+category: educacao
+description: |
+  Resultados do IDEB (Índice de Desenvolvimento da Educação Básica), criado
+  pelo INEP em 2007. Combina fluxo escolar (taxa de aprovação) e desempenho
+  nas avaliações do SAEB/Prova Brasil. Calculado a cada dois anos para as
+  redes pública e privada, desagregado por escola, município, estado e Brasil.
+  Cobre três etapas: Anos Iniciais (1º–5º ano), Anos Finais (6º–9º ano) e
+  Ensino Médio.
+tags:
+  - ideb
+  - inep
+  - qualidade
+  - fluxo_escolar
+  - saeb
+  - avaliacao
+  - educacao_basica
+license: "Dados Abertos MEC"
+homepage: "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados"
+url_type: static_list
+file_format: zip
+files:
+  # ── Anos Iniciais (1º–5º ano) ─────────────────────────────────────────────
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_iniciais_municipios_2021.zip"
+    filename: "ideb_anos_iniciais_municipios_2021.zip"
+    description: "IDEB 2021 — Anos Iniciais por Município"
+    est_size_mb: 3.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_iniciais_escolas_2021.zip"
+    filename: "ideb_anos_iniciais_escolas_2021.zip"
+    description: "IDEB 2021 — Anos Iniciais por Escola"
+    est_size_mb: 8.0
+
+  # ── Anos Finais (6º–9º ano) ───────────────────────────────────────────────
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_finais_municipios_2021.zip"
+    filename: "ideb_anos_finais_municipios_2021.zip"
+    description: "IDEB 2021 — Anos Finais por Município"
+    est_size_mb: 3.0
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_anos_finais_escolas_2021.zip"
+    filename: "ideb_anos_finais_escolas_2021.zip"
+    description: "IDEB 2021 — Anos Finais por Escola"
+    est_size_mb: 8.0
+
+  # ── Ensino Médio ──────────────────────────────────────────────────────────
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_ensino_medio_municipios_2021.zip"
+    filename: "ideb_ensino_medio_municipios_2021.zip"
+    description: "IDEB 2021 — Ensino Médio por Município"
+    est_size_mb: 2.5
+
+  - url: "https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/2021/divulgacao_ensino_medio_escolas_2021.zip"
+    filename: "ideb_ensino_medio_escolas_2021.zip"
+    description: "IDEB 2021 — Ensino Médio por Escola"
+    est_size_mb: 6.0
+
+est_size_mb_total: 30.5
+est_extracted_mb_total: 90.0
+dest_folder: "inep_mec/ideb"
+checks:
+  - type: file_exists
+  - type: zip_valid
+  - type: min_size_mb
+    value: 1
+notes: |
+  O IDEB é calculado bienalmente (anos ímpares: 2005, 2007, ..., 2021, 2023).
+  Este catálogo disponibiliza a edição de 2021 (última com URLs estáveis
+  verificadas). Para edições anteriores, substitua o ano na URL:
+    https://download.inep.gov.br/educacao_basica/portal_ideb/planilhas_para_download/{year}/divulgacao_anos_iniciais_municipios_{year}.zip
+  Edições disponíveis: 2005, 2007, 2009, 2011, 2013, 2015, 2017, 2019, 2021.
+  Os arquivos contêm planilhas Excel (.xlsx) com metas e resultados observados
+  para as redes pública (federal, estadual, municipal) e total (pública + privada).
+  Correlaciona-se diretamente com o SAEB e o Censo Escolar.
