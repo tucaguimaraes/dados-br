@@ -337,10 +337,10 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md). A forma mais simples de contribuir é a
 
 **Carlos Artur Guimarães**
 Pesquisador e gestor público com foco em dados educacionais e governança digital.
-Goiânia, Goiás — Brasil
+Natal, RN.
 
-- GitHub: [@carlosartur](https://github.com/carlosartur)
-- E-mail: arturguimaraes@gmail.com
+- GitHub: [@carlosartur](https://github.com/tucaguimaraes)
+- E-mail: carlostucaguimaraes@gmail.com
 
 ---
 
