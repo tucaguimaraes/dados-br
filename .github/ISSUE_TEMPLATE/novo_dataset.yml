@@ -1,0 +1,121 @@
+name: 📦 Solicitar Novo Dataset
+description: Proponha a adição de um dataset de dados públicos brasileiros ao catálogo.
+title: "[Dataset]: "
+labels: ["dataset-request", "catalog"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por contribuir com o catálogo! Preencha as informações abaixo para que possamos avaliar e adicionar o dataset.
+
+  - type: input
+    id: dataset_name
+    attributes:
+      label: Nome do dataset
+      placeholder: "Censo da Educação Superior"
+    validations:
+      required: true
+
+  - type: input
+    id: source_org
+    attributes:
+      label: Órgão / fonte
+      placeholder: "INEP/MEC"
+    validations:
+      required: true
+
+  - type: input
+    id: homepage
+    attributes:
+      label: URL da página oficial
+      placeholder: "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-da-educacao-superior"
+    validations:
+      required: true
+
+  - type: input
+    id: download_url
+    attributes:
+      label: URL de download (ou padrão de URL)
+      description: Cole um exemplo de URL direta para o arquivo ou o padrão com {year}
+      placeholder: "https://download.inep.gov.br/censo_educacao_superior/{year}/dados.zip"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: url_type
+    attributes:
+      label: Tipo de URL
+      description: Como os arquivos são disponibilizados?
+      options:
+        - pattern (uma URL por ano, ex: .../dados/{year}/arquivo.zip)
+        - static_list (lista fixa de URLs)
+        - ftp (servidor FTP)
+        - dynamic (API ou página com scraping — mais complexo)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Categoria
+      options:
+        - Educação
+        - Saúde
+        - Economia
+        - Segurança Pública
+        - Meio Ambiente
+        - Infraestrutura
+        - Transparência
+        - Outra
+    validations:
+      required: true
+
+  - type: input
+    id: years
+    attributes:
+      label: Anos disponíveis
+      placeholder: "2010–2023"
+    validations:
+      required: false
+
+  - type: input
+    id: file_format
+    attributes:
+      label: Formato dos arquivos
+      placeholder: "zip (contém CSV)"
+    validations:
+      required: false
+
+  - type: input
+    id: est_size
+    attributes:
+      label: Tamanho estimado por ano (MB)
+      placeholder: "~250 MB"
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do dataset
+      description: Para que serve? Quais variáveis principais? Qual a granularidade (município, escola, aluno)?
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: Licença
+      placeholder: "Dados Abertos / Lei de Acesso à Informação"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto adicional
+      description: Links para dicionário de dados, notas técnicas ou qualquer informação adicional
+    validations:
+      required: false

@@ -1,0 +1,86 @@
+name: 🐛 Relatar Bug
+description: Encontrou um erro? Descreva-o aqui para que possamos corrigir.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar um bug! Por favor, preencha as informações abaixo com o máximo de detalhes.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do problema
+      description: O que aconteceu? O que você esperava que acontecesse?
+      placeholder: "Ao rodar `dados-br download enem`, o comando retorna..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      description: Como podemos reproduzir o problema?
+      placeholder: |
+        1. Execute `dados-br download enem --years 2023`
+        2. Selecione a opção X
+        3. Observe o erro Y
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+      description: O que deveria ter acontecido?
+    validations:
+      required: false
+
+  - type: textarea
+    id: error_output
+    attributes:
+      label: Saída de erro (traceback)
+      description: Cole aqui o traceback completo ou a mensagem de erro
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Versão do dados-br
+      description: Execute `dados-br version` e cole o resultado
+      placeholder: "dados-br versão 0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python_version
+    attributes:
+      label: Versão do Python
+      placeholder: "Python 3.12.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Sistema operacional
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto adicional
+      description: Qualquer outra informação relevante
+    validations:
+      required: false
