@@ -42,6 +42,7 @@ from rich.text import Text
 from . import __version__
 from .checker import DatasetCheckReport, run_basic_checks, run_dataset_checks
 from .downloader import DownloadConfig, DownloadSummary, download_urls, probe_all_sizes
+from .manifest import write_manifest
 from .indicators import IndicatorLevel, IndicatorRegistry, indicator_registry as _global_indicators
 from .models import Dataset
 from .registry import Registry, RegistryError, registry as _global_registry
@@ -626,29 +627,60 @@ def cmd_download(
     summary = download_urls(url_dest_map, config, title="dados-br Download")
 
     # ------------------------------------------------------------------
+    # Checagens automáticas pós-download + Manifests
+    # ------------------------------------------------------------------
+    check_reports_by_ds: dict[str, dict] = {}
+    manifest_paths: dict[str, str] = {}
+
+    if auto_check and not dry_run and summary.succeeded > 0:
+        if not _is_json():
+            out.print("\n[bold cyan]🔍 Checagens automáticas pós-download[/]")
+        for ds in datasets_to_download:
+            if ds.checks and dataset_files.get(ds.id):
+                rpt = run_dataset_checks(ds, output_dir)
+                check_dict = {
+                    "dataset_id": rpt.dataset_id,
+                    "all_passed": rpt.all_passed,
+                    "passed": rpt.passed,
+                    "failed": rpt.failed,
+                    "results": [
+                        {
+                            "check_type": cr.check_type,
+                            "file": str(cr.file),
+                            "passed": cr.passed,
+                            "message": cr.message,
+                        }
+                        for cr in rpt.results
+                    ],
+                }
+                check_reports_by_ds[ds.id] = check_dict
+                if not _is_json():
+                    rpt.print_summary()
+                    if not rpt.all_passed:
+                        out.print(f"[yellow]⚠ {rpt.failed} checagem(ns) falhou para {ds.id}[/]")
+
+    # Escrever manifest.json para cada dataset
+    for ds in datasets_to_download:
+        if dataset_files.get(ds.id) is not None:
+            try:
+                mpath = write_manifest(
+                    ds=ds,
+                    output_dir=output_dir,
+                    summary=summary,
+                    dataset_file_paths=dataset_files[ds.id],
+                    dry_run=dry_run,
+                    check_report=check_reports_by_ds.get(ds.id),
+                )
+                manifest_paths[ds.id] = str(mpath)
+                if not _is_json():
+                    out.print(f"  [dim]📄 manifest: {mpath}[/]")
+            except Exception as exc:
+                err.print(f"[yellow]⚠ Não foi possível gravar manifest para {ds.id}: {exc}[/]")
+
+    # ------------------------------------------------------------------
     # Relatório final — JSON
     # ------------------------------------------------------------------
     if _is_json():
-        check_reports = []
-        if auto_check and not dry_run and summary.succeeded > 0:
-            for ds in datasets_to_download:
-                if ds.checks and dataset_files.get(ds.id):
-                    rpt = run_dataset_checks(ds, output_dir)
-                    check_reports.append({
-                        "dataset_id": rpt.dataset_id,
-                        "all_passed": rpt.all_passed,
-                        "passed": rpt.passed,
-                        "failed": rpt.failed,
-                        "results": [
-                            {
-                                "check_type": cr.check_type,
-                                "file": str(cr.file),
-                                "passed": cr.passed,
-                                "message": cr.message,
-                            }
-                            for cr in rpt.results
-                        ],
-                    })
         _emit_json({
             "dry_run": dry_run,
             "datasets": [ds.id for ds in datasets_to_download],
@@ -657,7 +689,8 @@ def cmd_download(
             "failed": summary.failed,
             "skipped": summary.skipped,
             "total_bytes": summary.total_bytes,
-            "checks": check_reports,
+            "manifests": manifest_paths,
+            "checks": list(check_reports_by_ds.values()),
             "results": [
                 {
                     "url": r.url,
@@ -691,18 +724,6 @@ def cmd_download(
     for r in summary.results:
         if not r.success and not r.skipped:
             out.print(f"  [red]✗ {r.url}[/] — {r.error}")
-
-    # ------------------------------------------------------------------
-    # Checagens automáticas pós-download
-    # ------------------------------------------------------------------
-    if auto_check and not dry_run and summary.succeeded > 0:
-        out.print("\n[bold cyan]🔍 Checagens automáticas pós-download[/]")
-        for ds in datasets_to_download:
-            if ds.checks and dataset_files.get(ds.id):
-                report = run_dataset_checks(ds, output_dir)
-                report.print_summary()
-                if not report.all_passed:
-                    out.print(f"[yellow]⚠ {report.failed} checagem(ns) falhou para {ds.id}[/]")
 
     if summary.failed > 0:
         raise typer.Exit(1)
