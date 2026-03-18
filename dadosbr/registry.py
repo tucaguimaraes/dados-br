@@ -57,7 +57,10 @@ class Registry:
                 f"Diretório de catálogo não encontrado: {self._catalog_dir}"
             )
 
-        yaml_files = sorted(self._catalog_dir.rglob("*.yaml"))
+        yaml_files = sorted(
+            p for p in self._catalog_dir.rglob("*.yaml")
+            if "indicators" not in p.parts
+        )
         if not yaml_files:
             logger.warning("Nenhum arquivo YAML encontrado em %s", self._catalog_dir)
 
