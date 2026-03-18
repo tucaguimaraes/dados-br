@@ -19,8 +19,11 @@ import yaml
 from dadosbr.models import Dataset
 from dadosbr.registry import CATALOG_DIR, Registry
 
-# Coletar todos os YAMLs do catálogo real para parametrizar
-_yaml_files = sorted(CATALOG_DIR.rglob("*.yaml"))
+# Coletar apenas YAMLs de datasets (excluir subpasta indicators/)
+_yaml_files = sorted(
+    p for p in CATALOG_DIR.rglob("*.yaml")
+    if "indicators" not in p.parts
+)
 
 
 @pytest.mark.parametrize("yaml_path", _yaml_files, ids=[f.stem for f in _yaml_files])
