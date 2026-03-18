@@ -13,9 +13,24 @@ Comandos:
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 from typing import Optional
+
+# ---------------------------------------------------------------------------
+# Estado global de formato de saída (definido pelo callback --output)
+# ---------------------------------------------------------------------------
+_output_format: str = "text"
+
+
+def _is_json() -> bool:
+    return _output_format == "json"
+
+
+def _emit_json(data: object) -> None:
+    """Escreve JSON puro em stdout — compatível com pipes (| jq)."""
+    print(json.dumps(data, ensure_ascii=False, indent=2))
 
 import typer
 from rich.console import Console
@@ -63,6 +78,24 @@ app.add_typer(indicators_app, name="indicators")
 
 out = Console()
 err = Console(stderr=True)
+
+
+@app.callback()
+def _global_options(
+    output: str = typer.Option(
+        "text",
+        "--output",
+        help="Formato de saída: [bold]text[/] (padrão, rico) ou [bold]json[/] (estruturado, para pipes)",
+        show_default=True,
+        metavar="FORMAT",
+    ),
+) -> None:
+    """🇧🇷 dados-br — Ferramenta open source para dados públicos brasileiros."""
+    global _output_format
+    if output not in ("text", "json"):
+        err.print(f"[red]--output inválido:[/] {output!r}. Use 'text' ou 'json'.")
+        raise typer.Exit(1)
+    _output_format = output
 
 # ---------------------------------------------------------------------------
 # Helpers de display
@@ -194,9 +227,46 @@ def cmd_list(
         datasets = reg.search(search)
 
     if not datasets:
-        out.print("[yellow]Nenhum dataset encontrado com os filtros informados.[/]")
+        if _is_json():
+            _emit_json([])
+        else:
+            out.print("[yellow]Nenhum dataset encontrado com os filtros informados.[/]")
         raise typer.Exit(0)
 
+    # ---- JSON ---------------------------------------------------------------
+    if _is_json():
+        def _download_cmd(ds: Dataset) -> str:
+            if ds.url_type in ("pattern", "ftp") and ds.years:
+                avail = ds.available_years()
+                recent = avail[-3:] if len(avail) >= 3 else avail
+                yr = f"--years {recent[0]}-{recent[-1]}" if len(recent) > 1 else f"--years {recent[0]}"
+                return f"dados-br download {ds.id} {yr}"
+            return f"dados-br download {ds.id}"
+
+        rows = []
+        for ds in datasets:
+            row: dict = {
+                "id": ds.id,
+                "name": ds.name,
+                "source": ds.source,
+                "category": ds.category,
+                "url_type": ds.url_type,
+                "tags": ds.tags or [],
+                "license": ds.license,
+                "est_size_mb": ds.estimate_download_mb(ds.available_years() or None),
+                "download_command": _download_cmd(ds),
+            }
+            if ds.url_type in ("pattern", "ftp") and ds.years:
+                row["years_start"] = ds.years.start
+                row["years_end"] = ds.years.end
+                row["year_count"] = ds.year_count()
+            elif ds.url_type == "static_list":
+                row["file_count"] = len(ds.files)
+            rows.append(row)
+        _emit_json(rows)
+        return
+
+    # ---- text ---------------------------------------------------------------
     title = f"Catálogo dados-br — {len(datasets)} dataset(s)"
     out.print(_dataset_table(datasets, title=title))
 
@@ -356,8 +426,10 @@ def cmd_download(
     Baixa um ou mais datasets de dados públicos brasileiros.
 
     Sem argumentos: modo interativo com seleção guiada.
+    Use [bold]--output json[/] para saída estruturada (compatível com pipes).
     """
-    _print_logo()
+    if not _is_json():
+        _print_logo()
     reg = _get_registry()
 
     # ------------------------------------------------------------------
@@ -383,7 +455,10 @@ def cmd_download(
             raise typer.Exit(1) from exc
 
     else:
-        # Modo interativo
+        # Modo interativo — indisponível em JSON (requer dataset_id explícito)
+        if _is_json():
+            err.print("[red]--output json requer um DATASET_ID explícito (ex: dados-br --output json download enem)[/]")
+            raise typer.Exit(1)
         out.print("\n[bold cyan]Modo interativo — selecione os dados para baixar[/]\n")
 
         # Passo 1: Categoria
@@ -528,10 +603,10 @@ def cmd_download(
             if not Confirm.ask("Continuar mesmo assim?", console=out, default=False):
                 raise typer.Exit(1)
 
-    if dry_run:
+    if dry_run and not _is_json():
         out.print("\n[bold yellow]🔍 Modo dry-run: nenhum arquivo será baixado[/]")
 
-    if not dry_run and not Confirm.ask(
+    if not dry_run and not _is_json() and not Confirm.ask(
         f"\nIniciar download de {len(url_dest_map)} arquivo(s)?",
         console=out,
         default=True,
@@ -551,7 +626,57 @@ def cmd_download(
     summary = download_urls(url_dest_map, config, title="dados-br Download")
 
     # ------------------------------------------------------------------
-    # Relatório final
+    # Relatório final — JSON
+    # ------------------------------------------------------------------
+    if _is_json():
+        check_reports = []
+        if auto_check and not dry_run and summary.succeeded > 0:
+            for ds in datasets_to_download:
+                if ds.checks and dataset_files.get(ds.id):
+                    rpt = run_dataset_checks(ds, output_dir)
+                    check_reports.append({
+                        "dataset_id": rpt.dataset_id,
+                        "all_passed": rpt.all_passed,
+                        "passed": rpt.passed,
+                        "failed": rpt.failed,
+                        "results": [
+                            {
+                                "check_type": cr.check_type,
+                                "file": str(cr.file),
+                                "passed": cr.passed,
+                                "message": cr.message,
+                            }
+                            for cr in rpt.results
+                        ],
+                    })
+        _emit_json({
+            "dry_run": dry_run,
+            "datasets": [ds.id for ds in datasets_to_download],
+            "files_total": summary.total,
+            "succeeded": summary.succeeded,
+            "failed": summary.failed,
+            "skipped": summary.skipped,
+            "total_bytes": summary.total_bytes,
+            "checks": check_reports,
+            "results": [
+                {
+                    "url": r.url,
+                    "dest": str(r.dest),
+                    "success": r.success,
+                    "skipped": r.skipped,
+                    "size_bytes": r.size_bytes,
+                    "elapsed_seconds": round(r.elapsed_seconds, 2),
+                    "error": r.error,
+                }
+                for r in summary.results
+            ],
+        })
+        if summary.failed > 0:
+            raise typer.Exit(1)
+        return
+
+    # ------------------------------------------------------------------
+    # Relatório final — text
     # ------------------------------------------------------------------
     out.print()
     color = "green" if summary.failed == 0 else "red"
@@ -601,6 +726,23 @@ def cmd_check(
     """Verifica integridade dos arquivos baixados."""
     reg = _get_registry()
 
+    def _report_to_dict(rpt: DatasetCheckReport) -> dict:
+        return {
+            "dataset_id": rpt.dataset_id,
+            "all_passed": rpt.all_passed,
+            "passed": rpt.passed,
+            "failed": rpt.failed,
+            "results": [
+                {
+                    "check_type": cr.check_type,
+                    "file": str(cr.file),
+                    "passed": cr.passed,
+                    "message": cr.message,
+                }
+                for cr in rpt.results
+            ],
+        }
+
     if dataset_id:
         try:
             ds = reg.require(dataset_id)
@@ -609,7 +751,10 @@ def cmd_check(
             raise typer.Exit(1) from exc
 
         report = run_dataset_checks(ds, data_dir)
-        report.print_summary()
+        if _is_json():
+            _emit_json(_report_to_dict(report))
+        else:
+            report.print_summary()
         if not report.all_passed:
             raise typer.Exit(1)
 
@@ -621,12 +766,19 @@ def cmd_check(
 
         files = sorted(data_dir.rglob("*.zip")) + sorted(data_dir.rglob("*.csv"))
         if not files:
-            out.print(f"[yellow]Nenhum arquivo ZIP ou CSV encontrado em {data_dir}[/]")
+            if _is_json():
+                _emit_json({"dataset_id": None, "all_passed": True, "passed": 0, "failed": 0, "results": []})
+            else:
+                out.print(f"[yellow]Nenhum arquivo ZIP ou CSV encontrado em {data_dir}[/]")
             raise typer.Exit(0)
 
-        out.print(f"[cyan]Checando {len(files)} arquivo(s) em {data_dir}...[/]")
+        if not _is_json():
+            out.print(f"[cyan]Checando {len(files)} arquivo(s) em {data_dir}...[/]")
         report = run_basic_checks(files)
-        report.print_summary()
+        if _is_json():
+            _emit_json(_report_to_dict(report))
+        else:
+            report.print_summary()
         if not report.all_passed:
             raise typer.Exit(1)
 
