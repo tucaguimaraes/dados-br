@@ -1,82 +1,119 @@
-# Como publicar o dados-br no GitHub
+# Publicando o dados-br no GitHub
 
-Guia passo a passo para hospedar e publicar o projeto.
-
----
-
-## Pré-requisitos
-
-- Conta no GitHub criada e repositório `dados-br` criado em **github.com/SEU_USUARIO/dados-br**
-- Git instalado (`git --version` para verificar)
-- Projeto com `git init` e primeiro commit já feitos
+Guia completo do zero para hospedar o projeto em **github.com/tucaguimaraes/dados-br**.
 
 ---
 
-## 1. Configurar o remote
+## Passo 1 — Criar o repositório no GitHub
 
-```bash
-# Remover qualquer remote incorreto existente
-git remote remove origin
-
-# Adicionar o remote correto (com https://)
-git remote add origin https://github.com/SEU_USUARIO/dados-br.git
-
-# Verificar
-git remote -v
-```
-
-A saída esperada:
-```
-origin  https://github.com/SEU_USUARIO/dados-br.git (fetch)
-origin  https://github.com/SEU_USUARIO/dados-br.git (push)
-```
+1. Acesse **github.com/new**
+2. Preencha:
+   - **Repository name:** `dados-br`
+   - **Description:** `Ferramenta open source para catalogar, baixar e analisar dados públicos brasileiros`
+   - **Visibility:** ✅ Public
+   - **NÃO marque** nenhuma opção de inicialização (README, .gitignore, License) — o projeto já tem tudo isso
+3. Clique em **Create repository**
 
 ---
 
-## 2. Autenticação — Personal Access Token (PAT)
+## Passo 2 — Criar o Personal Access Token
 
-O GitHub não aceita senha comum para operações Git. É necessário um **Personal Access Token**.
+O GitHub não aceita senha comum para operações Git. É obrigatório usar um token.
 
-### Criar o token
-
-1. Acesse: **github.com → foto do perfil → Settings**
-2. No menu esquerdo (final da página): **Developer settings**
+1. Acesse **github.com → sua foto (canto superior direito) → Settings**
+2. No menu esquerdo, role até o final: **Developer settings**
 3. **Personal access tokens → Tokens (classic)**
 4. **Generate new token → Generate new token (classic)**
 5. Preencha:
-   - **Note:** `dados-br-push` (qualquer nome descritivo)
-   - **Expiration:** 90 days (recomendado) ou No expiration
-   - **Scopes:** marque ✅ `repo`
+   - **Note:** `dados-br`
+   - **Expiration:** 90 days
+   - **Scopes:** marque ✅ `repo` (primeira opção da lista)
 6. Clique em **Generate token**
-7. **Copie o token agora** — começa com `ghp_...` e só aparece uma vez
+7. **Copie o token agora** — ele começa com `ghp_` e aparece uma única vez
 
-> ⚠️ Nunca compartilhe ou publique o token. Trate-o como uma senha.
+> ⚠️ Guarde o token em local seguro. Nunca o compartilhe nem o publique.
 
-### Fazer o push
+---
+
+## Passo 3 — Configurar o git local
+
+No terminal, dentro da pasta `dados-br`:
+
+```bash
+# Verificar se já existe algum remote configurado
+git remote -v
+```
+
+Se aparecer qualquer remote listado, remova:
+
+```bash
+git remote remove origin
+```
+
+Agora adicione o remote correto:
+
+```bash
+git remote add origin https://github.com/tucaguimaraes/dados-br.git
+```
+
+Confirme que ficou certo:
+
+```bash
+git remote -v
+```
+
+Saída esperada:
+```
+origin  https://github.com/tucaguimaraes/dados-br.git (fetch)
+origin  https://github.com/tucaguimaraes/dados-br.git (push)
+```
+
+---
+
+## Passo 4 — Fazer o push
 
 ```bash
 git push -u origin main
 ```
 
-Quando pedir credenciais:
-- **Username:** seu usuário do GitHub
-- **Password:** cole o token `ghp_...`
+O terminal vai pedir credenciais:
 
-### Salvar para não repetir
-
-```bash
-# Mac — salva no Keychain automaticamente
-git config --global credential.helper osxkeychain
+```
+Username: tucaguimaraes
+Password: ghp_SEU_TOKEN_AQUI   ← cole o token, não a senha do GitHub
 ```
 
-Após configurar, o próximo push já não pedirá credenciais.
+> **Dica Mac:** depois do primeiro push bem-sucedido, rode:
+> ```bash
+> git config --global credential.helper osxkeychain
+> ```
+> O Mac salva o token no Keychain e os próximos pushes não pedem mais credenciais.
 
 ---
 
-## 3. Criar a release v0.1.0
+## Passo 5 — Verificar no GitHub
+
+Acesse **github.com/tucaguimaraes/dados-br** — todos os arquivos devem aparecer.
+
+Em seguida, clique em **Actions** para acompanhar o CI rodando automaticamente.
+Se tudo estiver verde, o projeto está publicado e funcional.
+
+---
+
+## Passo 6 — Completar o perfil do repositório
+
+Em **github.com/tucaguimaraes/dados-br**, clique na engrenagem ao lado de "About":
+
+- **Description:** `Ferramenta open source para catalogar, baixar e analisar dados públicos brasileiros`
+- **Topics:** adicione um a um:
+  `dados-abertos` · `brazil` · `python` · `open-data` · `education` · `government` · `cli` · `research`
+
+---
+
+## Passo 7 — Criar a release v0.1.0
 
 ```bash
-# Criar tag anotada
+# Dentro da pasta dados-br, criar a tag
 git tag -a v0.1.0 -m "v0.1.0 — MVP: 35 datasets, 38 indicadores, CLI completa"
 
 # Enviar a tag para o GitHub
@@ -85,24 +122,25 @@ git push origin v0.1.0
 
 No GitHub:
 
-1. Acesse **github.com/SEU_USUARIO/dados-br → Releases → Create a new release**
+1. Acesse **github.com/tucaguimaraes/dados-br/releases/new**
 2. **Choose a tag:** selecione `v0.1.0`
-3. **Title:** `v0.1.0 — Lançamento Inicial`
-4. **Description:**
+3. **Release title:** `v0.1.0 — Lançamento Inicial`
+4. Cole no campo de descrição:
 
-```
+```markdown
 ## dados-br v0.1.0
 
 Primeiro lançamento público — ferramenta open source para catalogar,
 baixar, validar e analisar dados públicos brasileiros.
 
-### Incluído nesta versão
+### O que está incluído
 
 - 35 datasets de fontes abertas (INEP, IBGE, DATASUS, Tesouro, CGU, TCU...)
 - 38 indicadores com citações ABNT e perguntas norteadoras para pesquisa
-- CLI: `dados-br list`, `download`, `check`, `catalog`, `indicators`
+- CLI completa: `dados-br list`, `download`, `check`, `catalog`, `indicators`
 - Download HTTP + FTP com retry, progress bar e estimativa de tamanho
-- API Python programática (Apache 2.0)
+- Validação automática de integridade dos arquivos baixados
+- API Python programática — Apache 2.0
 
 ### Instalação
 
@@ -113,65 +151,65 @@ pip install dados-br
 
 ---
 
-## 4. Publicar no PyPI (automático via GitHub Actions)
+## Passo 8 — Publicar no PyPI (opcional)
 
-O projeto já inclui o workflow `.github/workflows/release.yml`.
-Toda release criada no GitHub publica automaticamente no PyPI.
+O workflow `.github/workflows/release.yml` já está configurado.
+Toda release no GitHub publica automaticamente no PyPI.
 
-### Configurar o secret
+### Criar conta e token no PyPI
 
-1. Crie uma conta em **pypi.org** (se ainda não tiver)
+1. Crie conta em **pypi.org/account/register** (se não tiver)
 2. **Account Settings → API tokens → Add API token**
-   - Nome: `dados-br-github`, Scope: `Entire account`
-   - Copie o token gerado (começa com `pypi-...`)
-3. No GitHub: **Settings → Secrets and variables → Actions → New repository secret**
+   - Nome: `dados-br-github`
+   - Scope: `Entire account`
+3. Copie o token gerado (começa com `pypi-...`)
+
+### Adicionar o secret no GitHub
+
+1. **github.com/tucaguimaraes/dados-br → Settings → Secrets and variables → Actions**
+2. **New repository secret**
    - Name: `PYPI_API_TOKEN`
    - Secret: cole o token do PyPI
+3. Clique em **Add secret**
 
-A partir daí, ao criar qualquer nova release, o pacote é publicado automaticamente.
+A próxima release publicará automaticamente no PyPI.
 Qualquer pessoa poderá instalar com `pip install dados-br`.
 
 ---
 
-## 5. Configurar o repositório no GitHub
-
-Em **github.com/SEU_USUARIO/dados-br**, clique na engrenagem ao lado de "About":
-
-- **Description:** `Ferramenta open source para catalogar, baixar e analisar dados públicos brasileiros`
-- **Topics:** `dados-abertos` `brazil` `python` `open-data` `education` `government` `cli` `research`
-
----
-
-## 6. Proteger o branch main
-
-1. **Settings → Branches → Add branch protection rule**
-2. **Branch name pattern:** `main`
-3. Marque:
-   - ✅ Require a pull request before merging
-   - ✅ Require status checks to pass → selecione `CI`
-4. Clique em **Create**
-
----
-
-## 7. Fluxo para novas atualizações
+## Resumo dos comandos (do zero ao push)
 
 ```bash
-# Criar branch para cada nova feature
-git checkout -b feat/nome-da-feature
+# Na pasta dados-br, executar em sequência:
 
-# Fazer as alterações...
-git add .
-git commit -m "feat: descrição do que foi feito"
-git push origin feat/nome-da-feature
+git remote remove origin
+git remote add origin https://github.com/tucaguimaraes/dados-br.git
+git push -u origin main
 
-# Abrir Pull Request no GitHub para revisão antes de mesclar na main
+# Após o push, salvar credenciais no Mac:
+git config --global credential.helper osxkeychain
+
+# Criar e publicar a tag da versão:
+git tag -a v0.1.0 -m "v0.1.0 — MVP: 35 datasets, 38 indicadores, CLI completa"
+git push origin v0.1.0
 ```
 
 ---
 
-## Próximos passos após o primeiro push
+## Próximas atualizações — fluxo de trabalho
 
-1. ✅ Verificar CI em: **github.com/SEU_USUARIO/dados-br/actions**
-2. 📦 Configurar `PYPI_API_TOKEN` e criar a release v0.1.0
-3. 📢 Publicar o post no LinkedIn (veja `LINKEDIN_POST.md`)
-4. 🏷️ Adicionar topics ao repositório
+```bash
+# Criar branch para cada nova feature ou correção
+git checkout -b feat/nome-da-feature
+
+# Fazer as alterações e commitar
+git add .
+git commit -m "feat: descrição do que foi feito"
+git push origin feat/nome-da-feature
+
+# Abrir Pull Request no GitHub → revisar → mesclar na main
+```
+
+---
+
+*Repositório: github.com/tucaguimaraes/dados-br*
